@@ -7,9 +7,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "axios": "^1.7.7",
     "constantinople": "^3.1.2",
     "cookie-parser": "~1.4.4",
     "debug": "~4.3.7",
+    "dotenv": "^16.4.5",
     "express": "~4.21.1",
     "http-errors": "~2.0.0",
     "jstransformer": "^1.0.0",
