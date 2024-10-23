@@ -5,8 +5,15 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
-var searchRouter = require("./routes/search");
 var albumsRouter = require("./routes/albums");
+var analyzerRouter = require("./routes/analyzer");
+var artistsRouter = require("./routes/artists");
+var lyricsRouter = require("./routes/lyrics");
+var playerRouter = require("./routes/player");
+var playlistsRouter = require("./routes/playlists");
+var searchRouter = require("./routes/search");
+var tracksRouter = require("./routes/tracks");
+var usersRouter = require("./routes/users");
 
 var app = express();
 
@@ -21,8 +28,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/search", searchRouter);
 app.use("/albums", albumsRouter);
+app.use("/analyzer", analyzerRouter);
+app.use("/artists", artistsRouter);
+app.use("/lyrics", lyricsRouter);
+app.use("/player", playerRouter);
+app.use("/playlists", playlistsRouter);
+app.use("/search", searchRouter);
+app.use("/tracks", tracksRouter);
+app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
