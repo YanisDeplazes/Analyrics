@@ -1,0 +1,53 @@
+# Node.js specific
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+/node_modules/
+/jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Binaries
+*.exe
+*.out
+*.app
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# dotenv environment variables
+.env
+
+# Coverage directory for test coverage tools like istanbul/jest
+coverage/
+
+# Build output (optional if you're compiling TypeScript or bundling)
+dist/
+
+# Temporary files
+tmp/
+temp/
+
+# Editor directories and files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore build artifacts and other hidden files
+*.swp
+*.swo
+*.lock
