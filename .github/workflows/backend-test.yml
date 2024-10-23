@@ -1,0 +1,25 @@
+name: Node.js CI with Jest
+
+on:
+  push:
+    branches:
+      - backend
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: cd backend
+      - working-directory: ./backend
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - run: npm install
+      - run: npm test
