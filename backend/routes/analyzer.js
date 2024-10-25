@@ -8,6 +8,8 @@ var { genAI } = require("../modules/googleClient");
 router.use(express.json());
 
 router.post("/", async function (req, res, next) {
+  const textPrompt = `Analyze the following line by rhyme, description, emotions:`;
+
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     let analysisResults = {};
@@ -21,7 +23,7 @@ router.post("/", async function (req, res, next) {
 
     // Analyze each line and store the raw response
     for (const [index, line] of lyrics.entries()) {
-      const prompt = `Analyze the following line by rhyme, description, emotions: "${line}"`;
+      const prompt = textPrompt + `"${line}"`;
       const result = await model.generateContent({
         contents: [{ role: "user", parts: [{ text: prompt }] }],
         generationConfig: {
