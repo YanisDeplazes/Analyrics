@@ -21,16 +21,17 @@ router.get("/", async function (req, res, next) {
     const endpoint = `search?q=${encodeURIComponent(q)}`;
 
     const results = await makeGeniusRequest(endpoint);
-    console.log(results);
 
+    if (!results.response.hits.length) {
+      return res.status(404).json({ error: "No results found" });
+    }
     // Todo: make song selective?
     const song = results.response.hits[0].result;
     const songUrl = song.url;
 
     const lyrics = await getLyrics(songUrl);
 
-    console.log(lyrics);
-    res.json(results);
+    res.json(lyrics);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

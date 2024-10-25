@@ -23,7 +23,6 @@ async function getAccessToken() {
       },
     });
     accessToken = response.data.access_token;
-    console.log("Genius access token obtained");
   } catch (error) {
     console.error("Error obtaining Genius access token:", error.response.data);
   }
