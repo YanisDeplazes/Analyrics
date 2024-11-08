@@ -25,9 +25,8 @@ async function getAccessToken() {
       }
     );
     accessToken = response.data.access_token;
-    console.log("Spotify access token obtained");
   } catch (error) {
-    console.error("Error obtaining Spotify access token:", error);
+    throw new Error(error.response.data);
   }
 }
 
@@ -45,8 +44,7 @@ async function makeSpotifyRequest(endpoint) {
     });
     return response.data;
   } catch (error) {
-    console.error("Error making Spotify API request:", error.response.data);
-    throw new Error("Spotify API request failed");
+    throw new Error(error.response.data);
   }
 }
 
