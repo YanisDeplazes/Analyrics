@@ -18,5 +18,6 @@ describe("GET /tracks", () => {
   it("should return 500 if the spotify request fails", async () => {
     const response = await request(app).get("/tracks").query({ id: "test" });
     expect(response.status).toBe(500);
+    expect(response.body).toEqual({ error: "Spotify API request failed" });
   });
 });

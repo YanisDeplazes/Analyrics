@@ -20,5 +20,6 @@ describe("GET /playlists", () => {
       .get("/playlists")
       .query({ playlist_id: "test" });
     expect(response.status).toBe(500);
+    expect(response.body).toEqual({ error: "Spotify API request failed" });
   });
 });

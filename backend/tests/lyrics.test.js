@@ -17,7 +17,7 @@ describe("GET /lyrics", () => {
     expect(response.status).toBe(200);
   });
 
-  it("should return 500 if the genius request fails", async () => {
+  it("should return 404 if no song exist", async () => {
     const response = await request(app)
       .get("/lyrics")
       .query({ q: "dhsuiagduzsagdisaidsa" });

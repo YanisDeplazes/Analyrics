@@ -24,7 +24,7 @@ async function getAccessToken() {
     });
     accessToken = response.data.access_token;
   } catch (error) {
-    console.error("Error obtaining Genius access token:", error.response.data);
+    throw new Error("Error obtaining Genius access token");
   }
 }
 
@@ -42,7 +42,6 @@ async function makeGeniusRequest(endpoint) {
     });
     return response.data;
   } catch (error) {
-    console.error("Error making Genius API request:", error.response.data);
     throw new Error("Genius API request failed");
   }
 }
