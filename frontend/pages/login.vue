@@ -7,11 +7,13 @@
       any song lyrics you like.
     </p>
     <div class="buttons">
-      <Button text="Log in" variant="secondary" fill="fill" icon="right">
-        <template v-slot:icon>
-          <Icon size="large" variant="login"></Icon>
-        </template>
-      </Button>
+      <NuxtLink to="http://localhost:3000/login">
+        <Button text="Log in" variant="secondary" fill="fill" icon="right">
+          <template v-slot:icon>
+            <Icon size="large" variant="login"></Icon>
+          </template>
+        </Button>
+      </NuxtLink>
       <Button text="Skip" variant="secondary" fill="outline" icon="right">
         <template v-slot:icon> </template>
       </Button>
@@ -23,7 +25,8 @@
 .buttons {
   display: flex;
   gap: var(--spacing-lg);
-  .button {
+  > *,
+  button {
     width: 100%;
   }
 }
