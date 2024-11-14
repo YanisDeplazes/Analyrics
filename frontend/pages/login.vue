@@ -1,22 +1,20 @@
 <template>
   <Section>
-    <div>
-      <h1 class="display-2">Get a personalised experience</h1>
-      <p>
-        Log in with your Spotify account to get song recommendations tailored
-        just for you! Prefer not to log in? No worries—you can still search and
-        analyze any song lyrics you like.
-      </p>
-      <div class="buttons">
-        <Button text="Log in" variant="secondary" fill="fill" icon="right">
-          <template v-slot:icon>
-            <Icon size="large" variant="login"></Icon>
-          </template>
-        </Button>
-        <Button text="Skip" variant="secondary" fill="outline" icon="right">
-          <template v-slot:icon> </template>
-        </Button>
-      </div>
+    <h1 class="display-2">Get a personalised experience</h1>
+    <p>
+      Log in with your Spotify account to get song recommendations tailored just
+      for you! Prefer not to log in? No worries—you can still search and analyze
+      any song lyrics you like.
+    </p>
+    <div class="buttons">
+      <Button text="Log in" variant="secondary" fill="fill" icon="right">
+        <template v-slot:icon>
+          <Icon size="large" variant="login"></Icon>
+        </template>
+      </Button>
+      <Button text="Skip" variant="secondary" fill="outline" icon="right">
+        <template v-slot:icon> </template>
+      </Button>
     </div>
   </Section>
 </template>
