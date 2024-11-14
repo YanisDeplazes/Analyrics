@@ -11,11 +11,13 @@
         you love. From insightful analysis to playful commentary, The Undertone
         Collective offers a fresh perspective on every song.
       </p>
-      <Button text="Explore now" variant="secondary" fill="fill" icon="right">
-        <template v-slot:icon>
-          <Icon size="large" variant="arrow-forward"></Icon>
-        </template>
-      </Button>
+      <NuxtLink to="/login">
+        <Button text="Explore now" variant="secondary" fill="fill" icon="right">
+          <template v-slot:icon>
+            <Icon size="large" variant="arrow-forward"></Icon>
+          </template>
+        </Button>
+      </NuxtLink>
     </Section>
     <Section>
       <h2>Meet the critics</h2>
