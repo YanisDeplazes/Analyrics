@@ -1,13 +1,12 @@
 <template>
-  <button @click="handleClick" :class="{
+  <button @click="handleClick" class="button" :class="{
     'primary-fill': fill == 'fill' && variant == 'primary',
     'secondary-fill': fill == 'fill' && variant == 'secondary',
     'primary-outline': fill == 'outline' && variant == 'primary',
     'secondary-outline': fill == 'outline' && variant == 'secondary'
   }">
     <slot name="icon" v-if="icon == 'left'" />
-    {{
-      text }}
+    {{ text }}
     <slot name="icon" v-if="icon == 'right'" />
   </button>
 </template>
@@ -25,14 +24,15 @@ const handleClick = (e: MouseEvent) => {
   emit("click", e);
 };
 </script>
-<style lang="scss" scoped>
-button {
+<style lang="css" scoped>
+.button {
   margin: 0 auto;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: unset;
   padding: var(--spacing-md);
   border-radius: var(--border-lg);
-
 }
 
 .primary-fill {
