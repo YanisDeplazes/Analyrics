@@ -4,3 +4,5 @@
     <a href="http://localhost:3000/login">Log in</a>
   </div>
 </template>
+
+<script></script>

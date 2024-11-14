@@ -10,6 +10,8 @@ router.get("/", async function (req, res) {
   }
 
   try {
+    console.log("Fetching Spotify profile");
+    console.log(accessToken);
     const response = await axios.get("https://api.spotify.com/v1/me", {
       headers: {
         Authorization: `Bearer ${accessToken}`,

@@ -50,4 +50,27 @@ async function makeSpotifyRequest(endpoint) {
   }
 }
 
-module.exports = { getAccessToken, makeSpotifyRequest };
+async function playTrackOnDevice(accessToken, trackUri, deviceId) {
+  try {
+    const endpoint = `me/player/play?device_id=${deviceId}`; // device_id als Query-Parameter
+    const response = await axios.put(
+      `https://api.spotify.com/v1/${endpoint}`,
+      { uris: [trackUri] },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Verwende das Access Token vom Client
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error starting playback:",
+      error.response ? error.response.data : error.message
+    );
+    throw new Error("Failed to start playback");
+  }
+}
+
+module.exports = { getAccessToken, makeSpotifyRequest, playTrackOnDevice };
