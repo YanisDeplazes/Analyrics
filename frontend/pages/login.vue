@@ -10,13 +10,11 @@
       <div class="buttons">
         <Button text="Log in" variant="secondary" fill="fill" icon="right">
           <template v-slot:icon>
-            <Icon size="large" variant="arrow-forward"></Icon>
+            <Icon size="large" variant="login"></Icon>
           </template>
         </Button>
         <Button text="Skip" variant="secondary" fill="outline" icon="right">
-          <template v-slot:icon>
-            <Icon size="large" variant="arrow-forward"></Icon>
-          </template>
+          <template v-slot:icon> </template>
         </Button>
       </div>
     </div>
