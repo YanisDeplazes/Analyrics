@@ -22,4 +22,28 @@ router.get("/", async function (req, res) {
   }
 });
 
+router.get("/top/tracks", async function (req, res) {
+  const accessToken = req.query.access_token;
+
+  if (!accessToken) {
+    return res.status(401).json({ error: "Access token missing" });
+  }
+
+  try {
+    const response = await axios.get(
+      "https://api.spotify.com/v1/me/top/tracks",
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    res.json(response.data);
+  } catch (error) {
+    console.error("Error fetching Spotify profile:", error);
+    res.status(500).json({ error: "Failed to fetch profile" });
+  }
+});
+
 module.exports = router;
