@@ -31,14 +31,3 @@
     </Section>
   </div>
 </template>
-
-<style lang="scss">
-h1,
-h2,
-p {
-  color: #cec3e6;
-}
-p {
-  line-height: 25.6px;
-}
-</style>
