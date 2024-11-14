@@ -1,3 +1,6 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <div>
     <section class="welcome">
@@ -13,7 +16,7 @@
         you love. From insightful analysis to playful commentary, The Undertone
         Collective offers a fresh perspective on every song.
       </p>
-      <button>Explore now</button>
+      <Button text="Explore now"></Button>
     </section>
     <section>
       <h2>Meet the critics</h2>
@@ -42,15 +45,6 @@ p {
 }
 p {
   line-height: 25.6px;
-}
-button {
-  margin: 0 auto;
-  display: block;
-  border: unset;
-  background-color: #fff689;
-  padding: 10px 40px;
-  margin: auto;
-  border-radius: 5px;
 }
 
 section {
