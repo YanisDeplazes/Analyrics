@@ -14,7 +14,7 @@
       <NuxtLink to="/login">
         <Button text="Explore now" variant="secondary" fill="fill" icon="right">
           <template v-slot:icon>
-            <Icon size="large" variant="arrow-forward"></Icon>
+            <Icon size="large" variant="arrow-forward" type="secondary"></Icon>
           </template>
         </Button>
       </NuxtLink>
