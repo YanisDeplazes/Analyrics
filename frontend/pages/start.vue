@@ -2,7 +2,8 @@
   <div>
     <Section>
       <CardsReveal />
-
+    </Section>
+    <Section>
       <h1 class="font-branding">THE UNDERTONE COLLECTIVE</h1>
       <p>
         The Undertone Collective is where music’s hidden stories come to life.
