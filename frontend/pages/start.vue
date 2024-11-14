@@ -1,14 +1,10 @@
-<script setup lang="ts">
-</script>
+import { Section, CardsReveal } from '#build/components';
 
 <template>
   <div>
-    <section class="welcome">
-      <div class="cards">
-        <img src="../public/card.png" class="card" />
-        <img src="../public/card.png" class="card" />
-        <img src="../public/card.png" class="card" />
-      </div>
+    <Section>
+      <CardsReveal />
+
       <h1 class="font-branding">THE UNDERTONE COLLECTIVE</h1>
       <p>
         The Undertone Collective is where music’s hidden stories come to life.
@@ -17,11 +13,11 @@
         Collective offers a fresh perspective on every song.
       </p>
       <Button text="Explore now"></Button>
-    </section>
-    <section>
+    </Section>
+    <Section>
       <h2>Meet the critics</h2>
-    </section>
-    <section>
+    </Section>
+    <Section>
       <h2>Disclaimer</h2>
       <p>
         This app uses a Large Language Model by Google called Gemini to analyze
@@ -33,7 +29,7 @@
         intention of the lyrics. For any important interpretations, always refer
         to the original source or consult the lyricist.
       </p>
-    </section>
+    </Section>
   </div>
 </template>
 
@@ -45,55 +41,5 @@ p {
 }
 p {
   line-height: 25.6px;
-}
-
-section {
-  padding-top: 16px;
-  padding-bottom: 16px;
-  max-width: 345px;
-  margin: auto;
-}
-.cards {
-  width: 100%;
-  display: flex;
-
-  .card {
-    width: 100%;
-    border-radius: 10px;
-    border: #fff689 5px solid;
-    position: relative;
-    &:nth-child(1) {
-      animation: reveal-negative 2s forwards;
-    }
-    &:nth-child(2) {
-      scale: 1.05;
-      z-index: 1;
-    }
-    &:nth-child(3) {
-      animation: reveal-positive 2s forwards;
-    }
-  }
-  @keyframes reveal-negative {
-    from {
-      transform: translate(100px, 15px);
-      rotate: 0deg;
-    }
-    to {
-      transform: translate(0px, 15px);
-      rotate: -10deg;
-    }
-  }
-  @keyframes reveal-positive {
-    from {
-      transform: translate(-100px, 15px);
-
-      rotate: 0deg;
-    }
-    to {
-      transform: translate(0px, 15px);
-
-      rotate: 10deg;
-    }
-  }
 }
 </style>
