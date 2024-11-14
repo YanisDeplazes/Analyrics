@@ -16,6 +16,11 @@
     </swiper-slide>
   </swiper>
 </template>
+<style lang="scss">
+.swiper {
+  width: 100%;
+}
+</style>
 <script>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
