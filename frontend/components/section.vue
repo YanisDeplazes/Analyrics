@@ -6,8 +6,7 @@
 
 <style lang="scss">
 section {
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding: var(--spacing-2xl) var(--spacing-lg);
   max-width: 345px;
   margin: auto;
 }
