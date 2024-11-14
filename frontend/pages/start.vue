@@ -1,14 +1,9 @@
-<script setup lang="ts">
-</script>
-
 <template>
   <div>
-    <section class="welcome">
-      <div class="cards">
-        <img src="../public/card.png" class="card" />
-        <img src="../public/card.png" class="card" />
-        <img src="../public/card.png" class="card" />
-      </div>
+    <Section>
+      <CardsReveal />
+    </Section>
+    <Section>
       <h1 class="font-branding">THE UNDERTONE COLLECTIVE</h1>
       <p>
         The Undertone Collective is where music’s hidden stories come to life.
@@ -16,12 +11,13 @@
         you love. From insightful analysis to playful commentary, The Undertone
         Collective offers a fresh perspective on every song.
       </p>
-      <Button text="Explore now" variant="secondary" fill="fill"></Button>
-    </section>
-    <section>
+      <Button text="Explore now"></Button>
+    </Section>
+    <Section>
       <h2>Meet the critics</h2>
-    </section>
-    <section>
+      <CrititsOverview />
+    </Section>
+    <Section>
       <h2>Disclaimer</h2>
       <p>
         This app uses a Large Language Model by Google called Gemini to analyze
@@ -33,67 +29,6 @@
         intention of the lyrics. For any important interpretations, always refer
         to the original source or consult the lyricist.
       </p>
-    </section>
+    </Section>
   </div>
 </template>
-
-<style lang="scss">
-h1,
-h2,
-p {
-  color: #cec3e6;
-}
-p {
-  line-height: 25.6px;
-}
-
-section {
-  padding-top: 16px;
-  padding-bottom: 16px;
-  max-width: 345px;
-  margin: auto;
-}
-.cards {
-  width: 100%;
-  display: flex;
-
-  .card {
-    width: 100%;
-    border-radius: 10px;
-    border: #fff689 5px solid;
-    position: relative;
-    &:nth-child(1) {
-      animation: reveal-negative 2s forwards;
-    }
-    &:nth-child(2) {
-      scale: 1.05;
-      z-index: 1;
-    }
-    &:nth-child(3) {
-      animation: reveal-positive 2s forwards;
-    }
-  }
-  @keyframes reveal-negative {
-    from {
-      transform: translate(100px, 15px);
-      rotate: 0deg;
-    }
-    to {
-      transform: translate(0px, 15px);
-      rotate: -10deg;
-    }
-  }
-  @keyframes reveal-positive {
-    from {
-      transform: translate(-100px, 15px);
-
-      rotate: 0deg;
-    }
-    to {
-      transform: translate(0px, 15px);
-
-      rotate: 10deg;
-    }
-  }
-}
-</style>
