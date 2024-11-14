@@ -15,6 +15,7 @@
     </Section>
     <Section>
       <h2>Meet the critics</h2>
+      <CrititsOverview />
     </Section>
     <Section>
       <h2>Disclaimer</h2>
