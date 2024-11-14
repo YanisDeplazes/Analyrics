@@ -4,5 +4,8 @@ export default defineNuxtConfig({
   app: {
     baseURL: "/stuwe1/frontend"
   },
+  devServer: {
+    port: 8888
+  },
   devtools: { enabled: true }
 })
