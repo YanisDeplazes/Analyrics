@@ -13,14 +13,16 @@
 
   .card {
     width: calc(100% / 3);
-    border-radius: 10px;
+    border-radius: var(--border-md);
     border: #fff689 5px solid;
     position: relative;
+    scale: 1.2;
+
     &:nth-child(1) {
       animation: reveal-negative 2s forwards;
     }
     &:nth-child(2) {
-      scale: 1.05;
+      scale: 1.3;
       z-index: 1;
     }
     &:nth-child(3) {
