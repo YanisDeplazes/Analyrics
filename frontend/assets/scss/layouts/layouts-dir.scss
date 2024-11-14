@@ -1,0 +1,9 @@
+/* ==========================================================================
+    @layouts-dir.scss
+    Nuxt provides a layouts framework to extract common UI patterns into 
+    reusable layouts.
+============================================================================= */
+
+@use "header";
+@use "footer";
+@use "main";

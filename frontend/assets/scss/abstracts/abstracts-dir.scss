@@ -1,0 +1,11 @@
+/* ==========================================================================
+	@abstracts-dir.scss
+	This file is used to contain all abstracts imports.
+    This file serves as an aggregate of all the abstracts (settings, helpers, and functions) used across the stylesheets. 
+    Abstracts are parts of our codebase that don't produce direct, tangible CSS output when compiled on their own. 
+============================================================================= */
+
+@use "variables";
+@use "mixins";
+@use "functions";
+@use "helpers";
