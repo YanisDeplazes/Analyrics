@@ -1,9 +1,8 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>
-    <section class="welcome">
+    <Section>
       <div class="cards">
         <img src="../public/card.png" class="card" />
         <img src="../public/card.png" class="card" />
@@ -17,11 +16,11 @@
         Collective offers a fresh perspective on every song.
       </p>
       <Button text="Explore now"></Button>
-    </section>
-    <section>
+    </Section>
+    <Section>
       <h2>Meet the critics</h2>
-    </section>
-    <section>
+    </Section>
+    <Section>
       <h2>Disclaimer</h2>
       <p>
         This app uses a Large Language Model by Google called Gemini to analyze
@@ -33,7 +32,7 @@
         intention of the lyrics. For any important interpretations, always refer
         to the original source or consult the lyricist.
       </p>
-    </section>
+    </Section>
   </div>
 </template>
 
