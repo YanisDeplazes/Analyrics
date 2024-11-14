@@ -10,6 +10,7 @@ describe("GET /lyrics", () => {
     });
   });
 
+  // TODO: Fails sometimes
   it("should return 200 if the genius request succeeds", async () => {
     const response = await request(app)
       .get("/lyrics")
