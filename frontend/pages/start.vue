@@ -16,7 +16,7 @@
         you love. From insightful analysis to playful commentary, The Undertone
         Collective offers a fresh perspective on every song.
       </p>
-      <Button text="Explore now"></Button>
+      <Button text="Explore now" variant="secondary" fill="fill"></Button>
     </section>
     <section>
       <h2>Meet the critics</h2>
