@@ -1,9 +1,21 @@
 <template>
-  <button @click="handleClick">{{ text }}</button>
+  <button @click="handleClick" class="button" :class="{
+    'primary-fill': fill == 'fill' && variant == 'primary',
+    'secondary-fill': fill == 'fill' && variant == 'secondary',
+    'primary-outline': fill == 'outline' && variant == 'primary',
+    'secondary-outline': fill == 'outline' && variant == 'secondary'
+  }">
+    <slot name="icon" v-if="icon == 'left'" />
+    {{ text }}
+    <slot name="icon" v-if="icon == 'right'" />
+  </button>
 </template>
 <script setup lang="ts">
 const props = defineProps<{
-  text: string
+  text: string,
+  variant: "primary" | "secondary",
+  fill: "fill" | "outline",
+  icon?: "left" | "right"
 }>();
 const emit = defineEmits<{
   click: [e: MouseEvent]
@@ -13,13 +25,35 @@ const handleClick = (e: MouseEvent) => {
 };
 </script>
 <style lang="css" scoped>
-button {
+.button {
   margin: 0 auto;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: unset;
-  background-color: #fff689;
-  padding: 10px 40px;
-  margin: auto;
-  border-radius: 5px;
+  padding: var(--spacing-md);
+  border-radius: var(--border-lg);
+}
+
+.primary-fill {
+  background-color: var(--bg-primary);
+  color: var(--on-primary);
+}
+
+.secondary-fill {
+  background-color: var(--bg-secondary);
+  color: var(--on-secondary);
+}
+
+.primary-outline {
+  background-color: transparent;
+  color: var(--bg-primary);
+  border: 1px solid var(--bg-primary);
+}
+
+.secondary-outline {
+  background-color: transparent;
+  color: var(--bg-secondary);
+  border: 1px solid var(--bg-secondary);
 }
 </style>
