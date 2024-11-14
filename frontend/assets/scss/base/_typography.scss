@@ -1,0 +1,80 @@
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/assets/fonts/Playfair_Display/PlayfairDisplay-Regular.ttf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gothic A1";
+  src: url("/assets/fonts/Gothic_A1/GothicA1-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+$font-family-branding: "Playfair Display", serif;
+$font-family-heading: "Gothic A1", sans-serif;
+$font-family-body: "Gothic A1", sans-serif;
+
+.font-branding {
+  font-family: $font-family-branding;
+}
+
+html {
+  font-family: $font-family-body;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+small {
+  font-size: 0.889rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6 {
+  font-family: $font-family-heading;
+  font-weight: 700;
+  line-height: 120%;
+}
+
+h1,
+.display-1 {
+  font-size: 2.027rem;
+}
+
+h2,
+.display-2 {
+  font-size: 1.802rem;
+}
+
+h3,
+.display-3 {
+  font-size: 1.602rem;
+}
+
+h4,
+.display-4 {
+  font-size: 1.424rem;
+}
+
+h5,
+.display-5 {
+  font-size: 1.266rem;
+}
+
+h6,
+.display-6 {
+  font-size: 1.125rem;
+}
