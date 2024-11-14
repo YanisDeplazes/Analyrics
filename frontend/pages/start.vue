@@ -1,5 +1,3 @@
-import { Section, CardsReveal } from '#build/components';
-
 <template>
   <div>
     <Section>
