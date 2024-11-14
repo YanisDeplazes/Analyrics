@@ -12,7 +12,7 @@
   display: flex;
 
   .card {
-    width: 100%;
+    width: calc(100% / 3);
     border-radius: 10px;
     border: #fff689 5px solid;
     position: relative;
