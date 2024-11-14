@@ -14,9 +14,11 @@
           </template>
         </Button>
       </NuxtLink>
-      <Button text="Skip" variant="secondary" fill="outline" icon="right">
-        <template v-slot:icon> </template>
-      </Button>
+      <NuxtLink to="selection">
+        <Button text="Skip" variant="secondary" fill="outline" icon="right">
+          <template v-slot:icon> </template>
+        </Button>
+      </NuxtLink>
     </div>
   </Section>
 </template>
@@ -25,9 +27,13 @@
 .buttons {
   display: flex;
   gap: var(--spacing-lg);
-  > *,
-  button {
+  a {
     width: 100%;
+
+    button {
+      height: 100%;
+      width: 100%;
+    }
   }
 }
 </style>
