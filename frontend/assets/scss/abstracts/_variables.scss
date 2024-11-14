@@ -48,6 +48,7 @@ $spacing-640: 640px;
 $spacing-720: 720px;
 
 // Spacing Tokens
+$spcaing-sm: $spacing-4;
 $spacing-md: $spacing-8;
 $spacing-lg: $spacing-16;
 $spacing-xl: $spacing-24;
@@ -77,6 +78,7 @@ $spacing-5xl: $spacing-224;
   --border-lg: #{$border-lg};
   --border-xl: #{$border-xl};
 
+  --spacing-sm:#{$spcaing-sm};
   --spacing-md: #{$spacing-md};
   --spacing-lg: #{$spacing-lg};
   --spacing-xl: #{$spacing-xl};
