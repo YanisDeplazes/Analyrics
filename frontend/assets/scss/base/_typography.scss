@@ -27,7 +27,9 @@ html {
   font-weight: 400;
   color: var(--on-primary);
 }
-
+strong {
+  font-weight: bold;
+}
 small {
   font-size: 0.889rem;
 }
