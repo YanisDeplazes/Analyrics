@@ -41,7 +41,7 @@ router.get("/", async (req, res) => {
     const accessToken = response.data.access_token;
 
     res.redirect(
-      "http://localhost:8888/stuwe1/frontend/profile?" +
+      "http://localhost:8888/stuwe1/frontend/selection?" +
         querystring.stringify({ access_token: accessToken })
     );
   } catch (error) {
