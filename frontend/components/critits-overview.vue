@@ -60,57 +60,57 @@
 </template>
 
 <style lang="scss">
-.swiper-wrapper {
-  .swiper-slide {
-    .critic {
-      background-color: var(--bg-secondary);
+.swiper {
+  width: 100%;
+}
+
+.critic {
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-lg);
+  padding: var(--spacing-lg);
+  color: var(--on-secondary);
+  display: flex;
+  gap: var(--spacing-lg);
+  flex-direction: column;
+
+  .image {
+    position: relative;
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      aspect-ratio: 288 / 320;
       border-radius: var(--border-lg);
-      padding: var(--spacing-lg);
-      color: var(--on-secondary);
+    }
+    .title {
+      position: absolute;
+      bottom: var(--spacing-lg);
+      background-color: var(--bg-secondary);
+      border-top-right-radius: var(--border-md);
+      border-bottom-right-radius: var(--border-md);
+      padding: var(--spacing-md);
+    }
+  }
+  .category {
+    background-color: var(--bg-primary);
+    color: var(--on-primary);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+
+    border-radius: var(--border-md);
+    padding: var(--spacing-md);
+    .icon {
       display: flex;
-      gap: var(--spacing-lg);
-      flex-direction: column;
-
-      .image {
-        position: relative;
-
-        img {
-          width: 100%;
-          height: auto;
-          object-fit: cover;
-          aspect-ratio: 288 / 320;
-          border-radius: var(--border-lg);
-        }
-        .title {
-          position: absolute;
-          bottom: var(--spacing-lg);
-          background-color: var(--bg-secondary);
-          border-top-right-radius: var(--border-md);
-          border-bottom-right-radius: var(--border-md);
-          padding: var(--spacing-md);
-        }
-      }
-      .category {
-        background-color: var(--bg-primary);
-        color: var(--on-primary);
-        display: flex;
-        flex-direction: column;
-        gap: var(--spacing-md);
-
-        border-radius: var(--border-md);
-        padding: var(--spacing-md);
-        .icon {
-          display: flex;
-          gap: 5px;
-          .icon-humor {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            background: url("./icons/humor.svg");
-            background-repeat: no-repeat;
-            background-size: contain;
-          }
-        }
+      gap: 5px;
+      .icon-humor {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background: url("./icons/humor.svg");
+        background-repeat: no-repeat;
+        background-size: contain;
       }
     }
   }
