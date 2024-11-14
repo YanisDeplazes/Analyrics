@@ -25,11 +25,15 @@ html {
   font-family: $font-family-body;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 140%;
+  color: var(--on-primary);
 }
 
 small {
   font-size: 0.889rem;
+}
+
+p {
+  line-height: 140%;
 }
 
 h1,
