@@ -1,4 +1,4 @@
-
+<template>
   <Section class="introduction-section">
     <CardsReveal />
   </Section>
@@ -47,4 +47,3 @@
   text-align: center;
 }
 </style>
-
