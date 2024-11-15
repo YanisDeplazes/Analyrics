@@ -3,7 +3,7 @@
     <CardsReveal />
   </Section>
   <Section class="branding-section">
-    <h1 class="font-branding">THE UNDERTONE COLLECTIVE</h1>
+    <h1 class="font-branding text-center">THE UNDERTONE COLLECTIVE</h1>
     <p>
       The Undertone Collective is where music’s hidden stories come to life.
       Our team of fictional critics, delves into the meaning behind the lyrics
@@ -19,7 +19,7 @@
     </NuxtLink>
   </Section>
   <Section class="critics-section">
-    <h2>Meet the critics</h2>
+    <h2 class="font-branding">Meet the critics</h2>
     <CrititsOverview />
   </Section>
   <Section class="disclaimer-section">
@@ -42,5 +42,8 @@
 .branding-section,
 .disclaimer-section {
   margin: var(--spacing-2xl) var(--spacing-lg);
+}
+.text-center{
+  text-align: center;
 }
 </style>
