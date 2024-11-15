@@ -43,8 +43,8 @@
   
   <style scoped>
   .notification {
-    width: 221px;
-    height: 135px;
+    width: 100%;
+    height: unset;
     padding: var(--spacing-md);
     border-radius: var(--border-sm);
     color: var(--on-success);
@@ -63,13 +63,8 @@
     align-items: center;
   }
   
-  .notification-title {
-    font-weight: bold;
-    font-size: 32.44px;
-  }
-  
   .notification-description {
-    margin-top: 10px;
+    margin-top: var(--spacing-md);
     width: 205px;
   }
   
