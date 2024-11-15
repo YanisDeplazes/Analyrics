@@ -2,19 +2,20 @@
     <div class="badge-container">
       <div :class="['badge', type]">
         <span class="badge-icon">
-          <template v-if="type === 'loading'">
+          <template v-if="type === 'loading' || type === 'loading-primary'">
             <Icon size="large" variant="keyboard-arrow-right" type="secondary" />
           </template>
-          <template v-if="type === 'success'">
+          <template v-if="type === 'success' || type === 'success-primary'">
             <Icon size="large" variant="check" type="secondary" />
           </template>
-          <template v-if="type === 'error'">
+          <template v-if="type === 'error' || type === 'error-primary'">
             <Icon size="large" variant="cross" type="secondary" />
           </template>
         </span>
         <span class="badge-text">{{ text }}</span>
   
-        <div v-if="type === 'error'" class="error-box">
+        <!-- Nested error message box -->
+        <div v-if="type === 'error' || type === 'error-primary'" class="error-box">
           <Icon size="small" variant="error" type="secondary" />
           <span class="error-message">Error message</span>
         </div>
@@ -28,7 +29,14 @@
       type: {
         type: String,
         required: true,
-        validator: (value) => ['loading', 'success', 'error',].includes(value),
+        validator: (value) => [
+          'loading',
+          'success',
+          'error',
+          'loading-primary',
+          'success-primary',
+          'error-primary',
+        ].includes(value),
       },
       text: {
         type: String,
@@ -41,10 +49,11 @@
   <style scoped>
 
 /**
- * To do:
- * - Error message should appear under the other content of the container. 
- * - Icons are to big and the loading icon is missing. 
- * -> Also, the error-nested icon should be in white which is not defined in the variables.
+ * To Do:
+ * - wasn't able to change icon color for bg-primary badges
+ * - missing loading icon in css variables
+ * - missing white error icon
+ * - wasn't able to put error message box below the text
  */
 
   .badge-container {
@@ -62,8 +71,6 @@
     margin-bottom: var(--spacing-lg);
     font-size: 16px;
     font-weight: 500;
-    color: var(--on-secondary);
-    background-color: var(--bg-secondary);
   }
   
   .badge-icon {
@@ -72,30 +79,45 @@
   
   .loading {
     background-color: var(--bg-secondary);
+    color: var(--on-secondary);
   }
   
   .success {
     background-color: var(--bg-secondary);
+    color: var(--on-secondary);
   }
   
   .error {
     background-color: var(--bg-secondary);
-    position: relative;
+    color: var(--on-secondary);
+  }
+  
+  .loading-primary {
+    background-color: var(--bg-primary);
+    color: var(--on-primary);
+  }
+  
+  .success-primary {
+    background-color: var(--bg-primary);
+    color: var(--on-primary);
+  }
+  
+  .error-primary {
+    background-color: var(--bg-primary);
+    color: var(--on-primary);
   }
   
   .error-box {
     display: inline-flex;
     align-items: center;
     background-color: var(--bg-error);
-    border-radius: 12px;
-    padding: 4px 8px;
-    margin-top: 8px;
-    color: white;
+    border-radius: var(--border-md);
+    padding: var(--spacing-md);
+    color: var(--on-error);
   }
   
   .error-icon {
     font-size: 20px;
-    margin-right: 4px;
   }
   
   .error-message {
