@@ -1,8 +1,8 @@
 <template>
-  <Section class="introduction">
+  <Section class="introduction-section">
     <CardsReveal />
   </Section>
-  <Section>
+  <Section class="branding-section">
     <h1 class="font-branding">THE UNDERTONE COLLECTIVE</h1>
     <p>
       The Undertone Collective is where music’s hidden stories come to life.
@@ -18,11 +18,11 @@
       </Button>
     </NuxtLink>
   </Section>
-  <Section>
+  <Section class="critics-section">
     <h2>Meet the critics</h2>
     <CrititsOverview />
   </Section>
-  <Section>
+  <Section class="disclaimer-section">
     <h2>Disclaimer</h2>
     <p>
       This app uses a Large Language Model by Google called Gemini to analyze
@@ -37,7 +37,10 @@
   </Section>
 </template>
 <style lang="scss" scoped>
-.introduction {
+.introduction-section,
+.critics-section,
+.branding-section,
+.disclaimer-section {
   margin: var(--spacing-2xl) var(--spacing-lg);
 }
 </style>
