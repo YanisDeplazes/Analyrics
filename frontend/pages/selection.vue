@@ -7,12 +7,7 @@
         Let's get to analysing your preferred song. We've pulled a few tracks
         from your Spotify account to get you started:
       </p>
-      <swiper
-        :slides-per-view="1.1"
-        :space-between="10"
-        @swiper="onSwiper"
-        @slideChange="onSlideChange"
-      >
+      <SwiperWrapper :slides-per-view="1.1" :space-between="10" @swiper="onSwiper" @slideChange="onSlideChange">
         <swiper-slide v-for="track in recommendations.items" :key="track.id">
           <div class="track">
             <div class="image">
@@ -25,7 +20,7 @@
               <p>
                 <small>{{
                   track.artists.map((artist) => artist.name).join(", ")
-                }}</small>
+                  }}</small>
               </p>
 
               <!--TODO: <p v-if="track.preview_url">
@@ -36,7 +31,7 @@
             </div>
           </div>
         </swiper-slide>
-      </swiper>
+      </SwiperWrapper>
     </div>
     <p>Alternatively, you can search for any song you'd like:</p>
     <!-- TODO: Search Component-->
@@ -51,9 +46,11 @@
   padding: var(--spacing-lg);
   display: flex;
   gap: var(--spacing-lg);
+
   .image,
   .track-info {
     flex: 1;
+
     img {
       width: 100%;
       height: auto;
@@ -62,61 +59,45 @@
 }
 </style>
 
-<script>
+<script setup lang="ts">
 // Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from "swiper/vue";
+import type Swiper from "swiper";
+import { Swiper as SwiperWrapper, SwiperSlide } from "swiper/vue";
+let profile = ref<null | { display_name: string }>(null);
+let recommendations = ref<{ items: Array<{ id: string, album: { images: Array<{ url: string }> }, name: string, artists: Array<{ name: string }> }> }>({ items: [] });
+let error = ref<null | string>(null);
+const onSwiper = (swiper: Swiper) => {
+  console.log(swiper);
+};
+const onSlideChange = () => {
+  console.log("slide change");
+};
+onMounted(async () => {
+  const accessToken = new URLSearchParams(window.location.search).get(
+    "access_token"
+  );
 
-export default {
-  components: {
-    Swiper,
-    SwiperSlide,
-  },
-  setup() {
-    const onSwiper = (swiper) => {
-      console.log(swiper);
-    };
-    const onSlideChange = () => {
-      console.log("slide change");
-    };
-    return {
-      onSwiper,
-      onSlideChange,
-    };
-  },
-  data() {
-    return {
-      profile: null,
-      recommendations: { items: [] },
-      error: null,
-    };
-  },
-  async mounted() {
-    const accessToken = new URLSearchParams(window.location.search).get(
-      "access_token"
+  if (!accessToken) {
+    error.value = "Access token not found. Please log in.";
+    return;
+  }
+
+  try {
+    const profileFetch = await fetch(
+      `http://localhost:3000/me?access_token=${accessToken}`
     );
 
-    if (!accessToken) {
-      this.error = "Access token not found. Please log in.";
-      return;
-    }
+    const profileData = await profileFetch.json();
+    profile.value = profileData;
 
-    try {
-      const profileFetch = await fetch(
-        `http://localhost:3000/me?access_token=${accessToken}`
-      );
+    const topItemsFetch = await fetch(
+      `http://localhost:3000/me/top/tracks?access_token=${accessToken}`
+    );
 
-      const profileData = await profileFetch.json();
-      this.profile = profileData;
-
-      const topItemsFetch = await fetch(
-        `http://localhost:3000/me/top/tracks?access_token=${accessToken}`
-      );
-
-      const topItemsData = await topItemsFetch.json();
-      this.recommendations = topItemsData;
-    } catch (error) {
-      this.error = "Could not load profile data.";
-    }
-  },
-};
+    const topItemsData = await topItemsFetch.json();
+    recommendations.value = topItemsData;
+  } catch (e) {
+    error.value = "Could not load profile data.";
+  }
+});
 </script>
