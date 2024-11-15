@@ -11,5 +11,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
+  min-height: calc(100vh - 2 * var(--spacing-lg));
 }
 </style>
