@@ -1,8 +1,8 @@
 <template>
   <div class="cards">
-    <img src="../public/card.png" class="card" />
-    <img src="../public/card.png" class="card" />
-    <img src="../public/card.png" class="card" />
+    <img src="/images/personas/emma.png" class="card" />
+    <img src="/images/personas/ellen.png" class="card" />
+    <img src="/images/personas/gordon.png" class="card" />
   </div>
 </template>
 
@@ -17,6 +17,8 @@
     border: #fff689 5px solid;
     position: relative;
     scale: 1.2;
+    object-fit: cover;
+    aspect-ratio: 9/16;
 
     &:nth-child(1) {
       animation: reveal-negative 2s forwards;

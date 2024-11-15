@@ -1,5 +1,5 @@
 <template>
-  <Section>
+  <Section class="login-section">
     <h1 class="display-2">Get a personalised experience</h1>
     <p>
       Log in with your Spotify account to get song recommendations tailored just
@@ -10,20 +10,18 @@
       <NuxtLink to="http://localhost:3000/login">
         <Button text="Log in" variant="secondary" fill="fill" icon="right">
           <template v-slot:icon>
-            <Icon size="large" variant="login"></Icon>
+            <Icon size="large" variant="login" type="secondary"></Icon>
           </template>
         </Button>
       </NuxtLink>
-      <NuxtLink to="selection">
-        <Button text="Skip" variant="secondary" fill="outline" icon="right">
-          <template v-slot:icon> </template>
+      <NuxtLink to="song-selection">
+        <Button text="Skip" variant="secondary" fill="outline">
         </Button>
       </NuxtLink>
     </div>
   </Section>
 </template>
-
-<style lang="scss">
+<style lang="scss" scoped>
 .buttons {
   display: flex;
   gap: var(--spacing-lg);
@@ -35,5 +33,12 @@
       width: 100%;
     }
   }
+}
+.login-section{
+  height: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
 }
 </style>

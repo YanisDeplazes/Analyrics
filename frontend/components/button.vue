@@ -31,7 +31,7 @@ const handleClick = (e: MouseEvent) => {
   align-items: center;
   justify-content: center;
   border: unset;
-  padding: var(--spacing-md);
+  padding: var(--spacing-lg);
   border-radius: var(--border-lg);
 }
 

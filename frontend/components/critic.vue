@@ -1,17 +1,23 @@
 <template>
     <div class="critic">
         <div class="image">
-            <img src="../public/card.png" />
-            <h3 class="title">Ellen</h3>
+            <img :src="imageUrlWithBaseUrl" />
+            <h3 class="title">{{ name }}</h3>
         </div>
-        <CriticCategory variant="humor"></CriticCategory>
-        <p>
-            Ellen is a cheerful, out-of-touch host who delivers hilariously wrong
-            song interpretations with endless enthusiasm. Laughing at her own
-            jokes and dropping outdated references, she's cringy yet endearing.
-        </p>
+        <CriticCategory :variant="category"></CriticCategory>
+        <p>{{ description }}</p>
+        <slot name="call-to-action" />
     </div>
 </template>
+<script setup lang="ts">
+const props = defineProps<{
+    name: string,
+    category: "culture" | "genre" | "humor" | "philosophy" | "intellect" | "niche",
+    description: string,
+    imageUrl: string
+}>();
+const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
+</script>
 <style lang="scss" scoped>
 .critic {
     background-color: var(--bg-secondary);
