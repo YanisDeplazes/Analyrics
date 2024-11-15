@@ -6,12 +6,13 @@
         </div>
         <CriticCategory :variant="category"></CriticCategory>
         <p>{{ description }}</p>
+        <slot name="call-to-action" />
     </div>
 </template>
 <script setup lang="ts">
 const props = defineProps<{
     name: string,
-    category: string,
+    category: "culture" | "genre" | "humor" | "philosophy" | "intellect" | "niche",
     description: string,
     imageUrl: string
 }>();

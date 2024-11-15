@@ -14,7 +14,7 @@
           </template>
         </Button>
       </NuxtLink>
-      <NuxtLink to="selection">
+      <NuxtLink to="song-selection">
         <Button text="Skip" variant="secondary" fill="outline">
         </Button>
       </NuxtLink>
