@@ -6,7 +6,12 @@
         Let's get to analysing your preferred song. We've pulled a few tracks
         from your Spotify account to get you started:
       </p>
-      <SwiperWrapper :slides-per-view="1.1" :space-between="10" @swiper="onSwiper" @slideChange="onSlideChange">
+      <SwiperWrapper
+        :slides-per-view="1.1"
+        :space-between="10"
+        @swiper="onSwiper"
+        @slideChange="onSlideChange"
+      >
         <swiper-slide v-for="track in recommendations.items" :key="track.id">
           <div class="track">
             <div class="image">
@@ -34,6 +39,7 @@
     </template>
     <p>Alternatively, you can search for any song you'd like:</p>
     <!-- TODO: Search Component-->
+    <SearchComponent />
   </Section>
 </template>
 
@@ -69,7 +75,14 @@
 import type Swiper from "swiper";
 import { Swiper as SwiperWrapper, SwiperSlide } from "swiper/vue";
 let profile = ref<null | { display_name: string }>(null);
-let recommendations = ref<{ items: Array<{ id: string, album: { images: Array<{ url: string }> }, name: string, artists: Array<{ name: string }> }> }>({ items: [] });
+let recommendations = ref<{
+  items: Array<{
+    id: string;
+    album: { images: Array<{ url: string }> };
+    name: string;
+    artists: Array<{ name: string }>;
+  }>;
+}>({ items: [] });
 let error = ref<null | string>(null);
 const onSwiper = (swiper: Swiper) => {
   console.log(swiper);
