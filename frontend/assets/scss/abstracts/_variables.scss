@@ -1,0 +1,89 @@
+// colors
+$bg-primary: #392467;
+$on-primary: #cec3e6;
+$bg-secondary: #fff689;
+$on-secondary: #392467;
+$bg-error: #c63c51;
+$on-error: #fff;
+$bg-success: #00a878;
+$on-success: #fff;
+$bg-info: #369;
+$on-info: #fff;
+$bg-warning: #ff9f1c;
+$on-warning: #fff;
+$bg-neutral: #f5f0f6;
+$on-neutral: #392467;
+
+// Border Radius
+$border-sm: 4px;
+$border-md: 8px;
+$border-lg: 16px;
+$border-xl: 32px;
+
+// Spacing
+$spacing-0: 0px;
+$spacing-4: 4px;
+$spacing-6: 6px;
+$spacing-8: 8px;
+$spacing-12: 12px;
+$spacing-16: 16px;
+$spacing-20: 20px;
+$spacing-24: 24px;
+$spacing-32: 32px;
+$spacing-40: 40px;
+$spacing-48: 48px;
+$spacing-64: 64px;
+$spacing-80: 80px;
+$spacing-96: 96px;
+$spacing-128: 128px;
+$spacing-160: 160px;
+$spacing-192: 192px;
+$spacing-224: 224px;
+$spacing-256: 256px;
+$spacing-320: 320px;
+$spacing-384: 384px;
+$spacing-480: 480px;
+$spacing-560: 560px;
+$spacing-640: 640px;
+$spacing-720: 720px;
+
+// Spacing Tokens
+$spcaing-sm: $spacing-4;
+$spacing-md: $spacing-8;
+$spacing-lg: $spacing-16;
+$spacing-xl: $spacing-24;
+$spacing-2xl: $spacing-32;
+$spacing-3xl: $spacing-64;
+$spacing-4xl: $spacing-160;
+$spacing-5xl: $spacing-224;
+
+:root {
+  --bg-primary: #{$bg-primary};
+  --on-primary: #{$on-primary};
+  --bg-secondary: #{$bg-secondary};
+  --on-secondary: #{$on-secondary};
+  --bg-error: #{$bg-error};
+  --on-error: #{$on-error};
+  --bg-success: #{$bg-success};
+  --on-success: #{$on-success};
+  --bg-info: #{$bg-info};
+  --on-info: #{$on-info};
+  --bg-warning: #{$bg-warning};
+  --on-warning: #{$on-warning};
+  --bg-neutral: #{$bg-neutral};
+  --on-neutral: #{$on-neutral};
+
+  --border-sm: #{$border-sm};
+  --border-md: #{$border-md};
+  --border-lg: #{$border-lg};
+  --border-xl: #{$border-xl};
+
+  --spacing-sm:#{$spcaing-sm};
+  --spacing-md: #{$spacing-md};
+  --spacing-lg: #{$spacing-lg};
+  --spacing-xl: #{$spacing-xl};
+  --spacing-2xl: #{$spacing-2xl};
+  --spacing-3xl: #{$spacing-3xl};
+  --spacing-4xl: #{$spacing-4xl};
+  --spacing-5xl: #{$spacing-5xl};
+}

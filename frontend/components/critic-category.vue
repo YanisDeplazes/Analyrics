@@ -1,0 +1,64 @@
+<template>
+    <div class="category">
+        <p class="icon">
+            <Icon :variant="variant" size="large" type="primary"></Icon> {{ categoryTitle }}
+        </p>
+        <p>{{ categoryDescription }}</p>
+    </div>
+</template>
+<script setup lang="ts">
+const props = defineProps<{
+    variant: "culture" | "genre" | "humor" | "philosophy" | "intellect" | "niche"
+}>();
+
+const categoryTitle = computed(() => {
+    switch (props.variant) {
+        case "culture":
+            return "Cultural commentator";
+        case "genre":
+            return "Genre Enthusiast";
+        case "humor":
+            return "Humorous Critic";
+        case "intellect":
+            return "Intellectual Critic";
+        case "niche":
+            return "Niche Perspective";
+        case "philosophy":
+            return "Philosophical Analyst";
+    }
+});
+
+const categoryDescription = computed(() => {
+    switch (props.variant) {
+        case "culture":
+            return "Tying music to culture and society";
+        case "genre":
+            return "Genre or artist-specific deep dives";
+        case "humor":
+            return "Lighthearted and comedic interpretations";
+        case "intellect":
+            return "Exploring deep meanings";
+        case "niche":
+            return "Sophisticated, scholarly commentary";
+        case "philosophy":
+            return "Unique and unconventional viewpoints";
+    }
+})
+</script>
+<style lang="scss" scoped>
+.category {
+    background-color: var(--bg-primary);
+    color: var(--on-primary);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+
+    border-radius: var(--border-md);
+    padding: var(--spacing-md);
+
+    .icon {
+        display: flex;
+        gap: var(--spacing-md);
+    }
+}
+</style>
