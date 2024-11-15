@@ -1,8 +1,7 @@
 <template>
-  <Section>
+  <Section class="recommendation-section">
     <h1>Hi {{ profile?.display_name || "there" }}!</h1>
-
-    <div v-if="recommendations && recommendations.items.length">
+    <template v-if="recommendations && recommendations.items.length">
       <p>
         Let's get to analysing your preferred song. We've pulled a few tracks
         from your Spotify account to get you started:
@@ -20,7 +19,7 @@
               <p>
                 <small>{{
                   track.artists.map((artist) => artist.name).join(", ")
-                  }}</small>
+                }}</small>
               </p>
 
               <!--TODO: <p v-if="track.preview_url">
@@ -32,13 +31,19 @@
           </div>
         </swiper-slide>
       </SwiperWrapper>
-    </div>
+    </template>
     <p>Alternatively, you can search for any song you'd like:</p>
     <!-- TODO: Search Component-->
   </Section>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.recommendation-section {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
 .track {
   background-color: var(--bg-secondary);
   color: var(--on-secondary);
