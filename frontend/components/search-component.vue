@@ -1,13 +1,14 @@
 <template>
   <div class="searchbar-wrapper">
     <div class="searchbar">
-      <button @click="searchSong" class="icon">
+      <button @click="searchSong" aria-label="Search" class="icon">
         <Icon size="large" variant="search" type="secondary"></Icon>
       </button>
       <input
         class="input"
         v-model="query"
         @keyup.enter="searchSong"
+        aria-label="Search for a song"
         placeholder="Search for a song"
       />
     </div>
@@ -19,7 +20,10 @@
         @click="$emit('play-track', track.uri)"
       >
         <img
-          :src="track.album.images[0]?.url"
+          :src="
+            track.album.images[0].url ||
+            '/stuwe1/frontend/images/personas/default-cover-image.png'
+          "
           alt="Track Image"
           class="track-image"
         />
