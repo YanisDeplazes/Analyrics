@@ -2,21 +2,29 @@
     <div class="badge-container">
       <div :class="['badge', type]">
         <span class="badge-icon">
-          <template v-if="type === 'loading' || type === 'loading-primary'">
+          <template v-if="type === 'loading'">
             <Icon size="large" variant="keyboard-arrow-right" type="secondary" />
           </template>
-          <template v-if="type === 'success' || type === 'success-primary'">
+          <template v-if="type === 'success'">
             <Icon size="large" variant="check" type="secondary" />
           </template>
-          <template v-if="type === 'error' || type === 'error-primary'">
+          <template v-if="type === 'error'">
             <Icon size="large" variant="cross" type="secondary" />
+          </template>
+          <template v-if="type === 'loading-primary'">
+            <Icon size="large" variant="keyboard-arrow-right" type="primary" />
+          </template>
+          <template v-if="type === 'success-primary'">
+            <Icon size="large" variant="check" type="primary" />
+          </template>
+          <template v-if="type === 'error-primary'">
+            <Icon size="large" variant="cross" type="primary" />
           </template>
         </span>
         <span class="badge-text">{{ text }}</span>
-  
-        <!-- Nested error message box -->
+
         <div v-if="type === 'error' || type === 'error-primary'" class="error-box">
-          <Icon size="small" variant="error" type="secondary" />
+          <Icon size="small" variant="error" type="error" />
           <span class="error-message">Error message</span>
         </div>
       </div>
@@ -50,9 +58,7 @@
 
 /**
  * To Do:
- * - wasn't able to change icon color for bg-primary badges
- * - missing loading icon in css variables
- * - missing white error icon
+ * - missing loading icon in css variables, replaced with placeholder icon
  * - wasn't able to put error message box below the text
  */
 
