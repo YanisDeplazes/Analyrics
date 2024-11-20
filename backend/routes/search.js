@@ -12,7 +12,7 @@ router.get("/", async function (req, res, next) {
 
   try {
     const endpoint = `search?q=${encodeURIComponent(query)}&type=${
-      type || "track"
+      type || "track,artist"
     }&limit=10`;
 
     const results = await makeSpotifyRequest(endpoint);
