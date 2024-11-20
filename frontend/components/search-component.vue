@@ -17,7 +17,7 @@
         v-for="(track, index) in searchResults"
         :key="index"
         class="result-item"
-        @click="$emit('play-track', track.uri)"
+        @click="selectTrack(track.uri)"
       >
         <img
           :src="
@@ -73,11 +73,15 @@ export default defineComponent({
         console.error("Fetch error:", error);
       }
     };
+    const selectTrack = (track: any) => {
+      $fetch("select-track", track);
+    };
 
     return {
       query,
       searchResults,
       searchSong,
+      selectTrack,
     };
   },
 });
