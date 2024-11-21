@@ -19,7 +19,10 @@
         @click="$emit('play-track', track.uri)"
       >
         <img
-          :src="track.album?.images?.[0]?.url || '/default-cover.jpg'"
+          :src="
+            track.album?.images?.[0]?.url ||
+            '/images/personas/default-cover-image.png'
+          "
           alt="Album Art"
           class="track-image"
         />
