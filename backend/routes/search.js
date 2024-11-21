@@ -11,9 +11,10 @@ router.get("/", async function (req, res, next) {
   }
 
   try {
-    const endpoint = `search?q=${encodeURIComponent(query)}&type=${
-      type || "track"
-    }&limit=10`;
+    // Replace spaces with `+` and construct the endpoint manually
+    const formattedQuery = query.replace(/ /g, "+");
+    const queryType = type || "track"; // Default to track and artist if not provided
+    const endpoint = `search?q=${formattedQuery}&type=${queryType}&limit=10`;
 
     const results = await makeSpotifyRequest(endpoint);
     res.json(results);
