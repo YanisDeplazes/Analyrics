@@ -6,36 +6,55 @@
         Let's get to analysing your preferred song. We've pulled a few tracks
         from your Spotify account to get you started:
       </p>
-      <SwiperWrapper
-        :slides-per-view="1.1"
-        :space-between="10"
-        @swiper="onSwiper"
-        @slideChange="onSlideChange"
-      >
-        <swiper-slide v-for="track in recommendations.items" :key="track.id">
-          <div class="track">
-            <div class="image">
-              <img :src="track.album.images[1].url" alt="Album cover" />
+      <h2 class="font-branding">Your Top Tracks</h2>
+      <div class="swipper-container">
+        <div class="swiper-buttons">
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+        <Swiper
+          :modules="[Navigation]"
+          :slides-per-view="1"
+          :space-between="10"
+          :navigation="{
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          }"
+          @swiper="onSwiper"
+          @slideChange="onSlideChange"
+          aria-label="Track recommendations carousel"
+        >
+          <swiper-slide
+            v-for="(track, index) in recommendations.items"
+            :key="track.id"
+          >
+            <div class="track" :id="'track_' + index">
+              <div class="image">
+                <div class="icon"></div>
+                <div class="track_preview_controls" @click="togglePlay(index)">
+                  <audio :src="track.preview_url"></audio>
+                </div>
+                <img
+                  :src="track.album.images[1].url || '/default-cover.jpg'"
+                  alt="Album cover"
+                  class="cover"
+                  aria-label="Album cover"
+                />
+              </div>
+              <div class="track-info">
+                <p>
+                  <strong>{{ track.name }}</strong>
+                </p>
+                <p>
+                  <small>{{
+                    track.artists.map((artist) => artist.name).join(", ")
+                  }}</small>
+                </p>
+              </div>
             </div>
-            <div class="track-info">
-              <p>
-                <strong>{{ track.name }}</strong>
-              </p>
-              <p>
-                <small>{{
-                  track.artists.map((artist) => artist.name).join(", ")
-                }}</small>
-              </p>
-
-              <!--TODO: <p v-if="track.preview_url">
-            <audio controls :src="track.preview_url">
-              Your browser does not support the audio element.
-            </audio>
-          </p> -->
-            </div>
-          </div>
-        </swiper-slide>
-      </SwiperWrapper>
+          </swiper-slide>
+        </Swiper>
+      </div>
     </template>
     <p>
       To get started with your song analysis, search for any song you’d like.
@@ -68,33 +87,6 @@
   </Section>
 </template>
 
-<style lang="scss" scoped>
-.recommendation-section {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-}
-
-.track {
-  background-color: var(--bg-secondary);
-  color: var(--on-secondary);
-  border-radius: var(--border-lg);
-  padding: var(--spacing-lg);
-  display: flex;
-  gap: var(--spacing-lg);
-
-  .image,
-  .track-info {
-    flex: 1;
-
-    img {
-      width: 100%;
-      height: auto;
-    }
-  }
-}
-</style>
-
 <script setup lang="ts">
 // Import Swiper Vue.js components
 import type Swiper from "swiper";
@@ -109,12 +101,15 @@ let recommendations = ref<{
   }>;
 }>({ items: [] });
 let error = ref<null | string>(null);
+
 const onSwiper = (swiper: Swiper) => {
   console.log(swiper);
 };
+
 const onSlideChange = () => {
   console.log("slide change");
 };
+
 onMounted(async () => {
   const accessToken = new URLSearchParams(window.location.search).get(
     "access_token"
@@ -144,3 +139,127 @@ onMounted(async () => {
   }
 });
 </script>
+
+<style lang="scss" scoped>
+.recommendation-section {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.swiper-slide {
+  background-color: var(--bg-secondary); /* Optional styling */
+  color: var(--on-secondary); /* Optional styling */
+  border-radius: var(--border-lg); /* Optional styling */
+  height: auto; /* Ensure height adjusts dynamically */
+  max-width: 100%;
+
+  .track {
+    padding: var(--spacing-lg); /* Optional padding */
+    display: flex; /* To center content */
+    padding: var(--spacing-lg); /* Optional padding */
+    gap: var(--spacing-lg);
+    &.playing {
+      .image {
+        .icon {
+          background-image: url("../public/icons/pause_white.svg");
+        }
+        .track_preview_controls {
+          background-color: rgba(0, 0, 0, 0.3);
+          opacity: 1;
+        }
+      }
+    }
+
+    .image,
+    .track-info {
+      flex: 1;
+    }
+    .image {
+      position: relative;
+
+      .cover {
+        width: 100%;
+        height: 100%;
+      }
+
+      .icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 40px;
+        height: 40px;
+        max-width: 40px;
+        -o-object-fit: cover;
+        object-fit: cover;
+        transform: translate(-50%, -50%);
+        background-image: url("../public/icons/play_white.svg");
+        background-size: contain;
+        z-index: 1;
+        pointer-events: none;
+      }
+      .track_preview_controls {
+        position: absolute;
+        background: linear-gradient(
+          rgba(0, 0, 0, 0.502),
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0)
+        );
+        opacity: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: all 0.2s ease-in-out;
+      }
+      &:hover {
+        .track_preview_controls {
+          opacity: 1;
+          cursor: pointer;
+        }
+      }
+      .track_preview {
+        display: none;
+      }
+    }
+  }
+}
+.swiper-buttons {
+  position: absolute;
+  right: 0;
+  top: -20px;
+  padding-bottom: 20px;
+  display: inline-flex;
+  gap: var(--spacing-lg);
+  .swiper-button-prev,
+  .swiper-button-next {
+    position: relative;
+    background-color: var(--bg-secondary);
+    color: var(--bg-primary);
+    background-position: center;
+    background-size: 10px;
+    background-repeat: no-repeat;
+    border-radius: 100%;
+    color: var(--bg-primary);
+    width: 24px;
+    height: 24px;
+    left: unset;
+    right: unset;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      scale: 1.03;
+      cursor: pointer;
+    }
+    &::after {
+      font-size: 12px;
+    }
+  }
+}
+
+.swipper-container {
+  width: 100%;
+  position: relative;
+}
+</style>
