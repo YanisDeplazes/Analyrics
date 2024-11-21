@@ -1,14 +1,29 @@
 <template>
-  <SwiperWrapper :slides-per-view="1.1" :space-between="10" @swiper="onSwiper" @slideChange="onSlideChange">
+  <SwiperWrapper
+    :slides-per-view="1.1"
+    :space-between="10"
+    @swiper="onSwiper"
+    @slideChange="onSlideChange"
+  >
     <swiper-slide v-for="persona in personaData.personas">
-      <Critic :name="persona.name" :category="persona.category" :description="persona.description"
-        :image-url="persona.imageUrl"></Critic>
+      <Critic
+        :name="persona.name"
+        :category="persona.category"
+        :description="persona.description"
+        :image-url="persona.imageUrl"
+      ></Critic>
     </swiper-slide>
   </SwiperWrapper>
 </template>
 <style lang="scss">
 .swiper {
   width: 100%;
+
+  .swiper-slide {
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-lg);
+    height: unset;
+  }
 }
 </style>
 <script setup lang="ts">
