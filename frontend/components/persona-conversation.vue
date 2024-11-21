@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import type Persona from '~/interfaces/persona';
 const animatedChat = ref('')
+let timeoutId: NodeJS.Timeout | null;
 
 const props = defineProps<{
     persona: Persona,
@@ -22,7 +23,7 @@ const typeWriterEffect = (text: string) => {
         if (index < text.length) {
             animatedChat.value += text[index];
             index++;
-            setTimeout(typeNextCharacter, typingSpeedInMilliseconds);
+            timeoutId = setTimeout(typeNextCharacter, typingSpeedInMilliseconds);
         }
     }
 
@@ -33,6 +34,10 @@ watch(
     () => props.chat, // Watch the `chat` prop
     (newChat) => {
         if (newChat) {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+                timeoutId = null;
+            }
             typeWriterEffect(newChat); // Trigger the typewriter effect on change
         }
     },
