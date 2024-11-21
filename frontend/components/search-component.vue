@@ -106,7 +106,7 @@ export default defineComponent({
 .searchbar-wrapper {
   display: flex;
   flex-direction: column;
-  width: 342px;
+  width: 345px;
 }
 
 .searchbar {

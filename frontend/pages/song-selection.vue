@@ -37,9 +37,34 @@
         </swiper-slide>
       </SwiperWrapper>
     </template>
-    <p>Alternatively, you can search for any song you'd like:</p>
-    <!-- TODO: Search Component-->
+    <p>
+      To get started with your song analysis, search for any song you’d like.
+    </p>
     <SearchComponent />
+    <template v-if="!(recommendations && recommendations.items.length)">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="345"
+        height="4"
+        viewBox="0 0 357 4"
+        fill="none"
+      >
+        <path
+          d="M2 2H355"
+          stroke="#392467"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+        <path
+          d="M2 2H355"
+          stroke="white"
+          stroke-opacity="0.2"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+      </svg>
+      <p>Alternatively, you can search for any song you'd like:</p>
+    </template>
   </Section>
 </template>
 
