@@ -139,6 +139,34 @@ onMounted(async () => {
     error.value = "Could not load profile data.";
   }
 });
+
+// Toggle playback
+const togglePlay = (index: number) => {
+  const track = document.querySelector<HTMLDivElement>(`#track_${index}`);
+  const audio = track?.querySelector<HTMLAudioElement>("audio");
+  // Get all tracks and audio elements
+  const allTracks = document.querySelectorAll<HTMLDivElement>(`.track`);
+  const allAudioElements = document.querySelectorAll<HTMLAudioElement>("audio");
+  // Pause all other audio elements and reset their state
+  allAudioElements.forEach((audioElement, i) => {
+    if (!audioElement.paused && i !== index) {
+      audioElement.pause();
+      audioElement.currentTime = 0; // Reset to the beginning
+    }
+  });
+  // Remove "playing" class from all tracks
+  allTracks.forEach((track) => track.classList.remove("playing"));
+  // Play or pause the current track
+  if (audio && track) {
+    if (audio.paused) {
+      track.classList.add("playing");
+      audio.play();
+    } else {
+      track.classList.remove("playing");
+      audio.pause();
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
