@@ -88,9 +88,10 @@
 </template>
 
 <script setup lang="ts">
-// Import Swiper Vue.js components
-import type Swiper from "swiper";
-import { Swiper as SwiperWrapper, SwiperSlide } from "swiper/vue";
+import { Swiper as Swiper, SwiperSlide } from "swiper/vue";
+import { Navigation } from "swiper/modules"; // Updated import
+import "swiper/css";
+import "swiper/css/navigation";
 let profile = ref<null | { display_name: string }>(null);
 let recommendations = ref<{
   items: Array<{
