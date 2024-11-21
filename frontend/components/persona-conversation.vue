@@ -1,16 +1,44 @@
 <template>
     <div class="persona-conversation-container">
-        <p>{{ chat }}</p>
+        <p>{{ animatedChat }}</p>
         <img :src="personaImageUrl" alt="Persona image" />
     </div>
 </template>
 <script setup lang="ts">
 import type Persona from '~/interfaces/persona';
+const animatedChat = ref('')
 
 const props = defineProps<{
     persona: Persona,
     chat: string
 }>();
+
+const typeWriterEffect = (text: string) => {
+    animatedChat.value = '';
+    let index = 0;
+    const typingSpeedInMilliseconds = 30;
+
+    function typeNextCharacter() {
+        if (index < text.length) {
+            animatedChat.value += text[index];
+            index++;
+            setTimeout(typeNextCharacter, typingSpeedInMilliseconds);
+        }
+    }
+
+    typeNextCharacter();
+}
+
+watch(
+    () => props.chat, // Watch the `chat` prop
+    (newChat) => {
+        if (newChat) {
+            typeWriterEffect(newChat); // Trigger the typewriter effect on change
+        }
+    },
+    { immediate: true } // Start the effect on the first render
+);
+
 
 const personaImageUrl = computed(() => `/stuwe1/frontend/${props.persona.imageUrl}`)
 </script>
