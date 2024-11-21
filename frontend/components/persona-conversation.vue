@@ -1,7 +1,7 @@
 <template>
     <div class="persona-conversation-container">
         <p>{{ chat }}</p>
-        <img :src="persona.imageUrl" alt="Persona image" />
+        <img :src="personaImageUrl" alt="Persona image" />
     </div>
 </template>
 <script setup lang="ts">
@@ -12,6 +12,7 @@ const props = defineProps<{
     chat: string
 }>();
 
+const personaImageUrl = computed(() => `/stuwe1/frontend/${props.persona.imageUrl}`)
 </script>
 <style lang="scss" scoped>
 .persona-conversation-container {
@@ -27,7 +28,9 @@ const props = defineProps<{
     }
 
     img {
-        max-height: 4rem;
+        max-height: 8rem;
+        max-width: 8rem;
+        align-self: flex-end;
     }
 }
 </style>
