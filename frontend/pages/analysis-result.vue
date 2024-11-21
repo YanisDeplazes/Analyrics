@@ -33,6 +33,14 @@ const { lines = [
     {
         line: "Ich steige in den Rangie mit Carmen, Tina und Angie",
         description: "Carpooling! How environmentally conscious! We should all be taking a page from this singer's book. Maybe we can get  Carmen, Tina, and Angie on the show?  Wouldn't that be a hoot?"
+    },
+    {
+        line: "Zum Frühstück ein'n Champagnie bei Bottegie Venetie",
+        description: "Breakfast of champions, am I right?  Although, I prefer a mimosa myself.  It's a bit more... bubbly!",
+    },
+    {
+        line: "Wir sind pretty im Bikini, das ist Bauch, Beine, Po",
+        description: "This is what it's all about, folks! Confidence!  Loving yourself!  And a little bit of  \"Bauch, Beine, Po!\""
     }
 ], song = {
     coverUrl: "",
