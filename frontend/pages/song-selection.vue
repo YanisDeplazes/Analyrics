@@ -9,8 +9,13 @@
       <SwiperWrapper
         :slides-per-view="1.1"
         :space-between="10"
+        :navigation="{
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }"
         @swiper="onSwiper"
         @slideChange="onSlideChange"
+        aria-label="Track recommendations carousel"
       >
         <swiper-slide
           v-for="(track, index) in recommendations.items"
@@ -23,9 +28,10 @@
                 <audio :src="track.preview_url"></audio>
               </div>
               <img
-                :src="track.album.images[1].url"
+                :src="track.album.images[1].url || '/default-cover.jpg'"
                 alt="Album cover"
                 class="cover"
+                aria-label="Album cover"
               />
             </div>
             <div class="track-info">
@@ -142,74 +148,80 @@ onMounted(async () => {
   justify-content: center;
 }
 
-.track {
-  background-color: var(--bg-secondary);
-  color: var(--on-secondary);
-  border-radius: var(--border-lg);
-  padding: var(--spacing-lg);
-  display: flex;
-  gap: var(--spacing-lg);
-  &.playing {
+.swiper-slide {
+  background-color: var(--bg-secondary); /* Optional styling */
+  color: var(--on-secondary); /* Optional styling */
+  border-radius: var(--border-lg); /* Optional styling */
+  height: auto; /* Ensure height adjusts dynamically */
+  max-width: 100%;
+
+  .track {
+    padding: var(--spacing-lg); /* Optional padding */
+    display: flex; /* To center content */
+    padding: var(--spacing-lg); /* Optional padding */
+    gap: var(--spacing-lg);
+    &.playing {
+      .image {
+        .icon {
+          background-image: url("../public/icons/pause_white.svg");
+        }
+        .track_preview_controls {
+          background-color: rgba(0, 0, 0, 0.3);
+          opacity: 1;
+        }
+      }
+    }
+
+    .image,
+    .track-info {
+      flex: 1;
+    }
     .image {
+      position: relative;
+
+      .cover {
+        width: 100%;
+        height: 100%;
+      }
+
       .icon {
-        background-image: url("../public/icons/pause_white.svg");
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 40px;
+        height: 40px;
+        max-width: 40px;
+        -o-object-fit: cover;
+        object-fit: cover;
+        transform: translate(-50%, -50%);
+        background-image: url("../public/icons/play_white.svg");
+        background-size: contain;
+        z-index: 1;
+        pointer-events: none;
       }
       .track_preview_controls {
-        background-color: rgba(0, 0, 0, 0.3);
-        opacity: 1;
+        position: absolute;
+        background: linear-gradient(
+          rgba(0, 0, 0, 0.502),
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0)
+        );
+        opacity: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: all 0.2s ease-in-out;
       }
-    }
-  }
-
-  .image,
-  .track-info {
-    flex: 1;
-  }
-  .image {
-    position: relative;
-
-    .cover {
-      width: 100%;
-      height: 100%;
-    }
-
-    .icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 40px;
-      height: 40px;
-      max-width: 40px;
-      -o-object-fit: cover;
-      object-fit: cover;
-      transform: translate(-50%, -50%);
-      background-image: url("../public/icons/play_white.svg");
-      background-size: contain;
-      z-index: 1;
-      pointer-events: none;
-    }
-    .track_preview_controls {
-      position: absolute;
-      background: linear-gradient(
-        rgba(0, 0, 0, 0.502),
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0)
-      );
-      opacity: 0;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      transition: all 0.2s ease-in-out;
-    }
-    &:hover {
-      .track_preview_controls {
-        opacity: 1;
-        cursor: pointer;
+      &:hover {
+        .track_preview_controls {
+          opacity: 1;
+          cursor: pointer;
+        }
       }
-    }
-    .track_preview {
-      display: none;
+      .track_preview {
+        display: none;
+      }
     }
   }
 }
