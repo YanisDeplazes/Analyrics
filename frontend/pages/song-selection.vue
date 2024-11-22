@@ -17,7 +17,15 @@
             <div class="image">
               <img :src="track.album.images[1].url" alt="Album cover" />
             </div>
-            <div class="track-info">
+            <div
+              class="track-info"
+              @click="
+                selectTrack(
+                  track.name,
+                  track.artists.map((artist) => artist.name).join(', ')
+                )
+              "
+            >
               <p>
                 <strong>{{ track.name }}</strong>
               </p>
@@ -61,6 +69,7 @@
   .image,
   .track-info {
     flex: 1;
+    cursor: pointer;
 
     img {
       width: 100%;
@@ -118,4 +127,29 @@ onMounted(async () => {
     error.value = "Could not load profile data.";
   }
 });
+
+const selectTrack = async (trackName: string, artistName: string) => {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/lyrics?q=${trackName
+        .replace(/\s*\(.*?\)\s*/g, "")
+        .trim()} ${artistName.replace(/,.*$/, "").trim()}`,
+      {
+        method: "GET", // Oder POST, falls du später zusätzliche Daten senden willst
+      }
+    );
+
+    if (!response.ok) {
+      console.error(
+        `Failed to send track: ${response.status} ${response.statusText}`
+      );
+      return;
+    }
+
+    const result = await response.json();
+    console.log("Server Response:", result);
+  } catch (error) {
+    console.error("Error sending track to backend:", error);
+  }
+};
 </script>

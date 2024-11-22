@@ -42,7 +42,7 @@ router.get("/", async function (req, res, next) {
       lyrics: formattedLyrics,
     };
 
-    console.log(lyricsData); // Zum Beispiel in der Konsole ausgeben
+    // console.log(lyricsData); // Zum Beispiel in der Konsole ausgeben
 
     // Sende die Antwort als JSON
     res.json(lyricsData);
@@ -56,6 +56,8 @@ function getLyrics(songUrl) {
   return axios.get(songUrl).then((response) => {
     const $ = cheerio.load(response.data);
     let lyrics = "";
+    //lyrics String Test
+    //lyrics += "Test Lyrics'";
 
     $("[data-lyrics-container]").each((index, element) => {
       lyrics += $(element).html();

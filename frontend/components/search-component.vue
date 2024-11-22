@@ -16,7 +16,12 @@
         v-for="(track, index) in filteredResults"
         :key="index"
         class="result-item"
-        @click="selectTrack(track.uri)"
+        @click="
+          selectTrack(
+            track.name,
+            track.artists.map((artist) => artist.name).join(', ')
+          )
+        "
       >
         <img
           :src="track.album?.images?.[0]?.url || '/default-cover.jpg'"
@@ -91,10 +96,13 @@ export default defineComponent({
         searchResults.value = [];
       }
     };
-    const selectTrack = async (track: any) => {
+
+    const selectTrack = async (trackName: string, artistName: string) => {
       try {
         const response = await fetch(
-          `http://localhost:3000/lyrics?q=${track.uri}`, // Track URI senden
+          `http://localhost:3000/lyrics?q=${trackName
+            .replace(/\s*\(.*?\)\s*/g, "")
+            .trim()} ${artistName.replace(/,.*$/, "").trim()}`,
           {
             method: "GET", // Oder POST, falls du später zusätzliche Daten senden willst
           }
