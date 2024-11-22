@@ -1,35 +1,36 @@
 <template>
   <div class="searchbar-wrapper">
     <div class="searchbar">
-      <button @click="searchSong" aria-label="Search" class="icon">
-        <Icon size="large" variant="search" type="secondary"></Icon>
-      </button>
+      <Icon size="large" variant="search" type="secondary"></Icon>
       <input
+        id="mySearch"
         class="input"
         v-model="query"
-        @keyup.enter="searchSong"
+        @input="searchSong"
         aria-label="Search for a song"
         placeholder="Search for a song"
       />
     </div>
-    <ul v-if="searchResults.length" class="results-list">
+    <ul class="results-list">
       <li
-        v-for="(track, index) in searchResults"
+        v-for="(track, index) in filteredResults"
         :key="index"
         class="result-item"
         @click="selectTrack(track.uri)"
       >
         <img
-          :src="
-            track.album.images[0].url ||
-            '/stuwe1/frontend/images/personas/default-cover-image.png'
-          "
-          alt="Track Image"
+          :src="track.album?.images?.[0]?.url || '/default-cover.jpg'"
+          alt="Album Art"
           class="track-image"
         />
         <div class="track-info">
-          <span class="track-name">{{ track.name }}</span>
-          <span class="track-artist">by {{ track.artists[0].name }}</span>
+          <span class="track-name">{{ track.name || "Unknown Track" }}</span>
+          <span class="track-artist">
+            {{
+              track.artists?.map((artist) => artist.name).join(", ") ||
+              "Unknown Artist"
+            }}
+          </span>
         </div>
       </li>
     </ul>
@@ -37,13 +38,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, computed } from "vue";
+import { useRouter } from "vue-router";
+import debounce from "lodash/debounce";
 
 export default defineComponent({
   name: "SearchBar",
   emits: ["play-track"],
-  setup() {
-    const query = ref<string>("");
+  setup(_, { emit }) {
+    const query = ref("");
     const searchResults = ref<
       {
         name: string;
@@ -53,13 +56,20 @@ export default defineComponent({
       }[]
     >([]);
 
-    const searchSong = async () => {
-      if (!query.value) {
+    // Computed property to filter search results based on query
+    const filteredResults = computed(() => {
+      return searchResults.value;
+    });
+
+    // Debounced search function to limit requests
+    const performSearch = debounce(async (searchQuery: string) => {
+      if (searchQuery.length < 3) {
         return;
       }
+
       try {
         const response = await fetch(
-          `http://localhost:3000/search?query=${query.value}`
+          `http://localhost:3000/search?query=${searchQuery}`
         );
         if (!response.ok) {
           console.error(
@@ -71,6 +81,14 @@ export default defineComponent({
         searchResults.value = data.tracks.items;
       } catch (error) {
         console.error("Fetch error:", error);
+      }
+    }, 300); // Wartezeit von 300ms, um Anfragen zu reduzieren
+
+    const searchSong = () => {
+      if (query.value) {
+        performSearch(query.value);
+      } else {
+        searchResults.value = [];
       }
     };
     const selectTrack = async (track: any) => {
@@ -99,6 +117,7 @@ export default defineComponent({
     return {
       query,
       searchResults,
+      filteredResults,
       searchSong,
       selectTrack,
     };
@@ -110,7 +129,7 @@ export default defineComponent({
 .searchbar-wrapper {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 342px;
 }
 
 .searchbar {
