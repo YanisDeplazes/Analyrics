@@ -89,10 +89,12 @@ function formatLyrics(lyrics) {
 function getLyrics(songUrl) {
   return axios.get(songUrl).then((response) => {
     const $ = cheerio.load(response.data);
-    // Holen Sie sich den gesamten HTML-Inhalt der Lyrics
-    const lyrics = $(".lyrics").html() || $("[data-lyrics-container]").html();
+    let lyrics = "";
 
-    // Sicherstellen, dass wir den gesamten Text haben, indem wir alle <br> Tags extrahieren
+    $("[data-lyrics-container]").each((index, element) => {
+      lyrics += $(element).html();
+    });
+
     return lyrics;
   });
 }
