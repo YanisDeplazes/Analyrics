@@ -16,7 +16,12 @@
         v-for="(track, index) in filteredResults"
         :key="index"
         class="result-item"
-        @click="$emit('play-track', track.uri)"
+        @click="
+          selectTrack(
+            track.name,
+            track.artists.map((artist) => artist.name).join(', ')
+          )
+        "
       >
         <img
           :src="
@@ -95,11 +100,37 @@ export default defineComponent({
       }
     };
 
+    const selectTrack = async (trackName: string, artistName: string) => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/lyrics?q=${trackName
+            .replace(/\s*\(.*?\)\s*/g, "")
+            .trim()} ${artistName.replace(/,.*$/, "").trim()}`,
+          {
+            method: "GET", // Oder POST, falls du später zusätzliche Daten senden willst
+          }
+        );
+
+        if (!response.ok) {
+          console.error(
+            `Failed to send track: ${response.status} ${response.statusText}`
+          );
+          return;
+        }
+
+        const result = await response.json();
+        console.log("Server Response:", result);
+      } catch (error) {
+        console.error("Error sending track to backend:", error);
+      }
+    };
+
     return {
       query,
       searchResults,
       filteredResults,
       searchSong,
+      selectTrack,
     };
   },
 });
