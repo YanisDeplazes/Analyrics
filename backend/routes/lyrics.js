@@ -42,7 +42,6 @@ router.get("/", async function (req, res, next) {
       lyrics: formattedLyrics,
     };
 
-    // Optional: Verarbeite die lyricsData-Variable weiter, bevor sie gesendet wird
     console.log(lyricsData); // Zum Beispiel in der Konsole ausgeben
 
     // Sende die Antwort als JSON
@@ -51,39 +50,6 @@ router.get("/", async function (req, res, next) {
     res.status(500).json({ error: error.message });
   }
 });
-
-/* // Funktion zum Extrahieren der Lyrics
-function getLyrics(songUrl) {
-  return axios.get(songUrl).then((response) => {
-    const $ = cheerio.load(response.data);
-    // Holen Sie sich den HTML-Inhalt
-    const lyrics = $(".lyrics").html() || $("[data-lyrics-container]").html();
-
-    return lyrics;
-  });
-}
-
-// Funktion zum Formatieren der Lyrics in das gewünschte Format
-function formatLyrics(lyrics) {
-  // Entferne Abschnittsüberschriften wie [Verse 1], [Chorus] etc.
-  lyrics = lyrics.replace(/\[.*?\]/g, "").trim();
-
-  // Ersetze <br> Tags durch Zeilenumbrüche
-  let lines = lyrics
-    .split("<br>")
-    .map((line) => line.trim())
-    .filter((line) => line.length > 0);
-
-  // Entferne HTML-Tags aus dem Text
-  lines = lines.map((line) => {
-    // Verwendet cheerio, um HTML-Tags zu entfernen und nur den Text zu behalten
-    const $ = cheerio.load(line);
-    return { line: $.text().trim() };
-  });
-
-  // Gibt das Array mit den Zeilen zurück, jede Zeile als Objekt mit "line"
-  return lines;
-} */
 
 // Funktion zum Extrahieren der Lyrics
 function getLyrics(songUrl) {

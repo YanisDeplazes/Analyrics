@@ -73,8 +73,27 @@ export default defineComponent({
         console.error("Fetch error:", error);
       }
     };
-    const selectTrack = (track: any) => {
-      $fetch("select-track", track);
+    const selectTrack = async (track: any) => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/lyrics?q=${track.uri}`, // Track URI senden
+          {
+            method: "GET", // Oder POST, falls du später zusätzliche Daten senden willst
+          }
+        );
+
+        if (!response.ok) {
+          console.error(
+            `Failed to send track: ${response.status} ${response.statusText}`
+          );
+          return;
+        }
+
+        const result = await response.json();
+        console.log("Server Response:", result);
+      } catch (error) {
+        console.error("Error sending track to backend:", error);
+      }
     };
 
     return {
