@@ -37,7 +37,7 @@ router.get("/", async function (req, res, next) {
 
     // Die Ausgabe als Variable speichern
     const lyricsData = {
-      song: songName,
+      track: songName,
       artist: artistName,
       lyrics: formattedLyrics,
     };
