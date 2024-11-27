@@ -26,9 +26,6 @@
     border-radius: var(--border-lg);
     height: unset;
   }
-  .swiper-scrollbar{
-
-  }
 
   .swiper-buttons {
     position: absolute;
