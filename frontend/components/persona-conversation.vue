@@ -5,7 +5,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import type Persona from '~/interfaces/persona';
+import type Persona from '~/model/persona';
 const animatedChat = ref('')
 let timeoutId: NodeJS.Timeout | null;
 

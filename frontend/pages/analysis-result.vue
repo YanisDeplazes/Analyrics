@@ -11,8 +11,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import type LineAnalysis from '~/interfaces/line-analysis';
-import type Persona from '~/interfaces/persona';
+import type LineAnalysis from '~/model/line-analysis';
+import type Persona from '~/model/persona';
 import personaData from 'assets/data/personas.json';
 const store = reactive<{
     lineIndex: number,
