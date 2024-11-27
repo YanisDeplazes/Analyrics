@@ -1,12 +1,12 @@
-import type { SpotifyTopTracks, SpotifyUser } from "~/model/spotify";
+import type { SpotifyTopTracks, SpotifyProfile } from "~/model/spotify";
 
 export default class Backend {
-    me = async (accessToken: string): Promise<SpotifyUser> => {
+    me = async (accessToken: string): Promise<SpotifyProfile> => {
         const profileFetch = await fetch(
             `http://localhost:3000/me?access_token=${accessToken}`
         );
         const profile = await profileFetch.json();
-        return profile as SpotifyUser;
+        return profile as SpotifyProfile;
     }
 
     topTracks = async (accessToken: string): Promise<SpotifyTopTracks> => {

@@ -26,7 +26,7 @@ export interface SpotifyTrack {
   preview_url: string
   track_number: number
   type: string
-  uri: string
+  uri: string,
 }
 
 export interface SpotifyAlbum {
@@ -69,7 +69,7 @@ export interface SpotifyExternalIds {
   isrc: string
 }
 
-export interface SpotifyUser {
+export interface SpotifyProfile {
   country: string;
   display_name: string;
   email: string;

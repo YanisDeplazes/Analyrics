@@ -27,14 +27,14 @@
                 <img :src="track.album.images[1].url || '/default-cover.jpg'" alt="Album cover" class="cover"
                   aria-label="Album cover" />
               </div>
-              <div class="track-info" @click="store.setSelectedTrack(track)">
+              <div class="track-info" @click="selectTrack(track)">
                 <p>
                   <strong>{{ track.name }}</strong>
                 </p>
                 <p>
                   <small>{{
-                    track.artists.map((artist) => artist.name).join(", ")
-                  }}</small>
+                    commaSeparatedArtists(track.artists)
+                    }}</small>
                 </p>
               </div>
             </div>
@@ -64,8 +64,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import Backend from "~/api/backend";
-import type { SpotifyTopTracks, SpotifyUser } from "~/model/spotify";
-let profile = ref<null | SpotifyUser>(null);
+import type { SpotifyTopTracks, SpotifyTrack, SpotifyProfile } from "~/model/spotify";
+let profile = ref<null | SpotifyProfile>(null);
 let recommendations = ref<SpotifyTopTracks>();
 let error = ref<null | string>(null);
 const backend = new Backend();
@@ -76,6 +76,11 @@ const onSwiper = (swiper: Swiper) => {
 const onSlideChange = () => {
   console.log("slide change");
 };
+
+const selectTrack = (track: SpotifyTrack) => {
+  store.setSelectedTrack(track);
+  navigateTo('persona-selection');
+}
 
 onMounted(async () => {
   const accessToken = new URLSearchParams(window.location.search).get(
@@ -88,7 +93,8 @@ onMounted(async () => {
   }
 
   try {
-    profile.value = await backend.me(accessToken);
+    store.setProfile(await backend.me(accessToken));
+    profile.value = store.spotifyProfile;
     recommendations.value = await backend.topTracks(accessToken);
   } catch (e) {
     error.value = "Could not load profile data.";

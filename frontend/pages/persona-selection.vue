@@ -1,30 +1,18 @@
 <template>
   <Section class="persona-selection-section">
     <p>
-      Nice selection Yanis! Which critic should analyse “Bauch Beine Po” by
-      Shirin David?
+      Nice selection {{ store.spotifyProfile?.display_name ?? "" }}! Which critic should analyse
+      “{{ store.selectedTrack?.name }}” by
+      {{ store.selectedTrack && commaSeparatedArtists(store.selectedTrack?.artists) }}?
     </p>
     <SwiperWrapper :slides-per-view="1.1" :space-between="10">
       <swiper-slide v-for="persona in personaData.personas">
-        <Critic
-          :name="persona.name"
-          :category="persona.category"
-          :description="persona.description"
-          :image-url="persona.imageUrl"
-        >
+        <Critic :name="persona.name" :category="persona.category" :description="persona.description"
+          :image-url="persona.imageUrl">
           <template v-slot:call-to-action>
-            <Button
-              fill="fill"
-              variant="primary"
-              :text="`Analyse with ${persona.name}`"
-              icon="right"
-            >
+            <Button fill="fill" variant="primary" :text="`Analyse with ${persona.name}`" icon="right">
               <template v-slot:icon>
-                <Icon
-                  size="large"
-                  type="primary"
-                  variant="arrow-forward"
-                ></Icon>
+                <Icon size="large" type="primary" variant="arrow-forward"></Icon>
               </template>
             </Button>
           </template>
@@ -36,6 +24,8 @@
 <script setup lang="ts">
 import { Swiper as SwiperWrapper, SwiperSlide } from "swiper/vue";
 import personaData from "assets/data/personas.json";
+import { store } from "~/stores/store";
+
 </script>
 <style lang="scss" scoped>
 .swiper {
