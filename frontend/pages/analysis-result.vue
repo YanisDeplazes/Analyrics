@@ -11,12 +11,12 @@
     </div>
 </template>
 <script setup lang="ts">
-import type LineAnalysis from '~/interfaces/line-analysis';
-import type Persona from '~/interfaces/persona';
-import personaData from 'assets/data/personas.json';
+import type LineAnalysis from '~/model/line-analysis';
+import type Critic from '~/model/critic';
+import criticsData from 'assets/data/critics.json';
 const store = reactive<{
     lineIndex: number,
-    persona: Persona | null
+    persona: Critic | null
 }>({
     lineIndex: 0,
     persona: null
@@ -79,9 +79,9 @@ const changeLine = () => {
 
 onMounted(() => {
     if (personaName) {
-        const personasFiltered = personaData.personas.filter(p => p.name == personaName)
-        if (personasFiltered.length == 1)
-            store.persona = personasFiltered[0];
+        const criticsFiltered = criticsData.critics.filter(critic => critic.name == personaName)
+        if (criticsFiltered.length == 1)
+            store.persona = criticsFiltered[0];
     }
 })
 </script>

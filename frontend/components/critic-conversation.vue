@@ -5,12 +5,12 @@
     </div>
 </template>
 <script setup lang="ts">
-import type Persona from '~/interfaces/persona';
+import type Critic from '~/model/critic';
 const animatedChat = ref('')
 let timeoutId: NodeJS.Timeout | null;
 
 const props = defineProps<{
-    persona: Persona,
+    persona: Critic,
     chat: string
 }>();
 

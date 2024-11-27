@@ -1,6 +1,6 @@
 <template>
   <Section class="recommendation-section">
-    <h1>Hi {{ profile?.display_name || "there" }}!</h1>
+    <h1>Hi {{ store.spotifyProfile?.display_name || "there" }}!</h1>
     <template v-if="recommendations && recommendations.items.length">
       <p>
         Let's get to analysing your preferred song. We've pulled a few tracks
@@ -27,14 +27,14 @@
                 <img :src="track.album.images[1].url || '/default-cover.jpg'" alt="Album cover" class="cover"
                   aria-label="Album cover" />
               </div>
-              <div class="track-info">
+              <div class="track-info" @click="selectTrack(track)">
                 <p>
                   <strong>{{ track.name }}</strong>
                 </p>
                 <p>
                   <small>{{
-                    track.artists.map((artist) => artist.name).join(", ")
-                  }}</small>
+                    commaSeparatedArtists(track.artists)
+                    }}</small>
                 </p>
               </div>
             </div>
@@ -59,20 +59,16 @@
 <script setup lang="ts">
 import { Swiper as Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Scrollbar } from "swiper/modules"; // Updated import
+import { store } from "~/stores/store";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
-let profile = ref<null | { display_name: string }>(null);
-let recommendations = ref<{
-  items: Array<{
-    id: string;
-    album: { images: Array<{ url: string }> };
-    name: string;
-    artists: Array<{ name: string }>;
-  }>;
-}>({ items: [] });
+import Backend from "~/api/backend";
+import type { SpotifyTopTracks, SpotifyTrack, SpotifyProfile } from "~/model/spotify";
+let profile = ref<null | SpotifyProfile>(null);
+let recommendations = ref<SpotifyTopTracks>();
 let error = ref<null | string>(null);
-
+const backend = new Backend();
 const onSwiper = (swiper: Swiper) => {
   console.log(swiper);
 };
@@ -80,6 +76,11 @@ const onSwiper = (swiper: Swiper) => {
 const onSlideChange = () => {
   console.log("slide change");
 };
+
+const selectTrack = (track: SpotifyTrack) => {
+  store.setSelectedTrack(track);
+  navigateTo('critic-selection');
+}
 
 onMounted(async () => {
   const accessToken = new URLSearchParams(window.location.search).get(
@@ -92,19 +93,8 @@ onMounted(async () => {
   }
 
   try {
-    const profileFetch = await fetch(
-      `http://localhost:3000/me?access_token=${accessToken}`
-    );
-
-    const profileData = await profileFetch.json();
-    profile.value = profileData;
-
-    const topItemsFetch = await fetch(
-      `http://localhost:3000/me/top/tracks?access_token=${accessToken}`
-    );
-
-    const topItemsData = await topItemsFetch.json();
-    recommendations.value = topItemsData;
+    store.setProfile(await backend.me(accessToken));
+    recommendations.value = await backend.topTracks(accessToken);
   } catch (e) {
     error.value = "Could not load profile data.";
   }
