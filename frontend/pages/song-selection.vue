@@ -12,34 +12,20 @@
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
         </div>
-        <Swiper
-          :modules="[Navigation]"
-          :slides-per-view="1"
-          :space-between="10"
-          :navigation="{
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          }"
-          @swiper="onSwiper"
-          @slideChange="onSlideChange"
-          aria-label="Track recommendations carousel"
-        >
-          <swiper-slide
-            v-for="(track, index) in recommendations.items"
-            :key="track.id"
-          >
+        <Swiper :modules="[Navigation, Scrollbar]" :slides-per-view="1" :space-between="10" :loop="true" :navigation="{
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }" :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange"
+          aria-label="Track recommendations carousel">
+          <swiper-slide v-for="(track, index) in recommendations.items" :key="track.id">
             <div class="track" :id="'track_' + index">
               <div class="image">
                 <div class="icon"></div>
                 <div class="track_preview_controls" @click="togglePlay(index)">
                   <audio :src="track.preview_url"></audio>
                 </div>
-                <img
-                  :src="track.album.images[1].url || '/default-cover.jpg'"
-                  alt="Album cover"
-                  class="cover"
-                  aria-label="Album cover"
-                />
+                <img :src="track.album.images[1].url || '/default-cover.jpg'" alt="Album cover" class="cover"
+                  aria-label="Album cover" />
               </div>
               <div class="track-info">
                 <p>
@@ -61,26 +47,9 @@
     </p>
     <SearchComponent />
     <template v-if="!(recommendations && recommendations.items.length)">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="345"
-        height="4"
-        viewBox="0 0 357 4"
-        fill="none"
-      >
-        <path
-          d="M2 2H355"
-          stroke="#392467"
-          stroke-width="4"
-          stroke-linecap="round"
-        />
-        <path
-          d="M2 2H355"
-          stroke="white"
-          stroke-opacity="0.2"
-          stroke-width="4"
-          stroke-linecap="round"
-        />
+      <svg xmlns="http://www.w3.org/2000/svg" width="345" height="4" viewBox="0 0 357 4" fill="none">
+        <path d="M2 2H355" stroke="#392467" stroke-width="4" stroke-linecap="round" />
+        <path d="M2 2H355" stroke="white" stroke-opacity="0.2" stroke-width="4" stroke-linecap="round" />
       </svg>
       <p>Alternatively, you can search for any song you'd like:</p>
     </template>
@@ -89,9 +58,10 @@
 
 <script setup lang="ts">
 import { Swiper as Swiper, SwiperSlide } from "swiper/vue";
-import { Navigation } from "swiper/modules"; // Updated import
+import { Navigation, Scrollbar } from "swiper/modules"; // Updated import
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/scrollbar";
 let profile = ref<null | { display_name: string }>(null);
 let recommendations = ref<{
   items: Array<{
@@ -177,22 +147,31 @@ const togglePlay = (index: number) => {
 }
 
 .swiper-slide {
-  background-color: var(--bg-secondary); /* Optional styling */
-  color: var(--on-secondary); /* Optional styling */
-  border-radius: var(--border-lg); /* Optional styling */
-  height: auto; /* Ensure height adjusts dynamically */
+  background-color: var(--bg-secondary);
+  /* Optional styling */
+  color: var(--on-secondary);
+  /* Optional styling */
+  border-radius: var(--border-lg);
+  /* Optional styling */
+  height: auto;
+  /* Ensure height adjusts dynamically */
   max-width: 100%;
 
   .track {
-    padding: var(--spacing-lg); /* Optional padding */
-    display: flex; /* To center content */
-    padding: var(--spacing-lg); /* Optional padding */
+    padding: var(--spacing-lg);
+    /* Optional padding */
+    display: flex;
+    /* To center content */
+    padding: var(--spacing-lg);
+    /* Optional padding */
     gap: var(--spacing-lg);
+
     &.playing {
       .image {
         .icon {
           background-image: url("../public/icons/pause_white.svg");
         }
+
         .track_preview_controls {
           background-color: rgba(0, 0, 0, 0.3);
           opacity: 1;
@@ -204,6 +183,7 @@ const togglePlay = (index: number) => {
     .track-info {
       flex: 1;
     }
+
     .image {
       position: relative;
 
@@ -227,13 +207,12 @@ const togglePlay = (index: number) => {
         z-index: 1;
         pointer-events: none;
       }
+
       .track_preview_controls {
         position: absolute;
-        background: linear-gradient(
-          rgba(0, 0, 0, 0.502),
-          rgba(0, 0, 0, 0),
-          rgba(0, 0, 0, 0)
-        );
+        background: linear-gradient(rgba(0, 0, 0, 0.502),
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, 0));
         opacity: 0;
         top: 0;
         left: 0;
@@ -241,18 +220,21 @@ const togglePlay = (index: number) => {
         height: 100%;
         transition: all 0.2s ease-in-out;
       }
+
       &:hover {
         .track_preview_controls {
           opacity: 1;
           cursor: pointer;
         }
       }
+
       .track_preview {
         display: none;
       }
     }
   }
 }
+
 .swiper-buttons {
   position: absolute;
   right: 0;
@@ -260,6 +242,7 @@ const togglePlay = (index: number) => {
   padding-bottom: 20px;
   display: inline-flex;
   gap: var(--spacing-lg);
+
   .swiper-button-prev,
   .swiper-button-next {
     position: relative;
@@ -281,6 +264,7 @@ const togglePlay = (index: number) => {
       scale: 1.03;
       cursor: pointer;
     }
+
     &::after {
       font-size: 12px;
     }

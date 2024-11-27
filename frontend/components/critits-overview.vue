@@ -4,27 +4,13 @@
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
     </div>
-    <Swiper
-      :modules="[Navigation]"
-      :slides-per-view="1"
-      :space-between="10"
-      :navigation="{
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      }"
-      @swiper="onSwiper"
-      @slideChange="onSlideChange"
-    >
-      <swiper-slide
-        v-for="(persona, index) in personaData.personas"
-        :key="index"
-      >
-        <Critic
-          :name="persona.name"
-          :category="persona.category"
-          :description="persona.description"
-          :image-url="persona.imageUrl"
-        ></Critic>
+    <Swiper :modules="[Navigation,Scrollbar]" :loop="true":slides-per-view="1" :space-between="10" :navigation="{
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    }" :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange">
+      <swiper-slide v-for="(persona, index) in personaData.personas" :key="index">
+        <Critic :name="persona.name" :category="persona.category" :description="persona.description"
+          :image-url="persona.imageUrl"></Critic>
       </swiper-slide>
     </Swiper>
   </div>
@@ -40,12 +26,14 @@
     border-radius: var(--border-lg);
     height: unset;
   }
+
   .swiper-buttons {
     position: absolute;
     right: 0;
     top: -20px;
     display: inline-flex;
     gap: var(--spacing-lg);
+
     .swiper-button-prev,
     .swiper-button-next {
       position: relative;
@@ -67,6 +55,7 @@
         scale: 1.03;
         cursor: pointer;
       }
+
       &::after {
         font-size: 12px;
       }
@@ -74,12 +63,12 @@
   }
 }
 </style>
-
 <script setup lang="ts">
 import { Swiper as Swiper, SwiperSlide } from "swiper/vue";
-import { Navigation } from "swiper/modules"; // Updated import
+import { Navigation, Scrollbar } from "swiper/modules"; // Updated import
 import "swiper/css";
 import "swiper/css/navigation"; // Import Swiper CSS for navigation
+import 'swiper/css/scrollbar';
 import personaData from "assets/data/personas.json";
 
 const onSwiper = (swiper: Swiper) => {
