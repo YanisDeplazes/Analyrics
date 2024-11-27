@@ -16,9 +16,11 @@ router.get("/", async function (req, res, next) {
     const queryType = type || "track"; // Default to track and artist if not provided
     const endpoint = `search?q=${formattedQuery}&type=${queryType}&limit=10`;
 
-    const results = await makeSpotifyRequest(endpoint);
-    res.json(results);
+    const searchResults = await makeSpotifyRequest(endpoint);
+
+    res.json(searchResults);
   } catch (error) {
+    console.error("Error in track search with speechiness filter:", error);
     res.status(500).json({ error: error.message });
   }
 });

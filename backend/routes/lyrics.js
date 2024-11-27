@@ -42,8 +42,6 @@ router.get("/", async function (req, res, next) {
       lyrics: formattedLyrics,
     };
 
-    // console.log(lyricsData); // Zum Beispiel in der Konsole ausgeben
-
     // Sende die Antwort als JSON
     res.json(lyricsData);
   } catch (error) {
