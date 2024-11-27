@@ -21,10 +21,20 @@
     </div>
   </Section>
 </template>
+<script setup lang="ts">
+import { store } from '~/stores/store';
+
+onMounted(() => {
+  console.log(store.spotifyUserAccessToken)
+  if (store.spotifyUserAccessToken) {
+    navigateTo("track-selection");
+  }
+})</script>
 <style lang="scss" scoped>
 .buttons {
   display: flex;
   gap: var(--spacing-lg);
+
   a {
     width: 100%;
 
@@ -34,7 +44,8 @@
     }
   }
 }
-.login-section{
+
+.login-section {
   height: 100%;
   display: flex;
   flex: 1;

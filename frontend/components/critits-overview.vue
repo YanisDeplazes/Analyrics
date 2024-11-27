@@ -64,11 +64,4 @@ import "swiper/css";
 import "swiper/css/navigation"; // Import Swiper CSS for navigation
 import 'swiper/css/scrollbar';
 import criticsData from "assets/data/critics.json";
-
-const onSwiper = (swiper: Swiper) => {
-  console.log(swiper);
-};
-const onSlideChange = () => {
-  console.log("slide change");
-};
 </script>
