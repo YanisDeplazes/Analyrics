@@ -16,12 +16,6 @@
         v-for="(track, index) in filteredResults"
         :key="index"
         class="result-item"
-        @click="
-          selectTrack(
-            track.name,
-            track.artists.map((artist) => artist.name).join(', ')
-          )
-        "
       >
         <img
           :src="
@@ -34,10 +28,7 @@
         <div class="track-info">
           <span class="track-name">{{ track.name || "Unknown Track" }}</span>
           <span class="track-artist">
-            {{
-              track.artists?.map((artist) => artist.name).join(", ") ||
-              "Unknown Artist"
-            }}
+            {{ commaSeparatedArtists(track.artists) || "Unknown Artist" }}
           </span>
         </div>
       </li>
@@ -47,7 +38,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
-import { useRouter } from "vue-router";
 import debounce from "lodash/debounce";
 
 export default defineComponent({
@@ -100,37 +90,11 @@ export default defineComponent({
       }
     };
 
-    const selectTrack = async (trackName: string, artistName: string) => {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/lyrics?q=${trackName
-            .replace(/\s*\(.*?\)\s*/g, "")
-            .trim()} ${artistName.replace(/,.*$/, "").trim()}`,
-          {
-            method: "GET", // Oder POST, falls du später zusätzliche Daten senden willst
-          }
-        );
-
-        if (!response.ok) {
-          console.error(
-            `Failed to send track: ${response.status} ${response.statusText}`
-          );
-          return;
-        }
-
-        const result = await response.json();
-        console.log("Server Response:", result);
-      } catch (error) {
-        console.error("Error sending track to backend:", error);
-      }
-    };
-
     return {
       query,
       searchResults,
       filteredResults,
       searchSong,
-      selectTrack,
     };
   },
 });
