@@ -7,70 +7,32 @@
             </template>
         </Button>
         <p class="font-branding line">{{ currentLine }}</p>
-        <PersonaConversation v-if="store.persona" :persona="store.persona" :chat="currentChat"></PersonaConversation>
+        <CriticConversation v-if="store.selectedCritic" :critic="store.selectedCritic" :chat="currentChat">
+        </CriticConversation>
     </div>
 </template>
 <script setup lang="ts">
-import type LineAnalysis from '~/model/line-analysis';
-import type Critic from '~/model/critic';
-import criticsData from 'assets/data/critics.json';
-const store = reactive<{
-    lineIndex: number,
-    persona: Critic | null
-}>({
-    lineIndex: 0,
-    persona: null
-});
-const { lines = [
-    {
-        line: "Iced Matcha Latte, zu spät beim Pilates",
-        description: "Oh, I've been there! Who hasn't rushed to Pilates with a refreshing beverage in hand? It's all about balance, people! Just like balancing that latte on your way to the reformer!  Get it?"
-    },
-    {
-        line: "Küsschen links, Küsschen rechts, ich trag' heute was Scharfes",
-        description: "This reminds me of my days on the red carpet! Air kisses galore! And who doesn't love a good outfit? \"Scharf\" -  spicy!  Like my sense of humor!"
-    },
-    {
-        line: "Ich steige in den Rangie mit Carmen, Tina und Angie",
-        description: "Carpooling! How environmentally conscious! We should all be taking a page from this singer's book. Maybe we can get  Carmen, Tina, and Angie on the show?  Wouldn't that be a hoot?"
-    },
-    {
-        line: "Zum Frühstück ein'n Champagnie bei Bottegie Venetie",
-        description: "Breakfast of champions, am I right?  Although, I prefer a mimosa myself.  It's a bit more... bubbly!",
-    },
-    {
-        line: "Wir sind pretty im Bikini, das ist Bauch, Beine, Po",
-        description: "This is what it's all about, folks! Confidence!  Loving yourself!  And a little bit of  \"Bauch, Beine, Po!\""
-    }
-], song = {
-    coverUrl: "",
-    artist: "Shirin David",
-    title: "Bauch Beine Po"
-},
-    personaName = "Ellen"
-} = defineProps<{
-    lines: Array<LineAnalysis>,
-    song: { coverUrl: string, artist: string, title: string },
-    personaName: string
-}>();
+import { store } from '~/stores/store';
+const lineIndex = ref<number>(0);
 
 const currentLine = computed(() => {
-    if (lines && lines.length > 0) {
-        return `«${lines[store.lineIndex].line}»`;
+    if (store.currentAnalysis && store.currentAnalysis.length > 0) {
+        return `«${store.currentAnalysis[lineIndex.value].line}»`;
     }
     return "No lines available";
 });
 
 const currentChat = computed(() => {
-    if (lines && lines.length > 0) {
-        return lines[store.lineIndex].description;
+    if (store.currentAnalysis && store.currentAnalysis.length > 0) {
+        return store.currentAnalysis[lineIndex.value].description;
     }
     return "No chat available";
 })
 
 const changeLine = () => {
-    if (store.lineIndex < lines.length) {
-        store.lineIndex = store.lineIndex += 1;
+    if (!store.currentAnalysis) return;
+    if (lineIndex.value < store.currentAnalysis.length) {
+        lineIndex.value = lineIndex.value += 1;
     }
     else {
         navigateTo("analysis-end");
@@ -78,11 +40,7 @@ const changeLine = () => {
 }
 
 onMounted(() => {
-    if (personaName) {
-        const criticsFiltered = criticsData.critics.filter(critic => critic.name == personaName)
-        if (criticsFiltered.length == 1)
-            store.persona = criticsFiltered[0];
-    }
+
 })
 </script>
 <style lang="scss" scoped>
