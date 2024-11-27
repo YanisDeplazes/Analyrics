@@ -1,6 +1,6 @@
 <template>
   <Section class="recommendation-section">
-    <h1>Hi {{ profile?.display_name || "there" }}!</h1>
+    <h1>Hi {{ store.spotifyProfile?.display_name || "there" }}!</h1>
     <template v-if="recommendations && recommendations.items.length">
       <p>
         Let's get to analysing your preferred song. We've pulled a few tracks
@@ -94,7 +94,6 @@ onMounted(async () => {
 
   try {
     store.setProfile(await backend.me(accessToken));
-    profile.value = store.spotifyProfile;
     recommendations.value = await backend.topTracks(accessToken);
   } catch (e) {
     error.value = "Could not load profile data.";
