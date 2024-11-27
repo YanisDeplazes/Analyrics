@@ -1,5 +1,5 @@
 <template>
-  <div class="swipper-container">
+  <div class="swiper-container">
     <div class="swiper-buttons">
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
@@ -8,7 +8,7 @@
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     }" :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange">
-      <swiper-slide v-for="(persona, index) in personaData.personas" :key="index">
+      <swiper-slide v-for="(persona, index) in criticsData.critics" :key="index">
         <Critic :name="persona.name" :category="persona.category" :description="persona.description"
           :image-url="persona.imageUrl"></Critic>
       </swiper-slide>
@@ -17,15 +17,9 @@
 </template>
 
 <style lang="scss">
-.swipper-container {
+.swiper-container {
   width: 100%;
   position: relative;
-
-  .swiper-slide {
-    background-color: var(--bg-secondary);
-    border-radius: var(--border-lg);
-    height: unset;
-  }
 
   .swiper-buttons {
     position: absolute;
@@ -69,7 +63,7 @@ import { Navigation, Scrollbar } from "swiper/modules"; // Updated import
 import "swiper/css";
 import "swiper/css/navigation"; // Import Swiper CSS for navigation
 import 'swiper/css/scrollbar';
-import personaData from "assets/data/personas.json";
+import criticsData from "assets/data/critics.json";
 
 const onSwiper = (swiper: Swiper) => {
   console.log(swiper);

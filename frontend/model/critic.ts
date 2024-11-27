@@ -1,4 +1,4 @@
-export default interface Persona {
+export default interface Critic {
     name: string,
     category: string,
     description: string,

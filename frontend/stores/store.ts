@@ -1,27 +1,27 @@
 import type LineAnalysis from '~/model/line-analysis';
-import type Persona from '~/model/persona';
+import type Critic from '~/model/critic';
 import type { SpotifyTrack, SpotifyProfile } from '~/model/spotify';
 
 
 export const store = reactive<{
     selectedTrack: SpotifyTrack | null,
-    selectedPersona: Persona | null,
+    selectedCritic: Critic | null,
     spotifyProfile: SpotifyProfile | null,
     currentAnalysis: Array<LineAnalysis> | null,
     setSelectedTrack: (song: SpotifyTrack) => void,
-    setPersona: (persona: Persona) => void,
+    setCritic: (persona: Critic) => void,
     setLineAnalysis: (lineAnalyis: Array<LineAnalysis>) => void,
     setProfile: (profile: SpotifyProfile) => void
 }>({
     selectedTrack: null,
-    selectedPersona: null,
+    selectedCritic: null,
     currentAnalysis: null,
     spotifyProfile: null,
-    setSelectedTrack: function (song) {
-        this.selectedTrack = song;
+    setSelectedTrack: function (track) {
+        this.selectedTrack = track;
     },
-    setPersona: function (persona) {
-        this.selectedPersona = persona;
+    setCritic: function (persona) {
+        this.selectedCritic = persona;
     },
     setLineAnalysis: function (lineAnalysis) {
         this.currentAnalysis = lineAnalysis;

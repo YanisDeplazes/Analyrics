@@ -13,12 +13,12 @@
 const props = defineProps<{
   name: string;
   category:
-    | "culture"
-    | "genre"
-    | "humor"
-    | "philosophy"
-    | "intellect"
-    | "niche";
+  | "culture"
+  | "genre"
+  | "humor"
+  | "philosophy"
+  | "intellect"
+  | "niche";
   description: string;
   imageUrl: string;
 }>();
@@ -31,6 +31,9 @@ const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
   display: flex;
   gap: var(--spacing-lg);
   flex-direction: column;
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-lg);
+  height: unset;
 
   .image {
     position: relative;

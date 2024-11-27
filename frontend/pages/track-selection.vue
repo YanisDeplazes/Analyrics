@@ -79,7 +79,7 @@ const onSlideChange = () => {
 
 const selectTrack = (track: SpotifyTrack) => {
   store.setSelectedTrack(track);
-  navigateTo('persona-selection');
+  navigateTo('critic-selection');
 }
 
 onMounted(async () => {
