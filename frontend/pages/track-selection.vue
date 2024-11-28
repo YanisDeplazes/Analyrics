@@ -22,14 +22,14 @@
         </div>
       </div>
       <div class="swiper-container">
-        <SwiperWrapper :modules="[Scrollbar, FreeMode]" :slides-per-view="1" :space-between="8" :loop="true"
+        <SwiperWrapper :modules="[Scrollbar, FreeMode]" :slides-per-view="1.1" :space-between="8" :loop="true"
           :scrollbar="{ draggable: true }" aria-label="Track recommendations carousel" @swiper="onSwiper" :breakpoints="{
             480: {
-              slidesPerView: 2,
+              slidesPerView: 2.1,
               spaceBetween: 8
             },
             768: {
-              slidesPerView: 4,
+              slidesPerView: 4.1,
               spaceBetween: 16
             },
           }">

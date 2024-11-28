@@ -16,14 +16,14 @@
   </div>
   <SwiperWrapper :modules="[Scrollbar, FreeMode]" :loop="true" :breakpoints="{
     480: {
-      slidesPerView: 2,
+      slidesPerView: 2.1,
       spaceBetween: 8
     },
     768: {
-      slidesPerView: 4,
+      slidesPerView: 4.1,
       spaceBetween: 16
     },
-  }" :slides-per-view="1" :space-between="8" :scrollbar="{ draggable: true }" @swiper="onSwiper"
+  }" :slides-per-view="1.1" :space-between="8" :scrollbar="{ draggable: true }" @swiper="onSwiper"
     class="swiper-container" :free-mode="true">
     <swiper-slide v-for="(persona, index) in criticsData.critics" :key="index">
       <Critic :name="persona.name" :category="persona.category" :description="persona.description"
