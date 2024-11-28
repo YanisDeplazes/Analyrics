@@ -9,31 +9,72 @@
       <h2 class="font-branding">Your Top Tracks</h2>
       <div class="swipper-container">
         <div class="swiper-buttons">
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
+          <Button
+            class="swiper-button-prev"
+            icon-only
+            variant="secondary"
+            fill="fill"
+            size="sm"
+          >
+            <template v-slot:icon>
+              <Icon
+                size="small"
+                variant="keyboard-arrow-left"
+                type="secondary"
+              ></Icon>
+            </template>
+          </Button>
+          <Button
+            class="swiper-button-next"
+            icon-only
+            variant="secondary"
+            fill="fill"
+            size="sm"
+          >
+            <template v-slot:icon>
+              <Icon
+                size="small"
+                variant="keyboard-arrow-right"
+                type="secondary"
+              ></Icon>
+            </template>
+          </Button>
         </div>
-        <Swiper :modules="[Navigation, Scrollbar]" :slides-per-view="1" :space-between="10" :loop="true" :navigation="{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        }" :scrollbar="{ draggable: true }" aria-label="Track recommendations carousel">
-          <swiper-slide v-for="(track, index) in recommendations.items" :key="track.id">
+        <Swiper
+          :modules="[Navigation, Scrollbar]"
+          :slides-per-view="1"
+          :space-between="10"
+          :loop="true"
+          :navigation="{
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          }"
+          :scrollbar="{ draggable: true }"
+          aria-label="Track recommendations carousel"
+        >
+          <swiper-slide
+            v-for="(track, index) in recommendations.items"
+            :key="track.id"
+          >
             <div class="track" :id="'track_' + index">
               <div class="image">
                 <div class="icon"></div>
                 <div class="track_preview_controls" @click="togglePlay(index)">
                   <audio :src="track.preview_url"></audio>
                 </div>
-                <img :src="track.album.images[1].url || '/default-cover.jpg'" alt="Album cover" class="cover"
-                  aria-label="Album cover" />
+                <img
+                  :src="track.album.images[1].url || '/default-cover.jpg'"
+                  alt="Album cover"
+                  class="cover"
+                  aria-label="Album cover"
+                />
               </div>
               <div class="track-info" @click="selectTrack(track)">
                 <p>
                   <strong>{{ track.name }}</strong>
                 </p>
                 <p>
-                  <small>{{
-                    commaSeparatedArtists(track.artists)
-                  }}</small>
+                  <small>{{ commaSeparatedArtists(track.artists) }}</small>
                 </p>
               </div>
             </div>
@@ -46,9 +87,26 @@
     </p>
     <SearchComponent />
     <template v-if="!(recommendations && recommendations.items.length)">
-      <svg xmlns="http://www.w3.org/2000/svg" width="345" height="4" viewBox="0 0 357 4" fill="none">
-        <path d="M2 2H355" stroke="#392467" stroke-width="4" stroke-linecap="round" />
-        <path d="M2 2H355" stroke="white" stroke-opacity="0.2" stroke-width="4" stroke-linecap="round" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="345"
+        height="4"
+        viewBox="0 0 357 4"
+        fill="none"
+      >
+        <path
+          d="M2 2H355"
+          stroke="#392467"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+        <path
+          d="M2 2H355"
+          stroke="white"
+          stroke-opacity="0.2"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
       </svg>
       <p>Alternatively, you can search for any song you'd like:</p>
     </template>
@@ -63,7 +121,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import Backend from "~/api/backend";
-import type { SpotifyTopTracks, SpotifyTrack, SpotifyProfile } from "~/model/spotify";
+import type {
+  SpotifyTopTracks,
+  SpotifyTrack,
+  SpotifyProfile,
+} from "~/model/spotify";
 let profile = ref<null | SpotifyProfile>(null);
 let recommendations = ref<SpotifyTopTracks>();
 let error = ref<null | string>(null);
@@ -71,8 +133,8 @@ const backend = new Backend();
 
 const selectTrack = (track: SpotifyTrack) => {
   store.setSelectedTrack(track);
-  navigateTo('critic-selection');
-}
+  navigateTo("critic-selection");
+};
 
 onMounted(async () => {
   if (!store.spotifyUserAccessToken) {
@@ -92,10 +154,11 @@ onMounted(async () => {
 const loadProfileAndRecommendations = async () => {
   if (store.spotifyUserAccessToken) {
     store.setProfile(await backend.me(store.spotifyUserAccessToken));
-    recommendations.value = await backend.topTracks(store.spotifyUserAccessToken);
-
+    recommendations.value = await backend.topTracks(
+      store.spotifyUserAccessToken
+    );
   }
-}
+};
 
 // Toggle playback
 const togglePlay = (index: number) => {
@@ -197,9 +260,11 @@ const togglePlay = (index: number) => {
 
       .track_preview_controls {
         position: absolute;
-        background: linear-gradient(rgba(0, 0, 0, 0.502),
-            rgba(0, 0, 0, 0),
-            rgba(0, 0, 0, 0));
+        background: linear-gradient(
+          rgba(0, 0, 0, 0.502),
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0)
+        );
         opacity: 0;
         top: 0;
         left: 0;
@@ -225,36 +290,13 @@ const togglePlay = (index: number) => {
 .swiper-buttons {
   position: absolute;
   right: 0;
-  top: -20px;
-  padding-bottom: 20px;
+  top: -50px;
   display: inline-flex;
-  gap: var(--spacing-lg);
 
   .swiper-button-prev,
   .swiper-button-next {
-    position: relative;
-    background-color: var(--bg-secondary);
-    color: var(--bg-primary);
-    background-position: center;
-    background-size: 10px;
-    background-repeat: no-repeat;
-    border-radius: 100%;
-    color: var(--bg-primary);
-    width: 24px;
-    height: 24px;
     left: unset;
     right: unset;
-    transition: 0.2s ease-in-out;
-
-    &:hover {
-      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-      scale: 1.03;
-      cursor: pointer;
-    }
-
-    &::after {
-      font-size: 12px;
-    }
   }
 }
 

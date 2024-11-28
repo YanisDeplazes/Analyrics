@@ -8,28 +8,36 @@
     </p>
     <div class="buttons">
       <NuxtLink to="http://localhost:3000/login">
-        <Button text="Log in" variant="secondary" fill="fill" icon="right">
+        <Button
+          text="Log in"
+          variant="secondary"
+          isLarge=""
+          fill="fill"
+          icon="right"
+          size="lg"
+        >
           <template v-slot:icon>
             <Icon size="large" variant="login" type="secondary"></Icon>
           </template>
         </Button>
       </NuxtLink>
       <NuxtLink to="track-selection">
-        <Button text="Skip" variant="secondary" fill="outline">
+        <Button text="Skip" variant="secondary" fill="outline" size="lg">
         </Button>
       </NuxtLink>
     </div>
   </Section>
 </template>
 <script setup lang="ts">
-import { store } from '~/stores/store';
+import { store } from "~/stores/store";
 
 onMounted(() => {
-  console.log(store.spotifyUserAccessToken)
+  console.log(store.spotifyUserAccessToken);
   if (store.spotifyUserAccessToken) {
     navigateTo("track-selection");
   }
-})</script>
+});
+</script>
 <style lang="scss" scoped>
 .buttons {
   display: flex;

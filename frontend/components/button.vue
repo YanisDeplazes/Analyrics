@@ -1,24 +1,39 @@
 <template>
-  <button @click="handleClick" class="button" :class="{
-    'primary-fill': fill == 'fill' && variant == 'primary',
-    'secondary-fill': fill == 'fill' && variant == 'secondary',
-    'primary-outline': fill == 'outline' && variant == 'primary',
-    'secondary-outline': fill == 'outline' && variant == 'secondary'
-  }">
-    <slot name="icon" v-if="icon == 'left'" />
-    {{ text }}
-    <slot name="icon" v-if="icon == 'right'" />
+  <button
+    @click="handleClick"
+    class="button"
+    :class="[
+      {
+        'primary-fill': fill == 'fill' && variant == 'primary',
+        'secondary-fill': fill == 'fill' && variant == 'secondary',
+        'primary-outline': fill == 'outline' && variant == 'primary',
+        'secondary-outline': fill == 'outline' && variant == 'secondary',
+      },
+      `size-${size}`,
+      { 'icon-only': iconOnly },
+    ]"
+  >
+    <template v-if="!iconOnly">
+      <slot name="icon" v-if="icon == 'left'" />
+      {{ text }}
+      <slot name="icon" v-if="icon == 'right'" />
+    </template>
+    <template v-else>
+      <slot name="icon" />
+    </template>
   </button>
 </template>
 <script setup lang="ts">
 const props = defineProps<{
-  text: string,
-  variant: "primary" | "secondary",
-  fill: "fill" | "outline",
-  icon?: "left" | "right"
+  text?: string;
+  variant: "primary" | "secondary";
+  fill: "fill" | "outline";
+  icon?: "left" | "right";
+  size: "sm" | "lg";
+  iconOnly?: boolean;
 }>();
 const emit = defineEmits<{
-  click: [e: MouseEvent]
+  click: [e: MouseEvent];
 }>();
 const handleClick = (e: MouseEvent) => {
   emit("click", e);
@@ -31,8 +46,6 @@ const handleClick = (e: MouseEvent) => {
   align-items: center;
   justify-content: center;
   border: unset;
-  padding: var(--spacing-lg);
-  border-radius: var(--border-lg);
 }
 
 .button:hover {
@@ -45,6 +58,21 @@ const handleClick = (e: MouseEvent) => {
   scale: 1.05;
 }
 
+/*sizes*/
+.size-sm {
+  padding: var(--spacing-md);
+  border-radius: var(--border-md, 8px);
+  position: relative;
+  right: 0;
+  display: inline-flex;
+}
+
+.size-lg {
+  padding: var(--spacing-lg, 16px);
+  border-radius: var(--border-lg, 16px);
+}
+
+/*colors*/
 .primary-fill {
   background-color: var(--bg-primary);
   color: var(--on-primary);
