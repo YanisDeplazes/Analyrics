@@ -2,12 +2,12 @@
   <div class="critics-title">
     <h2>Meet the critics</h2>
     <div class="swiper-buttons">
-      <Button class="swiper-button-prev" icon-only variant="secondary" fill="fill" size="sm">
+      <Button icon-only variant="secondary" fill="fill" size="sm" @click="swiper!.slidePrev()">
         <template v-slot:icon>
           <Icon size="small" variant="keyboard-arrow-left" type="secondary"></Icon>
         </template>
       </Button>
-      <Button class="swiper-button-next" icon-only variant="secondary" fill="fill" size="sm">
+      <Button icon-only variant="secondary" fill="fill" size="sm" @click="swiper!.slideNext()">
         <template v-slot:icon>
           <Icon size="small" variant="keyboard-arrow-right" type="secondary"></Icon>
         </template>
@@ -15,10 +15,8 @@
     </div>
   </div>
   <div class="swiper-container">
-    <SwiperWrapper :modules="[Navigation, Scrollbar]" :loop="true" :slides-per-view="1" :space-between="10" :navigation="{
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    }" :scrollbar="{ draggable: true }">
+    <SwiperWrapper :modules="[Scrollbar]" :loop="true" :slides-per-view="1" :space-between="10"
+      :scrollbar="{ draggable: true }" @swiper="onSwiper">
       <swiper-slide v-for="(persona, index) in criticsData.critics" :key="index">
         <Critic :name="persona.name" :category="persona.category" :description="persona.description"
           :image-url="persona.imageUrl"></Critic>
@@ -44,19 +42,16 @@
   flex-direction: row;
   gap: 1rem;
 }
-
-.swiper-button-prev,
-.swiper-button-next,
-.swiper-button-prev::after,
-.swiper-button-next::after {
-  all: unset;
-}
 </style>
 <script setup lang="ts">
 import { Swiper as SwiperWrapper, SwiperSlide } from "swiper/vue";
-import { Navigation, Scrollbar } from "swiper/modules"; // Updated import
+import { Scrollbar } from "swiper/modules"; // Updated import
 import "swiper/css";
-import "swiper/css/navigation"; // Import Swiper CSS for navigation
 import "swiper/css/scrollbar";
 import criticsData from "assets/data/critics.json";
+import Swiper from "swiper";
+const swiper = ref<Swiper | null>(null);
+const onSwiper = (swiperInstance: Swiper) => {
+  swiper.value = swiperInstance;
+}
 </script>

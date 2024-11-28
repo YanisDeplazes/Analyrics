@@ -6,68 +6,33 @@
         Let's get to analysing your preferred song. We've pulled a few tracks
         from your Spotify account to get you started:
       </p>
-      <h2 class="font-branding">Your Top Tracks</h2>
-      <div class="swipper-container">
+      <div class="top-tracks-title">
+        <h2>Your Top Tracks</h2>
         <div class="swiper-buttons">
-          <Button
-            class="swiper-button-prev"
-            icon-only
-            variant="secondary"
-            fill="fill"
-            size="sm"
-          >
+          <Button icon-only variant="secondary" fill="fill" size="sm" @click="swiper!.slidePrev()">
             <template v-slot:icon>
-              <Icon
-                size="small"
-                variant="keyboard-arrow-left"
-                type="secondary"
-              ></Icon>
+              <Icon size="small" variant="keyboard-arrow-left" type="secondary"></Icon>
             </template>
           </Button>
-          <Button
-            class="swiper-button-next"
-            icon-only
-            variant="secondary"
-            fill="fill"
-            size="sm"
-          >
+          <Button icon-only variant="secondary" fill="fill" size="sm" @click="swiper!.slideNext()">
             <template v-slot:icon>
-              <Icon
-                size="small"
-                variant="keyboard-arrow-right"
-                type="secondary"
-              ></Icon>
+              <Icon size="small" variant="keyboard-arrow-right" type="secondary"></Icon>
             </template>
           </Button>
         </div>
-        <Swiper
-          :modules="[Navigation, Scrollbar]"
-          :slides-per-view="1"
-          :space-between="10"
-          :loop="true"
-          :navigation="{
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          }"
-          :scrollbar="{ draggable: true }"
-          aria-label="Track recommendations carousel"
-        >
-          <swiper-slide
-            v-for="(track, index) in recommendations.items"
-            :key="track.id"
-          >
+      </div>
+      <div class="swiper-container">
+        <SwiperWrapper :modules="[Scrollbar]" :slides-per-view="1" :space-between="10" :loop="true"
+          :scrollbar="{ draggable: true }" aria-label="Track recommendations carousel" @swiper="onSwiper">
+          <swiper-slide v-for="(track, index) in recommendations.items" :key="track.id">
             <div class="track" :id="'track_' + index">
               <div class="image">
                 <div class="icon"></div>
                 <div class="track_preview_controls" @click="togglePlay(index)">
                   <audio :src="track.preview_url"></audio>
                 </div>
-                <img
-                  :src="track.album.images[1].url || '/default-cover.jpg'"
-                  alt="Album cover"
-                  class="cover"
-                  aria-label="Album cover"
-                />
+                <img :src="track.album.images[1].url || '/default-cover.jpg'" alt="Album cover" class="cover"
+                  aria-label="Album cover" />
               </div>
               <div class="track-info" @click="selectTrack(track)">
                 <p>
@@ -79,7 +44,7 @@
               </div>
             </div>
           </swiper-slide>
-        </Swiper>
+        </SwiperWrapper>
       </div>
     </template>
     <p>
@@ -87,26 +52,9 @@
     </p>
     <SearchComponent />
     <template v-if="!(recommendations && recommendations.items.length)">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="345"
-        height="4"
-        viewBox="0 0 357 4"
-        fill="none"
-      >
-        <path
-          d="M2 2H355"
-          stroke="#392467"
-          stroke-width="4"
-          stroke-linecap="round"
-        />
-        <path
-          d="M2 2H355"
-          stroke="white"
-          stroke-opacity="0.2"
-          stroke-width="4"
-          stroke-linecap="round"
-        />
+      <svg xmlns="http://www.w3.org/2000/svg" width="345" height="4" viewBox="0 0 357 4" fill="none">
+        <path d="M2 2H355" stroke="#392467" stroke-width="4" stroke-linecap="round" />
+        <path d="M2 2H355" stroke="white" stroke-opacity="0.2" stroke-width="4" stroke-linecap="round" />
       </svg>
       <p>Alternatively, you can search for any song you'd like:</p>
     </template>
@@ -114,27 +62,29 @@
 </template>
 
 <script setup lang="ts">
-import { Swiper as Swiper, SwiperSlide } from "swiper/vue";
-import { Navigation, Scrollbar } from "swiper/modules";
+import { Swiper as SwiperWrapper, SwiperSlide, useSwiper } from "swiper/vue";
+import { Scrollbar } from "swiper/modules";
 import { store } from "~/stores/store";
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import Backend from "~/api/backend";
 import type {
   SpotifyTopTracks,
   SpotifyTrack,
-  SpotifyProfile,
 } from "~/model/spotify";
-let profile = ref<null | SpotifyProfile>(null);
-let recommendations = ref<SpotifyTopTracks>();
-let error = ref<null | string>(null);
+import Swiper from "swiper";
+const recommendations = ref<SpotifyTopTracks>();
+const error = ref<null | string>(null);
 const backend = new Backend();
-
+const swiper = ref<Swiper | null>(null);
 const selectTrack = (track: SpotifyTrack) => {
   store.setSelectedTrack(track);
   navigateTo("critic-selection");
 };
+
+const onSwiper = (swiperInstance: Swiper) => {
+  swiper.value = swiperInstance;
+}
 
 onMounted(async () => {
   if (!store.spotifyUserAccessToken) {
@@ -260,11 +210,9 @@ const togglePlay = (index: number) => {
 
       .track_preview_controls {
         position: absolute;
-        background: linear-gradient(
-          rgba(0, 0, 0, 0.502),
-          rgba(0, 0, 0, 0),
-          rgba(0, 0, 0, 0)
-        );
+        background: linear-gradient(rgba(0, 0, 0, 0.502),
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, 0));
         opacity: 0;
         top: 0;
         left: 0;
@@ -287,21 +235,25 @@ const togglePlay = (index: number) => {
   }
 }
 
-.swiper-buttons {
-  position: absolute;
-  right: 0;
-  top: -50px;
-  display: inline-flex;
-
-  .swiper-button-prev,
-  .swiper-button-next {
-    left: unset;
-    right: unset;
-  }
-}
-
-.swipper-container {
+.swiper-container {
   width: 100%;
   position: relative;
+}
+
+.top-tracks-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.swiper-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  all: unset;
 }
 </style>
