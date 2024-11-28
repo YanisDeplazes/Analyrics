@@ -1,18 +1,27 @@
 <template>
-  <div class="swiper-container">
+  <div class="critics-title">
+    <h2>Meet the critics</h2>
     <div class="swiper-buttons">
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+      <Button icon-only variant="secondary" fill="fill" size="sm" @click="swiper!.slidePrev()">
+        <template v-slot:icon>
+          <Icon size="small" variant="keyboard-arrow-left" type="secondary"></Icon>
+        </template>
+      </Button>
+      <Button icon-only variant="secondary" fill="fill" size="sm" @click="swiper!.slideNext()">
+        <template v-slot:icon>
+          <Icon size="small" variant="keyboard-arrow-right" type="secondary"></Icon>
+        </template>
+      </Button>
     </div>
-    <Swiper :modules="[Navigation,Scrollbar]" :loop="true":slides-per-view="1" :space-between="10" :navigation="{
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    }" :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange">
+  </div>
+  <div class="swiper-container">
+    <SwiperWrapper :modules="[Scrollbar]" :loop="true" :slides-per-view="1" :space-between="10"
+      :scrollbar="{ draggable: true }" @swiper="onSwiper">
       <swiper-slide v-for="(persona, index) in criticsData.critics" :key="index">
         <Critic :name="persona.name" :category="persona.category" :description="persona.description"
           :image-url="persona.imageUrl"></Critic>
       </swiper-slide>
-    </Swiper>
+    </SwiperWrapper>
   </div>
 </template>
 
@@ -20,48 +29,29 @@
 .swiper-container {
   width: 100%;
   position: relative;
+}
 
-  .swiper-buttons {
-    position: absolute;
-    right: 0;
-    top: -20px;
-    display: inline-flex;
-    gap: var(--spacing-lg);
+.critics-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
-    .swiper-button-prev,
-    .swiper-button-next {
-      position: relative;
-      background-color: var(--bg-secondary);
-      color: var(--bg-primary);
-      background-position: center;
-      background-size: 10px;
-      background-repeat: no-repeat;
-      border-radius: 100%;
-      color: var(--bg-primary);
-      width: 24px;
-      height: 24px;
-      left: unset;
-      right: unset;
-      transition: 0.2s all ease-in-out;
-
-      &:hover {
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        scale: 1.03;
-        cursor: pointer;
-      }
-
-      &::after {
-        font-size: 12px;
-      }
-    }
-  }
+.swiper-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 </style>
 <script setup lang="ts">
-import { Swiper as Swiper, SwiperSlide } from "swiper/vue";
-import { Navigation, Scrollbar } from "swiper/modules"; // Updated import
+import { Swiper as SwiperWrapper, SwiperSlide } from "swiper/vue";
+import { Scrollbar } from "swiper/modules"; // Updated import
 import "swiper/css";
-import "swiper/css/navigation"; // Import Swiper CSS for navigation
-import 'swiper/css/scrollbar';
+import "swiper/css/scrollbar";
 import criticsData from "assets/data/critics.json";
+import Swiper from "swiper";
+const swiper = ref<Swiper | null>(null);
+const onSwiper = (swiperInstance: Swiper) => {
+  swiper.value = swiperInstance;
+}
 </script>

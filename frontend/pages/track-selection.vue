@@ -6,16 +6,24 @@
         Let's get to analysing your preferred song. We've pulled a few tracks
         from your Spotify account to get you started:
       </p>
-      <h2 class="font-branding">Your Top Tracks</h2>
-      <div class="swipper-container">
+      <div class="top-tracks-title">
+        <h2>Your Top Tracks</h2>
         <div class="swiper-buttons">
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
+          <Button icon-only variant="secondary" fill="fill" size="sm" @click="swiper!.slidePrev()">
+            <template v-slot:icon>
+              <Icon size="small" variant="keyboard-arrow-left" type="secondary"></Icon>
+            </template>
+          </Button>
+          <Button icon-only variant="secondary" fill="fill" size="sm" @click="swiper!.slideNext()">
+            <template v-slot:icon>
+              <Icon size="small" variant="keyboard-arrow-right" type="secondary"></Icon>
+            </template>
+          </Button>
         </div>
-        <Swiper :modules="[Navigation, Scrollbar]" :slides-per-view="1" :space-between="10" :loop="true" :navigation="{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        }" :scrollbar="{ draggable: true }" aria-label="Track recommendations carousel">
+      </div>
+      <div class="swiper-container">
+        <SwiperWrapper :modules="[Scrollbar]" :slides-per-view="1" :space-between="10" :loop="true"
+          :scrollbar="{ draggable: true }" aria-label="Track recommendations carousel" @swiper="onSwiper">
           <swiper-slide v-for="(track, index) in recommendations.items" :key="track.id">
             <div class="track" :id="'track_' + index">
               <div class="image">
@@ -31,14 +39,12 @@
                   <strong>{{ track.name }}</strong>
                 </p>
                 <p>
-                  <small>{{
-                    commaSeparatedArtists(track.artists)
-                  }}</small>
+                  <small>{{ commaSeparatedArtists(track.artists) }}</small>
                 </p>
               </div>
             </div>
           </swiper-slide>
-        </Swiper>
+        </SwiperWrapper>
       </div>
     </template>
     <p>
@@ -56,22 +62,28 @@
 </template>
 
 <script setup lang="ts">
-import { Swiper as Swiper, SwiperSlide } from "swiper/vue";
-import { Navigation, Scrollbar } from "swiper/modules";
+import { Swiper as SwiperWrapper, SwiperSlide, useSwiper } from "swiper/vue";
+import { Scrollbar } from "swiper/modules";
 import { store } from "~/stores/store";
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import Backend from "~/api/backend";
-import type { SpotifyTopTracks, SpotifyTrack, SpotifyProfile } from "~/model/spotify";
-let profile = ref<null | SpotifyProfile>(null);
-let recommendations = ref<SpotifyTopTracks>();
-let error = ref<null | string>(null);
+import type {
+  SpotifyTopTracks,
+  SpotifyTrack,
+} from "~/model/spotify";
+import Swiper from "swiper";
+const recommendations = ref<SpotifyTopTracks>();
+const error = ref<null | string>(null);
 const backend = new Backend();
-
+const swiper = ref<Swiper | null>(null);
 const selectTrack = (track: SpotifyTrack) => {
   store.setSelectedTrack(track);
-  navigateTo('critic-selection');
+  navigateTo("critic-selection");
+};
+
+const onSwiper = (swiperInstance: Swiper) => {
+  swiper.value = swiperInstance;
 }
 
 onMounted(async () => {
@@ -92,10 +104,11 @@ onMounted(async () => {
 const loadProfileAndRecommendations = async () => {
   if (store.spotifyUserAccessToken) {
     store.setProfile(await backend.me(store.spotifyUserAccessToken));
-    recommendations.value = await backend.topTracks(store.spotifyUserAccessToken);
-
+    recommendations.value = await backend.topTracks(
+      store.spotifyUserAccessToken
+    );
   }
-}
+};
 
 // Toggle playback
 const togglePlay = (index: number) => {
@@ -222,44 +235,25 @@ const togglePlay = (index: number) => {
   }
 }
 
-.swiper-buttons {
-  position: absolute;
-  right: 0;
-  top: -20px;
-  padding-bottom: 20px;
-  display: inline-flex;
-  gap: var(--spacing-lg);
-
-  .swiper-button-prev,
-  .swiper-button-next {
-    position: relative;
-    background-color: var(--bg-secondary);
-    color: var(--bg-primary);
-    background-position: center;
-    background-size: 10px;
-    background-repeat: no-repeat;
-    border-radius: 100%;
-    color: var(--bg-primary);
-    width: 24px;
-    height: 24px;
-    left: unset;
-    right: unset;
-    transition: 0.2s ease-in-out;
-
-    &:hover {
-      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-      scale: 1.03;
-      cursor: pointer;
-    }
-
-    &::after {
-      font-size: 12px;
-    }
-  }
-}
-
-.swipper-container {
+.swiper-container {
   width: 100%;
   position: relative;
+}
+
+.top-tracks-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.swiper-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  all: unset;
 }
 </style>
