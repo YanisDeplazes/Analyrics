@@ -6,7 +6,7 @@
 <style lang="scss" scoped>
 .content {
   padding: var(--spacing-lg);
-  max-width: 345px;
+  max-width: 1200px;
   margin: auto;
   display: flex;
   flex-direction: column;

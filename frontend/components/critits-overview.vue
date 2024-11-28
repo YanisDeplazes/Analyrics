@@ -14,15 +14,23 @@
       </Button>
     </div>
   </div>
-  <div class="swiper-container">
-    <SwiperWrapper :modules="[Scrollbar]" :loop="true" :slides-per-view="1" :space-between="10"
-      :scrollbar="{ draggable: true }" @swiper="onSwiper">
-      <swiper-slide v-for="(persona, index) in criticsData.critics" :key="index">
-        <Critic :name="persona.name" :category="persona.category" :description="persona.description"
-          :image-url="persona.imageUrl"></Critic>
-      </swiper-slide>
-    </SwiperWrapper>
-  </div>
+  <SwiperWrapper :modules="[Scrollbar, FreeMode]" :loop="true" :breakpoints="{
+    480: {
+      slidesPerView: 2,
+      spaceBetween: 8
+    },
+    768: {
+      slidesPerView: 4,
+      spaceBetween: 16
+    },
+
+  }" :slides-per-view="1" :space-between="8" :scrollbar="{ draggable: true }" @swiper="onSwiper"
+    class="swiper-container" :free-mode="true">
+    <swiper-slide v-for="(persona, index) in criticsData.critics" :key="index">
+      <Critic :name="persona.name" :category="persona.category" :description="persona.description"
+        :image-url="persona.imageUrl"></Critic>
+    </swiper-slide>
+  </SwiperWrapper>
 </template>
 
 <style lang="scss">
@@ -45,12 +53,13 @@
 </style>
 <script setup lang="ts">
 import { Swiper as SwiperWrapper, SwiperSlide } from "swiper/vue";
-import { Scrollbar } from "swiper/modules"; // Updated import
+import { Scrollbar, FreeMode } from "swiper/modules"; // Updated import
 import "swiper/css";
 import "swiper/css/scrollbar";
 import criticsData from "assets/data/critics.json";
 import Swiper from "swiper";
 const swiper = ref<Swiper | null>(null);
+const slidesPerView = ref(1);
 const onSwiper = (swiperInstance: Swiper) => {
   swiper.value = swiperInstance;
 }
