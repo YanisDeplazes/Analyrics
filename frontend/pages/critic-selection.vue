@@ -8,7 +8,7 @@
         commaSeparatedArtists(store.selectedTrack?.artists)
       }}?
     </p>
-    <SwiperWrapper :slides-per-view="1.1" :space-between="8" :modules="[Scrollbar]" :loop="true"
+    <SwiperWrapper :slides-per-view="1.1" :space-between="8" :modules="[Scrollbar, FreeMode]" :loop="true"
       :scrollbar="{ draggable: true }" :breakpoints="{
         480: {
           slidesPerView: 2.1,
@@ -37,7 +37,7 @@
 </template>
 <script setup lang="ts">
 import { Swiper as SwiperWrapper, SwiperSlide } from "swiper/vue";
-import { Scrollbar } from "swiper/modules"; // Updated import
+import { FreeMode, Scrollbar } from "swiper/modules"; // Updated import
 import criticsData from "assets/data/critics.json";
 import { store } from "~/stores/store";
 import type Critic from "~/model/critic";
