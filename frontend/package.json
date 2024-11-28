@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "cypress": "^13.16.0",
     "nuxt": "^3.13.0",
     "swiper": "^11.1.14",
     "vue": "latest",
