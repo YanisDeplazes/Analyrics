@@ -11,13 +11,7 @@
       Collective offers a fresh perspective on every song.
     </p>
     <NuxtLink to="/login">
-      <Button
-        text="Explore now"
-        variant="secondary"
-        fill="fill"
-        size="lg"
-        icon="right"
-      >
+      <Button text="Explore now" variant="secondary" fill="fill" size="lg" icon="right">
         <template v-slot:icon>
           <Icon size="large" variant="arrow-forward" type="secondary"></Icon>
         </template>
@@ -48,7 +42,12 @@
 .disclaimer-section {
   margin: var(--spacing-2xl) var(--spacing-lg);
 }
+
 .text-center {
   text-align: center;
+}
+
+.introduction-section {
+  max-height: 50vh;
 }
 </style>

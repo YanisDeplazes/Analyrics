@@ -105,10 +105,12 @@ onMounted(() => {
 <style lang="scss">
 .cards {
   width: 100%;
+  max-height: inherit;
   display: flex;
 
   .card {
     width: calc(100% / 3);
+    max-height: inherit;
     border-radius: var(--border-md);
     border: #fff689 5px solid;
     position: relative;
