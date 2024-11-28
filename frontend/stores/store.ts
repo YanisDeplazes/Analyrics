@@ -8,15 +8,18 @@ export const store = reactive<{
     selectedCritic: Critic | null,
     spotifyProfile: SpotifyProfile | null,
     currentAnalysis: Array<LineAnalysis> | null,
+    spotifyUserAccessToken: string | null,
     setSelectedTrack: (song: SpotifyTrack) => void,
     setCritic: (persona: Critic) => void,
     setLineAnalysis: (lineAnalyis: Array<LineAnalysis>) => void,
-    setProfile: (profile: SpotifyProfile) => void
+    setProfile: (profile: SpotifyProfile) => void,
+    setAccessToken: (accesToken: string) => void
 }>({
     selectedTrack: null,
     selectedCritic: null,
     currentAnalysis: null,
     spotifyProfile: null,
+    spotifyUserAccessToken: null,
     setSelectedTrack: function (track) {
         this.selectedTrack = track;
     },
@@ -28,5 +31,8 @@ export const store = reactive<{
     },
     setProfile: function (profile) {
         this.spotifyProfile = profile;
+    },
+    setAccessToken: function (accessToken) {
+        this.spotifyUserAccessToken = accessToken;
     }
 });

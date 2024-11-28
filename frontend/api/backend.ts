@@ -1,11 +1,15 @@
-import type TrackLyrics from "~/model/tracklyrics";
 import type { SpotifyTopTracks, SpotifyProfile, SpotifyAudioFeatures, SpotifyTrack } from "~/model/spotify";
 import removeTextInBraces from "~/utils/removeTextInBraces";
+import type LineAnalysis from "~/model/line-analysis";
+import type { TrackLyrics } from "~/model/tracklyrics";
+import type Critic from "~/model/critic";
+import type lyricsAnalysisRequest from "~/model/lyrics-analysis-request";
 
 export default class Backend {
+    baseUrl: string = "http://localhost:3000";
     me = async (accessToken: string): Promise<SpotifyProfile> => {
         const profileFetch = await fetch(
-            `http://localhost:3000/me?access_token=${accessToken}`
+            `${this.baseUrl}/me?access_token=${accessToken}`
         );
         const profile = await profileFetch.json();
         return profile as SpotifyProfile;
@@ -13,7 +17,7 @@ export default class Backend {
 
     topTracks = async (accessToken: string): Promise<SpotifyTopTracks> => {
         const topTracksFetch = await fetch(
-            `http://localhost:3000/me/top/tracks?access_token=${accessToken}`
+            `${this.baseUrl}/me/top/tracks?access_token=${accessToken}`
         );
 
         const topTracks = await topTracksFetch.json();
@@ -22,19 +26,37 @@ export default class Backend {
 
     audioFeatures = async (trackId: string): Promise<SpotifyAudioFeatures> => {
         const audioFeaturesFetch = await fetch(
-            `http://localhost:3000/audio-features/?id=${trackId}`
+            `${this.baseUrl}/audio-features/?id=${trackId}`
         );
         const audioFeatures = await audioFeaturesFetch.json();
         return audioFeatures as SpotifyAudioFeatures;
     }
     lyrics = async (track: SpotifyTrack): Promise<TrackLyrics> => {
         const response = await fetch(
-            `http://localhost:3000/lyrics?q=${removeTextInBraces(track.name).trim()} ${track.artists[0].name}`,
+            `${this.baseUrl}/lyrics?q=${removeTextInBraces(track.name).trim()} ${track.artists[0].name}`,
             {
                 method: "GET",
             }
         );
-        const result = await response.json();
-        return result as TrackLyrics;
+        const lyrics = await response.json();
+        return lyrics as TrackLyrics;
+    }
+    analyseLyrics = async (lyrics: TrackLyrics, critic: Critic): Promise<Array<LineAnalysis>> => {
+        const requestBody: lyricsAnalysisRequest = {
+            track: lyrics,
+            critic: critic
+        }
+        const response = await fetch(
+            `${this.baseUrl}/analyzer`,
+            {
+                method: "POST",
+                body: JSON.stringify(requestBody),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        )
+        const analysisResult = await response.json();
+        return analysisResult as Array<LineAnalysis>
     }
 }

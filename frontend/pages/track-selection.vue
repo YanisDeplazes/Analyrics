@@ -15,8 +15,7 @@
         <Swiper :modules="[Navigation, Scrollbar]" :slides-per-view="1" :space-between="10" :loop="true" :navigation="{
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
-        }" :scrollbar="{ draggable: true }" @swiper="onSwiper" @slideChange="onSlideChange"
-          aria-label="Track recommendations carousel">
+        }" :scrollbar="{ draggable: true }" aria-label="Track recommendations carousel">
           <swiper-slide v-for="(track, index) in recommendations.items" :key="track.id">
             <div class="track" :id="'track_' + index">
               <div class="image">
@@ -34,7 +33,7 @@
                 <p>
                   <small>{{
                     commaSeparatedArtists(track.artists)
-                    }}</small>
+                  }}</small>
                 </p>
               </div>
             </div>
@@ -58,7 +57,7 @@
 
 <script setup lang="ts">
 import { Swiper as Swiper, SwiperSlide } from "swiper/vue";
-import { Navigation, Scrollbar } from "swiper/modules"; // Updated import
+import { Navigation, Scrollbar } from "swiper/modules";
 import { store } from "~/stores/store";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -69,13 +68,6 @@ let profile = ref<null | SpotifyProfile>(null);
 let recommendations = ref<SpotifyTopTracks>();
 let error = ref<null | string>(null);
 const backend = new Backend();
-const onSwiper = (swiper: Swiper) => {
-  console.log(swiper);
-};
-
-const onSlideChange = () => {
-  console.log("slide change");
-};
 
 const selectTrack = (track: SpotifyTrack) => {
   store.setSelectedTrack(track);
@@ -83,22 +75,27 @@ const selectTrack = (track: SpotifyTrack) => {
 }
 
 onMounted(async () => {
-  const accessToken = new URLSearchParams(window.location.search).get(
-    "access_token"
-  );
+  if (!store.spotifyUserAccessToken) {
+    const route = useRoute();
+    const accessToken = route.query["access_token"] as string;
 
-  if (!accessToken) {
-    error.value = "Access token not found. Please log in.";
-    return;
-  }
+    if (!accessToken) {
+      error.value = "Access token not found. Please log in.";
+      return;
+    }
 
-  try {
-    store.setProfile(await backend.me(accessToken));
-    recommendations.value = await backend.topTracks(accessToken);
-  } catch (e) {
-    error.value = "Could not load profile data.";
+    store.setAccessToken(accessToken);
   }
+  await loadProfileAndRecommendations();
 });
+
+const loadProfileAndRecommendations = async () => {
+  if (store.spotifyUserAccessToken) {
+    store.setProfile(await backend.me(store.spotifyUserAccessToken));
+    recommendations.value = await backend.topTracks(store.spotifyUserAccessToken);
+
+  }
+}
 
 // Toggle playback
 const togglePlay = (index: number) => {

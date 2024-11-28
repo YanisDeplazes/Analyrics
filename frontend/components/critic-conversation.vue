@@ -10,7 +10,7 @@ const animatedChat = ref('')
 let timeoutId: NodeJS.Timeout | null;
 
 const props = defineProps<{
-    persona: Critic,
+    critic: Critic,
     chat: string
 }>();
 
@@ -45,7 +45,7 @@ watch(
 );
 
 
-const personaImageUrl = computed(() => `/stuwe1/frontend/${props.persona.imageUrl}`)
+const personaImageUrl = computed(() => `/stuwe1/frontend/${props.critic.imageUrl}`)
 </script>
 <style lang="scss" scoped>
 .persona-conversation-container {
