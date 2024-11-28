@@ -25,7 +25,7 @@
           alt="Album Art"
           class="track-image"
         />
-        <div class="track-info">
+        <div class="track-info" @click="selectTrack(track)">
           <span class="track-name">{{ track.name || "Unknown Track" }}</span>
           <span class="track-artist">
             {{ commaSeparatedArtists(track.artists) || "Unknown Artist" }}
@@ -35,69 +35,47 @@
     </ul>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+<script setup lang="ts">
 import debounce from "lodash/debounce";
+import { store } from "~/stores/store";
+import type { SpotifyTrack } from "~/model/spotify";
+import Backend from "~/api/backend";
+const backend = new Backend();
+const emit = defineEmits<{
+  playTrack: [track: SpotifyTrack];
+}>();
+const query = ref<string>("");
+const searchResults = ref<Array<SpotifyTrack>>([]);
 
-export default defineComponent({
-  name: "SearchBar",
-  emits: ["play-track"],
-  setup(_, { emit }) {
-    const query = ref("");
-    const searchResults = ref<
-      {
-        name: string;
-        artists: { name: string }[];
-        uri: string;
-        album: { images: { url: string }[] };
-      }[]
-    >([]);
-
-    // Computed property to filter search results based on query
-    const filteredResults = computed(() => {
-      return searchResults.value;
-    });
-
-    // Debounced search function to limit requests
-    const performSearch = debounce(async (searchQuery: string) => {
-      if (searchQuery.length < 3) {
-        return;
-      }
-
-      try {
-        const response = await fetch(
-          `http://localhost:3000/search?query=${searchQuery}`
-        );
-        if (!response.ok) {
-          console.error(
-            `Server error: ${response.status} ${response.statusText}`
-          );
-          return;
-        }
-        const data = await response.json();
-        searchResults.value = data.tracks.items;
-      } catch (error) {
-        console.error("Fetch error:", error);
-      }
-    }, 300); // Wartezeit von 300ms, um Anfragen zu reduzieren
-
-    const searchSong = () => {
-      if (query.value) {
-        performSearch(query.value);
-      } else {
-        searchResults.value = [];
-      }
-    };
-
-    return {
-      query,
-      searchResults,
-      filteredResults,
-      searchSong,
-    };
-  },
+const filteredResults = computed(() => {
+  return searchResults.value;
 });
+
+// Debounced search function to limit requests
+const performSearch = debounce(async (searchQuery: string) => {
+  if (searchQuery.length < 3) {
+    return;
+  }
+
+  try {
+    searchResults.value = await backend.search(searchQuery);
+  } catch (error) {
+    console.error("Fetch error:", error);
+  }
+}, 300); // Wartezeit von 300ms, um Anfragen zu reduzieren
+
+const searchSong = () => {
+  if (query.value) {
+    performSearch(query.value);
+  } else {
+    searchResults.value = [];
+  }
+};
+
+const selectTrack = (track: SpotifyTrack) => {
+  store.setSelectedTrack(track);
+  navigateTo("critic-selection");
+};
 </script>
 
 <style lang="css" scoped>

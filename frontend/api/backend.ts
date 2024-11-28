@@ -59,4 +59,12 @@ export default class Backend {
         const analysisResult = await response.json();
         return analysisResult as Array<LineAnalysis>
     }
+
+    search = async (query: string): Promise<Array<SpotifyTrack>> => {
+        const response = await fetch(
+            `${this.baseUrl}/search?query=${query}`
+        );
+        const data = await response.json();
+        return data.tracks.items as Array<SpotifyTrack>;
+    }
 }
