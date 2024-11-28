@@ -61,15 +61,15 @@ const handleClick = (e: MouseEvent) => {
 /*sizes*/
 .size-sm {
   padding: var(--spacing-md);
-  border-radius: var(--border-md, 8px);
+  border-radius: var(--border-md);
   position: relative;
   right: 0;
   display: inline-flex;
 }
 
 .size-lg {
-  padding: var(--spacing-lg, 16px);
-  border-radius: var(--border-lg, 16px);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-lg);
 }
 
 /*colors*/
