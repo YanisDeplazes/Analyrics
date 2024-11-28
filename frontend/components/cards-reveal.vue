@@ -1,10 +1,7 @@
 <template>
   <div class="cards">
-    <div
-      v-for="(image, index) in selectedImages"
-      :key="index"
-      :class="['card', { reveal: isRevealing, unreveal: isUnrevealing }]"
-    >
+    <div v-for="(image, index) in selectedImages" :key="index"
+      :class="['card', { reveal: isRevealing, unreveal: isUnrevealing }]">
       <img :src="image" alt="Card image" />
     </div>
   </div>
@@ -159,13 +156,16 @@ onMounted(() => {
       &:nth-child(1) {
         animation: reveal-1 2s forwards;
       }
+
       &:nth-child(2) {
         z-index: 1;
+
         &::after {
           opacity: 0; // Show the overlay during reveal
           animation: hide 1s ease-in-out forwards;
         }
       }
+
       &:nth-child(3) {
         animation: reveal-3 2s forwards;
       }
@@ -195,6 +195,7 @@ onMounted(() => {
       transform: translate(100px, 0px);
       rotate: 0deg;
     }
+
     to {
       transform: translate(0px, 15px);
       rotate: -10deg;
@@ -206,6 +207,7 @@ onMounted(() => {
       transform: translate(-100px, 0px);
       rotate: 0deg;
     }
+
     to {
       transform: translate(0px, 15px);
       rotate: 10deg;
@@ -216,6 +218,7 @@ onMounted(() => {
     0% {
       opacity: 0;
     }
+
     100% {
       opacity: 1;
     }
@@ -225,6 +228,7 @@ onMounted(() => {
     0% {
       opacity: 1;
     }
+
     100% {
       opacity: 0;
     }
@@ -235,6 +239,7 @@ onMounted(() => {
       transform: translate(0px, 15px);
       rotate: -10deg;
     }
+
     to {
       transform: translate(100px, 0px);
       rotate: 0deg;
@@ -246,6 +251,7 @@ onMounted(() => {
       transform: translate(0px, 15px);
       rotate: 10deg;
     }
+
     to {
       transform: translate(-100px, 0px);
       rotate: 0deg;
