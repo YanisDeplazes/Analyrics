@@ -22,8 +22,17 @@
         </div>
       </div>
       <div class="swiper-container">
-        <SwiperWrapper :modules="[Scrollbar]" :slides-per-view="1" :space-between="10" :loop="true"
-          :scrollbar="{ draggable: true }" aria-label="Track recommendations carousel" @swiper="onSwiper">
+        <SwiperWrapper :modules="[Scrollbar, FreeMode]" :slides-per-view="1" :space-between="8" :loop="true"
+          :scrollbar="{ draggable: true }" aria-label="Track recommendations carousel" @swiper="onSwiper" :breakpoints="{
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 8
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 16
+            },
+          }">
           <swiper-slide v-for="(track, index) in recommendations.items" :key="track.id">
             <div class="track" :id="'track_' + index">
               <div class="image">
@@ -63,7 +72,7 @@
 
 <script setup lang="ts">
 import { Swiper as SwiperWrapper, SwiperSlide, useSwiper } from "swiper/vue";
-import { Scrollbar } from "swiper/modules";
+import { Scrollbar, FreeMode } from "swiper/modules";
 import { store } from "~/stores/store";
 import "swiper/css";
 import "swiper/css/scrollbar";

@@ -23,7 +23,6 @@
       slidesPerView: 4,
       spaceBetween: 16
     },
-
   }" :slides-per-view="1" :space-between="8" :scrollbar="{ draggable: true }" @swiper="onSwiper"
     class="swiper-container" :free-mode="true">
     <swiper-slide v-for="(persona, index) in criticsData.critics" :key="index">
