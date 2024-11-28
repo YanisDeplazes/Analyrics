@@ -337,9 +337,8 @@ svg {
 }
 
 .icon-small {
-  width: 0.8rem;
-  height: 0.8rem;
-  min-width: 0.8rem;
+  width: 0.889rem;
+  height: 0.889rem;
 }
 
 .icon-large {

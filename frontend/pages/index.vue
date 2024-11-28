@@ -25,7 +25,6 @@
     </NuxtLink>
   </Section>
   <Section class="critics-section">
-    <h2 class="font-branding">Meet the critics</h2>
     <CrititsOverview />
   </Section>
   <Section class="disclaimer-section">
