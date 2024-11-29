@@ -8,8 +8,8 @@
       }}
       is being made by {{ store.selectedCritic?.name }}
     </p>
-    <p>{{ lyricsFetchStateMessage }}</p>
-    <p v-if="areLyricsFetched">{{ lyricsAnalysedStateMessage }}</p>
+    <Loader :is-loading="!areLyricsFetched" loading-in-progress-message="Fetching lyrics..." loading-finished-message="Lyrics fetched" ></Loader>
+    <Loader v-if="areLyricsFetched" :is-loading="!areLyricsAnalysed" loading-in-progress-message="Analysing lyrics..." loading-finished-message="Lyrics analysed"></Loader>
     <CriticConversation :critic="store.selectedCritic" chat="Okay let's have a look" v-if="store.selectedCritic">
     </CriticConversation>
   </div>
@@ -33,8 +33,6 @@ onMounted(async () => {
     }, 2000)
   }
 });
-const lyricsFetchStateMessage = computed(() => areLyricsFetched.value ? "Lyrics fetched" : "Fetching lyrics")
-const lyricsAnalysedStateMessage = computed(() => areLyricsAnalysed.value ? "Lyrics analysed" : "Analysing lyrics");
 </script>
 <style lang="scss" scoped>
 .progress-container {
