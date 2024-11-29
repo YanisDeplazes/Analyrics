@@ -21,7 +21,7 @@
           </template>
         </Button>
       </NuxtLink>
-      <NuxtLink to="track-selection">
+      <NuxtLink to="/track-selection">
         <Button text="Skip" variant="secondary" fill="outline" size="lg">
         </Button>
       </NuxtLink>
