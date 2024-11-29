@@ -60,8 +60,8 @@ const props = defineProps<{
     .error-message {
         background-color: var(--bg-error);
         color: var(--on-error);
-        padding: var(--spacing-lg);
-        border-radius: var(--spacing-lg);
+        padding: var(--spacing-md);
+        border-radius: var(--spacing-md);
         display: flex;
         flex-direction: row;
         gap: var(--spacing-lg);
