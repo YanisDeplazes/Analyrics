@@ -1,24 +1,24 @@
 <template>
   <div class="song-analysis-container">
     <!-- TODO: add player on top -->
-    <Button
-      @click="changeLine"
-      variant="secondary"
-      icon="right"
-      text="Next"
-      fill="fill"
-      size="lg"
-    >
-      <template v-slot:icon>
-        <Icon type="secondary" size="large" variant="arrow-forward"></Icon>
-      </template>
-    </Button>
+
     <p class="font-branding line">{{ currentLine }}</p>
-    <CriticConversation
-      v-if="store.selectedCritic"
-      :critic="store.selectedCritic"
-      :chat="currentChat"
-    >
+    <CriticConversation v-if="store.selectedCritic" :critic="store.selectedCritic" :chat="currentChat">
+      <template v-slot:navigation>
+        <div class="result-navigation">
+          <Button v-if="lineIndex > 0" @click="changeLine(-1)" variant="primary" icon="left" text="Back" fill="outline"
+            size="sm">
+            <template v-slot:icon>
+              <Icon type="secondary" size="large" variant="arrow-backward"></Icon>
+            </template>
+          </Button>
+          <Button @click="changeLine(1)" variant="primary" icon="right" text="Next" fill="fill" size="sm">
+            <template v-slot:icon>
+              <Icon type="primary" size="large" variant="arrow-forward"></Icon>
+            </template>
+          </Button>
+        </div>
+      </template>
     </CriticConversation>
   </div>
 </template>
@@ -40,16 +40,17 @@ const currentChat = computed(() => {
   return "No chat available";
 });
 
-const changeLine = () => {
+const changeLine = (direction: 1 | -1) => {
   if (!store.currentAnalysis) return;
+  const nextIndex = lineIndex.value + direction;
   if (lineIndex.value < store.currentAnalysis.length) {
-    lineIndex.value = lineIndex.value += 1;
+    lineIndex.value = lineIndex.value += direction;
   } else {
     navigateTo("analysis-end");
   }
 };
 
-onMounted(() => {});
+onMounted(() => { });
 </script>
 <style lang="scss" scoped>
 .song-analysis-container {
@@ -63,5 +64,11 @@ onMounted(() => {});
 .line {
   color: var(--bg-secondary);
   font-size: 2.027rem;
+}
+
+.result-navigation {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-lg);
 }
 </style>
