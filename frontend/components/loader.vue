@@ -33,16 +33,16 @@ const props = defineProps<{
     gap: var(--spacing-lg);
     flex-direction: column;
     align-items: start;
+    background-color: var(--bg-secondary);
+    color: var(--on-secondary);
+    border-radius: var(--border-lg);
+    padding: var(--spacing-lg);
 
     .loader {
         display: inline-flex;
-        padding: var(--spacing-lg);
         justify-content: center;
         flex-direction: row;
-        background-color: var(--bg-secondary);
-        color: var(--on-secondary);
         gap: var(--spacing-lg);
-        border-radius: var(--border-lg);
 
         .loader-icon {
             max-height: 24px;
@@ -64,7 +64,7 @@ const props = defineProps<{
         border-radius: var(--spacing-md);
         display: flex;
         flex-direction: row;
-        gap: var(--spacing-lg);
+        gap: var(--spacing-md);
     }
 }
 
