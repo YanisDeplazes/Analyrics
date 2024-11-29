@@ -9,45 +9,84 @@
       <div class="top-tracks-title">
         <h2>Your Top Tracks</h2>
         <div class="swiper-buttons">
-          <Button icon-only variant="secondary" fill="fill" size="sm" @click="swiper!.slidePrev()">
+          <Button
+            icon-only
+            variant="secondary"
+            fill="fill"
+            size="sm"
+            @click="swiper!.slidePrev()"
+          >
             <template v-slot:icon>
-              <Icon size="small" variant="keyboard-arrow-left" type="secondary"></Icon>
+              <Icon
+                size="small"
+                variant="keyboard-arrow-left"
+                type="secondary"
+              ></Icon>
             </template>
           </Button>
-          <Button icon-only variant="secondary" fill="fill" size="sm" @click="swiper!.slideNext()">
+          <Button
+            icon-only
+            variant="secondary"
+            fill="fill"
+            size="sm"
+            @click="swiper!.slideNext()"
+          >
             <template v-slot:icon>
-              <Icon size="small" variant="keyboard-arrow-right" type="secondary"></Icon>
+              <Icon
+                size="small"
+                variant="keyboard-arrow-right"
+                type="secondary"
+              ></Icon>
             </template>
           </Button>
         </div>
       </div>
       <div class="swiper-container">
-        <SwiperWrapper :modules="[Scrollbar, FreeMode]" :slides-per-view="1.1" :space-between="8" :loop="true"
-          :scrollbar="{ draggable: true }" aria-label="Track recommendations carousel" @swiper="onSwiper" :breakpoints="{
+        <SwiperWrapper
+          :modules="[Scrollbar, FreeMode]"
+          :slides-per-view="1.1"
+          :space-between="8"
+          :loop="true"
+          :scrollbar="{ draggable: true }"
+          aria-label="Track recommendations carousel"
+          @swiper="onSwiper"
+          :breakpoints="{
             480: {
               slidesPerView: 2.1,
-              spaceBetween: 8
+              spaceBetween: 8,
             },
             768: {
-              slidesPerView: 4.1,
-              spaceBetween: 16
+              slidesPerView: 3.1,
+              spaceBetween: 16,
             },
-          }">
-          <swiper-slide v-for="(track, index) in recommendations.items" :key="track.id">
+            1080: {
+              slidesPerView: 4.1,
+              spaceBetween: 16,
+            },
+          }"
+        >
+          <swiper-slide
+            v-for="(track, index) in recommendations.items"
+            :key="track.id"
+          >
             <div class="track" :id="'track_' + index">
-              <div class="image">
+              <div class="track-image">
                 <div class="icon"></div>
                 <div class="track_preview_controls" @click="togglePlay(index)">
                   <audio :src="track.preview_url"></audio>
                 </div>
-                <img :src="track.album.images[1].url || '/default-cover.jpg'" alt="Album cover" class="cover"
-                  aria-label="Album cover" />
+                <img
+                  :src="track.album.images[1].url || '/default-cover.jpg'"
+                  alt="Album cover"
+                  class="cover"
+                  aria-label="Album cover"
+                />
               </div>
               <div class="track-info" @click="selectTrack(track)">
-                <p>
+                <p class="track-title">
                   <strong>{{ track.name }}</strong>
                 </p>
-                <p>
+                <p class="track-artists">
                   <small>{{ commaSeparatedArtists(track.artists) }}</small>
                 </p>
               </div>
@@ -61,9 +100,26 @@
     </p>
     <SearchComponent />
     <template v-if="!(recommendations && recommendations.items.length)">
-      <svg xmlns="http://www.w3.org/2000/svg" width="345" height="4" viewBox="0 0 357 4" fill="none">
-        <path d="M2 2H355" stroke="#392467" stroke-width="4" stroke-linecap="round" />
-        <path d="M2 2H355" stroke="white" stroke-opacity="0.2" stroke-width="4" stroke-linecap="round" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="345"
+        height="4"
+        viewBox="0 0 357 4"
+        fill="none"
+      >
+        <path
+          d="M2 2H355"
+          stroke="#392467"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
+        <path
+          d="M2 2H355"
+          stroke="white"
+          stroke-opacity="0.2"
+          stroke-width="4"
+          stroke-linecap="round"
+        />
       </svg>
       <p>Alternatively, you can search for any song you'd like:</p>
     </template>
@@ -77,10 +133,7 @@ import { store } from "~/stores/store";
 import "swiper/css";
 import "swiper/css/scrollbar";
 import Backend from "~/api/backend";
-import type {
-  SpotifyTopTracks,
-  SpotifyTrack,
-} from "~/model/spotify";
+import type { SpotifyTopTracks, SpotifyTrack } from "~/model/spotify";
 import Swiper from "swiper";
 const recommendations = ref<SpotifyTopTracks>();
 const error = ref<null | string>(null);
@@ -93,7 +146,7 @@ const selectTrack = (track: SpotifyTrack) => {
 
 const onSwiper = (swiperInstance: Swiper) => {
   swiper.value = swiperInstance;
-}
+};
 
 onMounted(async () => {
   if (!store.spotifyUserAccessToken) {
@@ -161,9 +214,7 @@ const togglePlay = (index: number) => {
   color: var(--on-secondary);
   /* Optional styling */
   border-radius: var(--border-lg);
-  /* Optional styling */
   height: auto;
-  /* Ensure height adjusts dynamically */
   max-width: 100%;
 
   .track {
@@ -176,7 +227,7 @@ const togglePlay = (index: number) => {
     gap: var(--spacing-lg);
 
     &.playing {
-      .image {
+      .track-image {
         .icon {
           background-image: url("../public/icons/pause_white.svg");
         }
@@ -188,14 +239,27 @@ const togglePlay = (index: number) => {
       }
     }
 
-    .image,
-    .track-info {
+    &-info {
       flex: 1;
     }
 
-    .image {
-      position: relative;
+    &-title {
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+    }
+    &-artists {
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
+    }
 
+    .track-image {
+      position: relative;
+      width: 70px;
+      height: 70px;
       .cover {
         width: 100%;
         height: 100%;
@@ -219,9 +283,11 @@ const togglePlay = (index: number) => {
 
       .track_preview_controls {
         position: absolute;
-        background: linear-gradient(rgba(0, 0, 0, 0.502),
-            rgba(0, 0, 0, 0),
-            rgba(0, 0, 0, 0));
+        background: linear-gradient(
+          rgba(0, 0, 0, 0.502),
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0)
+        );
         opacity: 0;
         top: 0;
         left: 0;
