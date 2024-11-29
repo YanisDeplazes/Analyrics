@@ -58,7 +58,6 @@ import "swiper/css/scrollbar";
 import criticsData from "assets/data/critics.json";
 import Swiper from "swiper";
 const swiper = ref<Swiper | null>(null);
-const slidesPerView = ref(1);
 const onSwiper = (swiperInstance: Swiper) => {
   swiper.value = swiperInstance;
 }

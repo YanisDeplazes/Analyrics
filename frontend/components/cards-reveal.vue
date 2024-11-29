@@ -109,7 +109,8 @@ onMounted(() => {
     width: calc(100% / 3);
     max-height: inherit;
     border-radius: var(--border-md);
-    border: #fff689 5px solid;
+    background-color: var(--bg-secondary);
+    border: 4px var(--bg-secondary) solid;
     position: relative;
     aspect-ratio: 9 / 16;
 
@@ -120,6 +121,7 @@ onMounted(() => {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: var(--border-md);
     }
 
     &:nth-child(1) {
