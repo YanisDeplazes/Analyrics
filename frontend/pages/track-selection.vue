@@ -269,8 +269,8 @@ const togglePlay = (index: number) => {
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 40px;
-        height: 40px;
+        width: 50%;
+        height: 50%;
         max-width: 40px;
         -o-object-fit: cover;
         object-fit: cover;
