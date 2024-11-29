@@ -17,6 +17,8 @@
     "vue-router": "latest"
   },
   "devDependencies": {
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "mocha-junit-reporter": "^2.2.1",
     "sass": "^1.80.5",
     "sass-embedded": "^1.80.7"
   }
