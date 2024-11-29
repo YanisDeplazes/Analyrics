@@ -24,14 +24,14 @@
   <Section class="disclaimer-section">
     <h2>Disclaimer</h2>
     <p>
-      This app uses a Large Language Model by Google called Gemini to analyze
-      song lyrics. The lyrics we use are provided by Genius.com, where most
-      lyrics are user-submitted, so accuracy is not 100% guaranteed. Please note
-      that the analysis provided is for informational purposes only. We do not
-      take responsibility for the accuracy or completeness of the lyrics or
-      analysis, and it may not fully reflect the true meaning or intention of
-      the lyrics. For any important interpretations, always refer to the
-      original source or consult the lyricist.
+      The application uses a Large Language Model by Google called Gemini to analyse
+      song lyrics. The lyrics are provided by Genius.com, where most
+      lyrics are user-submitted; therefore, complete accuracy cannot be guaranteed. Please note
+      that the analyses provided are for informational purposes only. We disclaim any
+      responsibility for the accuracy or completeness of the lyrics or
+      their interpretations. The analysis may not fully capture the intended meaning or context
+      of the lyrics. For critical interpretations and insights, we recommend consulting the
+      original source or a lyricist directly.
     </p>
   </Section>
 </template>
