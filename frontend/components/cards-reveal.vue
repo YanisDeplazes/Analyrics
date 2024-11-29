@@ -1,7 +1,10 @@
 <template>
   <div class="cards">
-    <div v-for="(image, index) in selectedImages" :key="index"
-      :class="['card', { reveal: isRevealing, unreveal: isUnrevealing }]">
+    <div
+      v-for="(image, index) in selectedImages"
+      :key="index"
+      :class="['card', { reveal: isRevealing, unreveal: isUnrevealing }]"
+    >
       <img :src="image" alt="Card image" />
     </div>
   </div>
@@ -104,6 +107,8 @@ onMounted(() => {
   width: 100%;
   max-height: inherit;
   display: flex;
+  max-width: 580px;
+  margin: auto;
 
   .card {
     width: calc(100% / 3);
@@ -128,7 +133,7 @@ onMounted(() => {
     }
 
     &:nth-child(2) {
-      scale: 1.3;
+      scale: 1.15;
       z-index: 1;
 
       // Add top overlay effect
