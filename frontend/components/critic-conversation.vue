@@ -68,8 +68,8 @@ const personaImageUrl = computed(() => `/stuwe1/frontend/${props.critic.imageUrl
     }
 
     img {
-        max-height: 8rem;
-        max-width: 8rem;
+        max-height: calc(8rem + 10vw);
+        max-width: calc(8rem + 10vw);
         align-self: flex-end;
     }
 }

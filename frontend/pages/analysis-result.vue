@@ -1,8 +1,8 @@
 <template>
   <div class="song-analysis-container">
-    <!-- TODO: add player on top -->
-
-    <p class="font-branding line">{{ currentLine }}</p>
+    <div class="line-container">
+      <p class="font-branding line">{{ currentLine }}</p>
+    </div>
     <CriticConversation v-if="store.selectedCritic" :critic="store.selectedCritic" :chat="currentChat">
       <template v-slot:navigation>
         <div class="result-navigation">
@@ -52,19 +52,29 @@ const changeLine = (direction: 1 | -1) => {
 
 onMounted(() => { });
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
+
 .song-analysis-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
   gap: 1rem;
+
+  .line-container {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+
+    .line {
+      color: var(--bg-secondary);
+      font-size: calc(2.027rem + 2vw);
+    }
+  }
 }
 
-.line {
-  color: var(--bg-secondary);
-  font-size: 2.027rem;
-}
+
 
 .result-navigation {
   display: flex;
