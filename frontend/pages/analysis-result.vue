@@ -1,4 +1,5 @@
 <template>
+  <HomeButton />
   <div class="song-analysis-container">
     <div class="line-container">
       <p class="font-branding line">{{ currentLine }}</p>
