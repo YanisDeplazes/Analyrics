@@ -1,5 +1,6 @@
 <template>
   <Section class="critic-selection-section">
+    <h1>Select a critic</h1>
     <SwiperWrapper :slides-per-view="1.1" :space-between="8" :modules="[Scrollbar, FreeMode]" :loop="true"
       :scrollbar="{ draggable: true }" :breakpoints="{
         480: {
