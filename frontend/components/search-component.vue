@@ -161,7 +161,7 @@ const selectTrack = (track: SpotifyTrack) => {
 }
 
 .track-artist {
-  color: $n-secondary;
+  color: $on-secondary;
   font-family: "Gothic A1";
   font-size: 14.22px;
   font-style: normal;
