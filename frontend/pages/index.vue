@@ -43,6 +43,10 @@
   margin: var(--spacing-2xl) var(--spacing-lg);
 }
 
+.branding-section{
+  align-items: center;
+}
+
 .text-center {
   text-align: center;
 }

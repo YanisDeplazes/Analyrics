@@ -41,7 +41,6 @@ const handleClick = (e: MouseEvent) => {
 </script>
 <style lang="css" scoped>
 .button {
-  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;

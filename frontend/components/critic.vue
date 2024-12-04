@@ -33,7 +33,6 @@ const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
   flex-direction: column;
   background-color: var(--bg-secondary);
   border-radius: var(--border-lg);
-  height: unset;
 
   .image {
     position: relative;
