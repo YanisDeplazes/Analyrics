@@ -97,7 +97,7 @@ onMounted(() => {});
     justify-content: center;
 
     .line {
-      color: var(--bg-secondary);
+      color: $bg-secondary;
       font-size: calc(2.027rem + 2vw);
     }
   }
@@ -106,6 +106,6 @@ onMounted(() => {});
 .result-navigation {
   display: flex;
   flex-direction: row;
-  gap: var(--spacing-lg);
+  gap: $spacing-lg;
 }
 </style>

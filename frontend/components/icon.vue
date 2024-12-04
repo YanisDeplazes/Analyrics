@@ -331,7 +331,7 @@ const props = defineProps<{
     | "home";
 }>();
 </script>
-<style lang="css" scoped>
+<style lang="scss" scoped>
 i {
   display: inline-block;
 }
@@ -350,15 +350,15 @@ svg {
 }
 
 .icon-primary svg {
-  fill: var(--on-primary);
+  fill: $on-primary;
 }
 
 .icon-secondary svg {
-  fill: var(--on-secondary);
+  fill: $on-secondary;
 }
 
 .icon-error svg {
-  fill: var(--on-error);
+  fill: $on-error;
 }
 
 .icon-small {
@@ -367,13 +367,13 @@ svg {
 }
 
 .icon-large {
-  margin: var(--spacing-sm);
+  margin: $spacing-sm;
   width: 1rem;
   height: 1rem;
 }
 
 .icon-xl {
-  margin: var(--spacing-md);
+  margin: $spacing-md;
   width: 2rem;
   height: 2rem;
 }

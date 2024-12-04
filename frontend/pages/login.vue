@@ -41,7 +41,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .buttons {
   display: flex;
-  gap: var(--spacing-lg);
+  gap: $spacing-lg;
 
   a {
     width: 100%;
@@ -58,6 +58,6 @@ onMounted(() => {
   display: flex;
   flex: 1;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 }
 </style>

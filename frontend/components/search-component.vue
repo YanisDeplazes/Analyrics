@@ -78,7 +78,7 @@ const selectTrack = (track: SpotifyTrack) => {
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .searchbar-wrapper {
   display: flex;
   flex-direction: column;
@@ -86,15 +86,15 @@ const selectTrack = (track: SpotifyTrack) => {
 }
 
 .searchbar {
-  border-radius: var(--border-md, 8px);
-  background: var(--bg-secondary);
-  padding: var(--spacing-md, 8px);
+  border-radius: $border-md;
+  background: $bg-secondary;
+  padding: $spacing-md;
   display: flex;
   align-items: center;
 }
 
 .input {
-  color: var(--on-secondary, #392467);
+  color: $on-secondary;
   background: transparent;
   border: none;
   outline: none;
@@ -114,8 +114,8 @@ const selectTrack = (track: SpotifyTrack) => {
   list-style: none;
   padding: 0;
   margin-top: 8px;
-  border-radius: var(--border-md, 8px);
-  background: var(--bg-secondary);
+  border-radius: $border-md;
+  background: $bg-secondary;
   overflow-y: auto;
   max-height: 300px;
 }
@@ -129,13 +129,13 @@ const selectTrack = (track: SpotifyTrack) => {
 }
 
 .result-item:hover {
-  border-radius: var(--border-md, 8px);
+  border-radius: $border-md;
   background: linear-gradient(
       0deg,
       rgba(0, 0, 0, 0.2) 0%,
       rgba(0, 0, 0, 0.2) 100%
     ),
-    var(--bg-secondary, #fff689);
+    $bg-secondary;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -152,7 +152,7 @@ const selectTrack = (track: SpotifyTrack) => {
 }
 
 .track-name {
-  color: var(--on-secondary, #392467);
+  color: $on-secondary;
   font-family: "Gothic A1";
   font-size: 16px;
   font-style: normal;
@@ -161,7 +161,7 @@ const selectTrack = (track: SpotifyTrack) => {
 }
 
 .track-artist {
-  color: var(--on-secondary, #392467);
+  color: $on-secondary;
   font-family: "Gothic A1";
   font-size: 14.22px;
   font-style: normal;
