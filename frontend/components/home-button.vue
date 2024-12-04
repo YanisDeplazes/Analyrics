@@ -32,7 +32,7 @@
           variant="secondary"
           fill="fill"
           size="sm"
-          text="Change critics"
+          text="Change critic"
         >
           <template v-slot:icon>
             <Icon size="xl" variant="user" type="secondary"></Icon>
