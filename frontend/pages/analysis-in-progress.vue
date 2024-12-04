@@ -8,7 +8,7 @@
         loading-in-progress-message="Analysing lyrics..." loading-finished-message="Lyrics analysed"
         :has-error="hasLyricsAnalysisError" :error-message="lyricsAnalysisError"></Loader>
     </div>
-    <CriticConversation :critic="store.selectedCritic" chat="Okay let's have a look" v-if="store.selectedCritic">
+    <CriticConversation :critic="store.selectedCritic" :chat="chat" v-if="store.selectedCritic">
     </CriticConversation>
   </div>
 </template>
@@ -24,10 +24,12 @@ const lyricsFetchingError = ref<string>("");
 const areLyricsAnalysed = ref<boolean>(false);
 const hasLyricsAnalysisError = ref<boolean>(false);
 const lyricsAnalysisError = ref<string>("");
+const chat = ref("");
 onMounted(async () => {
   redirectIfNoSelectionMade();
   if (store.selectedTrack && store.selectedCritic) {
     try {
+      chat.value = store.selectedCritic.messages.fetchingLyrics;
       trackLyrics.value = await backend.lyrics(store.selectedTrack);
       areLyricsFetched.value = true;
     }
@@ -37,6 +39,7 @@ onMounted(async () => {
       return;
     }
     try {
+      chat.value = store.selectedCritic.messages.analysingLyrics;
       // store.setLineAnalysis(await backend.analyseLyrics(trackLyrics.value, store.selectedCritic));
       // areLyricsAnalysed.value = true;
       // setTimeout(() => {
