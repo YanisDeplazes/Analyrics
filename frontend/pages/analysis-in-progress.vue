@@ -1,20 +1,14 @@
 <template>
   <div class="progress-container">
-    <p>
-      Analysis of {{ store.selectedTrack?.name }} by
-      {{
-        store.selectedTrack?.artists &&
-        commaSeparatedArtists(store.selectedTrack?.artists)
-      }}
-      is being made by {{ store.selectedCritic?.name }}
-    </p>
-    <Loader :is-loading="!areLyricsFetched" loading-in-progress-message="Fetching lyrics..."
-      loading-finished-message="Lyrics fetched" :has-error="hasLyricsFetchingError"
-      :error-message="lyricsFetchingError"></Loader>
-    <Loader v-if="areLyricsFetched && !hasLyricsFetchingError" :is-loading="!areLyricsAnalysed"
-      loading-in-progress-message="Analysing lyrics..." loading-finished-message="Lyrics analysed"
-      :has-error="hasLyricsAnalysisError" :error-message="lyricsAnalysisError"></Loader>
-    <CriticConversation :critic="store.selectedCritic" chat="Okay let's have a look" v-if="store.selectedCritic">
+    <div class="loaders">
+      <Loader :is-loading="!areLyricsFetched" loading-in-progress-message="Fetching lyrics..."
+        loading-finished-message="Lyrics fetched" :has-error="hasLyricsFetchingError"
+        :error-message="lyricsFetchingError"></Loader>
+      <Loader v-if="areLyricsFetched && !hasLyricsFetchingError" :is-loading="!areLyricsAnalysed"
+        loading-in-progress-message="Analysing lyrics..." loading-finished-message="Lyrics analysed"
+        :has-error="hasLyricsAnalysisError" :error-message="lyricsAnalysisError"></Loader>
+    </div>
+    <CriticConversation :critic="store.selectedCritic" :chat="chat" v-if="store.selectedCritic">
     </CriticConversation>
   </div>
 </template>
@@ -30,11 +24,15 @@ const lyricsFetchingError = ref<string>("");
 const areLyricsAnalysed = ref<boolean>(false);
 const hasLyricsAnalysisError = ref<boolean>(false);
 const lyricsAnalysisError = ref<string>("");
+const chat = ref("");
 onMounted(async () => {
+  redirectIfNoSelectionMade();
   if (store.selectedTrack && store.selectedCritic) {
     try {
+      chat.value = store.selectedCritic.messages.fetchingLyrics;
       trackLyrics.value = await backend.lyrics(store.selectedTrack);
       areLyricsFetched.value = true;
+      // TODO: wait until text has been typed
     }
     catch (error) {
       hasLyricsFetchingError.value = true;
@@ -42,8 +40,10 @@ onMounted(async () => {
       return;
     }
     try {
+      chat.value = store.selectedCritic.messages.analysingLyrics;
       store.setLineAnalysis(await backend.analyseLyrics(trackLyrics.value, store.selectedCritic));
       areLyricsAnalysed.value = true;
+      // TODO: wait until text has been typed
       setTimeout(() => {
         navigateTo("analysis-result");
       }, 2000)
@@ -61,5 +61,14 @@ onMounted(async () => {
   flex-direction: column;
   flex: 1;
   justify-content: space-between;
+
+  .loaders {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-lg;
+  }
 }
 </style>

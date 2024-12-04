@@ -9,7 +9,16 @@ export default defineNuxtConfig({
     port: 8888
   },
   css: [
-    "~/assets/scss/style.scss"
+    "~/assets/scss/style.scss",
   ],
-  devtools: { enabled: true }
+  devtools: { enabled: true },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "~/assets/scss/abstracts/_variables.scss" as *;@use "~/assets/scss/abstracts/_mixins.scss" as *;'
+        }
+      }
+    }
+  }
 })

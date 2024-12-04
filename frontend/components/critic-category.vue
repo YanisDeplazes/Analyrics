@@ -47,18 +47,18 @@ const categoryDescription = computed(() => {
 </script>
 <style lang="scss" scoped>
 .category {
-    background-color: var(--bg-primary);
-    color: var(--on-primary);
+    background-color: $bg-primary;
+    color: $on-primary;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
+    gap: $spacing-md;
 
-    border-radius: var(--border-md);
-    padding: var(--spacing-md);
+    border-radius: $border-md;
+    padding: $spacing-md;
 
     .icon {
         display: flex;
-        gap: var(--spacing-md);
+        gap: $spacing-md;
     }
 }
 </style>
