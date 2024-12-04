@@ -20,7 +20,7 @@ const props = defineProps<{
 const typeWriterEffect = (text: string) => {
     animatedChat.value = '';
     let index = 0;
-    const typingSpeedInMilliseconds = 30;
+    const typingSpeedInMilliseconds = 15;
 
     function typeNextCharacter() {
         if (index < text.length) {
