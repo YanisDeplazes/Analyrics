@@ -119,6 +119,20 @@ onMounted(() => {
     position: relative;
     aspect-ratio: 9 / 16;
 
+    &::after {
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      height: calc(100% + 10px);
+      width: calc(100% + 10px);
+      content: "";
+      display: block;
+      background-color: rgba(255, 246, 137, 1); // Semi-transparent highlight
+      border-radius: var(--border-md);
+      z-index: 2;
+      opacity: 0; // Initially hidden
+    }
+
     img {
       position: absolute;
       top: 0;
@@ -137,21 +151,6 @@ onMounted(() => {
     &:nth-child(2) {
       scale: 1.15;
       z-index: 1;
-
-      // Add top overlay effect
-      &::after {
-        position: absolute;
-        top: -5px;
-        left: -5px;
-        height: calc(100% + 10px);
-        width: calc(100% + 10px);
-        content: "";
-        display: block;
-        background-color: rgba(255, 246, 137, 1); // Semi-transparent highlight
-        border-radius: var(--border-md);
-        z-index: 2;
-        opacity: 0; // Initially hidden
-      }
     }
 
     &:nth-child(3) {
@@ -160,17 +159,17 @@ onMounted(() => {
     }
 
     &.reveal {
+      &::after {
+        opacity: 0; // Show the overlay during reveal
+        animation: hide 1s ease-in-out forwards;
+      }
+
       &:nth-child(1) {
         animation: reveal-1 2s forwards;
       }
 
       &:nth-child(2) {
         z-index: 1;
-
-        &::after {
-          opacity: 0; // Show the overlay during reveal
-          animation: hide 1s ease-in-out forwards;
-        }
       }
 
       &:nth-child(3) {
@@ -181,6 +180,10 @@ onMounted(() => {
     &.unreveal {
       &:nth-child(1) {
         animation: unreveal-1 2s forwards;
+        &::after {
+          animation: show 1s ease-in-out forwards;
+          animation-delay: 1s;
+        }
       }
 
       &:nth-child(2) {
@@ -192,6 +195,10 @@ onMounted(() => {
 
       &:nth-child(3) {
         animation: unreveal-3 2s forwards;
+        &::after {
+          animation: show 1s ease-in-out forwards;
+          animation-delay: 1s;
+        }
       }
     }
   }
