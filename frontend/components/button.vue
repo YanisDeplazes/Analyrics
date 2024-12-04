@@ -1,18 +1,14 @@
 <template>
-  <button
-    @click="handleClick"
-    class="button"
-    :class="[
-      {
-        'primary-fill': fill == 'fill' && variant == 'primary',
-        'secondary-fill': fill == 'fill' && variant == 'secondary',
-        'primary-outline': fill == 'outline' && variant == 'primary',
-        'secondary-outline': fill == 'outline' && variant == 'secondary',
-      },
-      `size-${size}`,
-      { 'icon-only': iconOnly },
-    ]"
-  >
+  <button @click="handleClick" class="button" :class="[
+    {
+      'primary-fill': fill == 'fill' && variant == 'primary',
+      'secondary-fill': fill == 'fill' && variant == 'secondary',
+      'primary-outline': fill == 'outline' && variant == 'primary',
+      'secondary-outline': fill == 'outline' && variant == 'secondary',
+    },
+    `size-${size}`,
+    { 'icon-only': iconOnly },
+  ]">
     <template v-if="!iconOnly">
       <slot name="icon" v-if="icon == 'left'" />
       {{ text }}
@@ -39,7 +35,7 @@ const handleClick = (e: MouseEvent) => {
   emit("click", e);
 };
 </script>
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .button {
   display: flex;
   align-items: center;
@@ -59,38 +55,38 @@ const handleClick = (e: MouseEvent) => {
 
 /*sizes*/
 .size-sm {
-  padding: var(--spacing-md);
-  border-radius: var(--border-md);
+  padding: $spacing-md;
+  border-radius: $border-md;
   position: relative;
   right: 0;
   display: inline-flex;
 }
 
 .size-lg {
-  padding: var(--spacing-lg);
-  border-radius: var(--border-lg);
+  padding: $spacing-lg;
+  border-radius: $border-lg;
 }
 
 /*colors*/
 .primary-fill {
-  background-color: var(--bg-primary);
-  color: var(--on-primary);
+  background-color: $bg-primary;
+  color: $on-primary;
 }
 
 .secondary-fill {
-  background-color: var(--bg-secondary);
-  color: var(--on-secondary);
+  background-color: $bg-secondary;
+  color: $on-secondary;
 }
 
 .primary-outline {
   background-color: transparent;
-  color: var(--bg-primary);
-  border: 1px solid var(--bg-primary);
+  color: $bg-primary;
+  border: 1px solid $bg-primary;
 }
 
 .secondary-outline {
   background-color: transparent;
-  color: var(--bg-secondary);
-  border: 1px solid var(--bg-secondary);
+  color: $bg-secondary;
+  border: 1px solid $bg-secondary;
 }
 </style>
