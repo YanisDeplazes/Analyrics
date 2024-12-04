@@ -29,6 +29,7 @@ import { store } from '~/stores/store';
         display: flex;
         flex-direction: row;
         gap: $spacing-md;
+        justify-content: center;
 
         img {
             width: 2.5rem;
