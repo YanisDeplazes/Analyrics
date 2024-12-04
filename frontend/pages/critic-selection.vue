@@ -1,13 +1,5 @@
 <template>
   <Section class="critic-selection-section">
-    <p>
-      Nice selection {{ store.spotifyProfile?.display_name ?? "" }}! Which
-      critic should analyse “{{ store.selectedTrack?.name }}” by
-      {{
-        store.selectedTrack &&
-        commaSeparatedArtists(store.selectedTrack?.artists)
-      }}?
-    </p>
     <SwiperWrapper :slides-per-view="1.1" :space-between="8" :modules="[Scrollbar, FreeMode]" :loop="true"
       :scrollbar="{ draggable: true }" :breakpoints="{
         480: {
@@ -33,6 +25,7 @@
         </Critic>
       </swiper-slide>
     </SwiperWrapper>
+    <TrackCard></TrackCard>
   </Section>
 </template>
 <script setup lang="ts">
@@ -56,6 +49,7 @@ const setCritic = (critic: Critic) => {
 .critic-selection-section {
   display: flex;
   flex: 1;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
 }
 </style>
