@@ -1,7 +1,7 @@
 <template>
     <div class="persona-conversation-container">
         <div class="chat-bubble">
-            <p>{{ animatedChat }}</p>
+            <p class="chat">{{ animatedChat }}</p>
             <slot name="navigation"></slot>
         </div>
         <img :src="personaImageUrl" alt="Persona image" />
@@ -54,17 +54,20 @@ const personaImageUrl = computed(() => `/stuwe1/frontend/${props.critic.imageUrl
 .persona-conversation-container {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-lg);
+    gap: $spacing-lg;
 
     .chat-bubble {
-        background-color: var(--bg-secondary);
-        color: var(--on-secondary);
-        padding: var(--spacing-lg);
-        border-radius: var(--border-lg);
+        background-color: $bg-secondary;
+        color: $on-secondary;
+        padding: $spacing-lg;
+        border-radius: $border-lg;
         display: flex;
         flex-direction: column;
-        gap: var(--spacing-lg);
+        gap: $spacing-lg;
         align-items: flex-end;
+        .chat{
+            width: 100%;
+        }
     }
 
     img {
