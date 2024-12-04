@@ -30,19 +30,19 @@ const props = defineProps<{
 <style lang="scss" scoped>
 .loader-container {
     display: flex;
-    gap: var(--spacing-lg);
+    gap: $spacing-lg;
     flex-direction: column;
     align-items: start;
-    background-color: var(--bg-secondary);
-    color: var(--on-secondary);
-    border-radius: var(--border-lg);
-    padding: var(--spacing-lg);
+    background-color: $bg-secondary;
+    color: $on-secondary;
+    border-radius: $border-lg;
+    padding: $spacing-lg;
 
     .loader {
         display: inline-flex;
         justify-content: center;
         flex-direction: row;
-        gap: var(--spacing-lg);
+        gap: $spacing-lg;
 
         .loader-icon {
             max-height: 24px;
@@ -58,13 +58,13 @@ const props = defineProps<{
     }
 
     .error-message {
-        background-color: var(--bg-error);
-        color: var(--on-error);
-        padding: var(--spacing-md);
-        border-radius: var(--spacing-md);
+        background-color: $bg-error;
+        color: $on-error;
+        padding: $spacing-md;
+        border-radius: $spacing-md;
         display: flex;
         flex-direction: row;
-        gap: var(--spacing-md);
+        gap: $spacing-md;
     }
 }
 

@@ -32,6 +32,7 @@ onMounted(async () => {
       chat.value = store.selectedCritic.messages.fetchingLyrics;
       trackLyrics.value = await backend.lyrics(store.selectedTrack);
       areLyricsFetched.value = true;
+      // TODO: wait until text has been typed
     }
     catch (error) {
       hasLyricsFetchingError.value = true;
@@ -40,11 +41,12 @@ onMounted(async () => {
     }
     try {
       chat.value = store.selectedCritic.messages.analysingLyrics;
-      // store.setLineAnalysis(await backend.analyseLyrics(trackLyrics.value, store.selectedCritic));
-      // areLyricsAnalysed.value = true;
-      // setTimeout(() => {
-      //   // navigateTo("analysis-result");
-      // }, 2000)
+      store.setLineAnalysis(await backend.analyseLyrics(trackLyrics.value, store.selectedCritic));
+      areLyricsAnalysed.value = true;
+      // TODO: wait until text has been typed
+      setTimeout(() => {
+        navigateTo("analysis-result");
+      }, 2000)
     }
     catch (error) {
       hasLyricsAnalysisError.value = true;

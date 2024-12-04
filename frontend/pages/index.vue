@@ -40,7 +40,7 @@
 .critics-section,
 .branding-section,
 .disclaimer-section {
-  margin: var(--spacing-2xl) var(--spacing-lg);
+  margin: $spacing-2xl $--spacing-lg;
 }
 
 .branding-section{

@@ -113,9 +113,9 @@ onMounted(() => {
   .card {
     width: calc(100% / 3);
     max-height: inherit;
-    border-radius: var(--border-md);
-    background-color: var(--bg-secondary);
-    border: 4px var(--bg-secondary) solid;
+    border-radius: $border-md;
+    background-color: $bg-secondary;
+    border: 4px bg-secondary solid;
     position: relative;
     aspect-ratio: 9 / 16;
 
@@ -128,7 +128,7 @@ onMounted(() => {
       content: "";
       display: block;
       background-color: rgba(255, 246, 137, 1); // Semi-transparent highlight
-      border-radius: var(--border-md);
+      border-radius: $border-md;
       z-index: 2;
       opacity: 0; // Initially hidden
     }
@@ -140,7 +140,7 @@ onMounted(() => {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: var(--border-md);
+      border-radius: $border-md;
     }
 
     &:nth-child(1) {

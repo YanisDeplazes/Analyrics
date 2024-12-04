@@ -26,13 +26,13 @@ const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
 </script>
 <style lang="scss" scoped>
 .critic {
-  padding: var(--spacing-lg);
-  color: var(--on-secondary);
+  padding: $spacing-lg;
+  color: $on-secondary;
   display: flex;
-  gap: var(--spacing-lg);
+  gap: spacing-lg;
   flex-direction: column;
-  background-color: var(--bg-secondary);
-  border-radius: var(--border-lg);
+  background-color: $bg-secondary;
+  border-radius: $border-lg;
 
   .image {
     position: relative;
@@ -42,16 +42,16 @@ const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
       height: auto;
       object-fit: cover;
       aspect-ratio: 288 / 320;
-      border-radius: var(--border-lg);
+      border-radius: $border-lg;
     }
 
     .title {
       position: absolute;
-      bottom: var(--spacing-lg);
-      background-color: var(--bg-secondary);
-      border-top-right-radius: var(--border-md);
-      border-bottom-right-radius: var(--border-md);
-      padding: var(--spacing-md);
+      bottom: $spacing-lg;
+      background-color: $bg-secondary;
+      border-top-right-radius: $border-md;
+      border-bottom-right-radius: $border-md;
+      padding: $spacing-md;
     }
   }
 }

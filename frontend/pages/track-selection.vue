@@ -209,22 +209,22 @@ const togglePlay = (index: number) => {
 }
 
 .swiper-slide {
-  background-color: var(--bg-secondary);
+  background-color: $bg-secondary;
   /* Optional styling */
-  color: var(--on-secondary);
+  color: $on-secondary;
   /* Optional styling */
-  border-radius: var(--border-lg);
+  border-radius: $border-lg;
   height: auto;
   max-width: 100%;
 
   .track {
-    padding: var(--spacing-lg);
+    padding: $spacing-lg;
     /* Optional padding */
     display: flex;
     /* To center content */
-    padding: var(--spacing-lg);
+    padding: $spacing-lg;
     /* Optional padding */
-    gap: var(--spacing-lg);
+    gap: $spacing-lg;
 
     &.playing {
       .track-image {

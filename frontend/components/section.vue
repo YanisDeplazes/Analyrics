@@ -7,7 +7,7 @@
 <style lang="scss">
 section {
   display: flex;
-  gap: var(--spacing-lg);
+  gap: $spacing-lg;
   flex-direction: column;
 }
 </style>
