@@ -58,6 +58,6 @@ onMounted(() => {
   display: flex;
   flex: 1;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 }
 </style>

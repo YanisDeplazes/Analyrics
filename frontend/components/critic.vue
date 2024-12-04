@@ -29,7 +29,7 @@ const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
   padding: $spacing-lg;
   color: $on-secondary;
   display: flex;
-  gap: spacing-lg;
+  gap: $spacing-lg;
   flex-direction: column;
   background-color: $bg-secondary;
   border-radius: $border-lg;
