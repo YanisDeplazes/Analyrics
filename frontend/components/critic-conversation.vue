@@ -72,11 +72,7 @@ const personaImageUrl = computed(() => `/stuwe1/frontend/${props.critic.imageUrl
         }
 
         @include lg {
-            max-width: 50%;
-        }
-
-        @include md {
-            max-width: 75%;
+            width: 50%;
         }
     }
 
