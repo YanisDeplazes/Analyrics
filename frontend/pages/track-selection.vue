@@ -141,7 +141,11 @@ const backend = new Backend();
 const swiper = ref<Swiper | null>(null);
 const selectTrack = (track: SpotifyTrack) => {
   store.setSelectedTrack(track);
-  navigateTo("critic-selection");
+  if (store.selectedCritic) {
+    navigateTo("analysis-in-progress");
+  } else {
+    navigateTo("critic-selection");
+  }
 };
 
 const onSwiper = (swiperInstance: Swiper) => {
@@ -225,6 +229,10 @@ const togglePlay = (index: number) => {
     padding: $spacing-lg;
     /* Optional padding */
     gap: $spacing-lg;
+
+    .track-info {
+      cursor: pointer;
+    }
 
     &.playing {
       .track-image {
