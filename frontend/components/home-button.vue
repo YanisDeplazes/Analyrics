@@ -4,7 +4,7 @@
       icon-only
       variant="secondary"
       fill="fill"
-      size="sm"
+      size="small"
       @click="toggleMenu"
     >
       <template v-slot:icon>
@@ -18,7 +18,7 @@
           icon="left"
           variant="secondary"
           fill="fill"
-          size="sm"
+          size="small"
           text="Home"
         >
           <template v-slot:icon>
@@ -31,7 +31,7 @@
           icon="left"
           variant="secondary"
           fill="fill"
-          size="sm"
+          size="small"
           text="Change critic"
         >
           <template v-slot:icon>
@@ -44,7 +44,7 @@
           icon="left"
           variant="secondary"
           fill="fill"
-          size="sm"
+          size="small"
           text="Change song"
         >
           <template v-slot:icon>

@@ -2,42 +2,27 @@
   <HomeButton />
   <div class="song-analysis-container">
     <div class="line-container">
-      <p class="font-branding line">{{ currentLine }}</p>
+      <p class="font-branding line">{{ isTranslationShown ? currentLineTranslation : currentLine }}</p>
+      <Button v-if="currentLineTranslation && currentLineTranslation !== ''" variant="secondary" size="small"
+        fill="outline" icon="left" :text="isTranslationShown ? 'Hide translation' : 'View translation'"
+        @click="toggleTranslation">
+        <template v-slot:icon>
+          <Icon variant="translate" size="small" type="bg-secondary" />
+        </template>
+      </Button>
     </div>
-    <CriticConversation
-      v-if="store.selectedCritic"
-      :critic="store.selectedCritic"
-      :chat="currentChat"
-    >
+    <CriticConversation v-if="store.selectedCritic" :critic="store.selectedCritic" :chat="currentChat">
       <template v-slot:navigation>
         <div class="result-navigation">
-          <Button
-            v-if="lineIndex > 0"
-            @click="changeLine(-1)"
-            variant="primary"
-            icon="left"
-            text="Back"
-            fill="outline"
-            size="sm"
-          >
+          <Button v-if="lineIndex > 0" @click="changeLine(-1)" variant="primary" icon="left" text="Back" fill="outline"
+            size="small">
             <template v-slot:icon>
-              <Icon
-                type="secondary"
-                size="large"
-                variant="arrow-backward"
-              ></Icon>
+              <Icon type="secondary" size="small" variant="arrow-backward"></Icon>
             </template>
           </Button>
-          <Button
-            @click="changeLine(1)"
-            variant="primary"
-            icon="right"
-            text="Next"
-            fill="fill"
-            size="sm"
-          >
+          <Button @click="changeLine(1)" variant="primary" icon="right" text="Next" fill="fill" size="small">
             <template v-slot:icon>
-              <Icon type="primary" size="large" variant="arrow-forward"></Icon>
+              <Icon type="primary" size="small" variant="arrow-forward"></Icon>
             </template>
           </Button>
         </div>
@@ -48,19 +33,24 @@
 <script setup lang="ts">
 import { store } from "~/stores/store";
 const lineIndex = ref<number>(0);
+const isTranslationShown = ref(false);
+
+const toggleTranslation = () => {
+  isTranslationShown.value = !isTranslationShown.value;
+}
 
 const currentLine = computed(() => {
   if (store.currentAnalysis && store.currentAnalysis.length > 0) {
     return `«${store.currentAnalysis[lineIndex.value].line}»`;
   }
-  return "No lines available";
+  return "";
 });
 
-const currentLinetranslate = computed(() => {
-  if (store.currentAnalysis && store.currentAnalysis.length > 0) {
-    return `«${store.currentAnalysis[lineIndex.value].linetranslate}»`;
+const currentLineTranslation = computed(() => {
+  if (store.currentAnalysis && store.currentAnalysis.length > 0 && store.currentAnalysis[lineIndex.value].lineTranslation !== "") {
+    return `«${store.currentAnalysis[lineIndex.value].lineTranslation}»`;
   }
-  return "No lines available";
+  return "";
 });
 
 const currentChat = computed(() => {
@@ -94,6 +84,7 @@ onMounted(() => {
 
   .line-container {
     display: flex;
+    flex-direction: column;
     flex: 1;
     align-items: center;
     justify-content: center;

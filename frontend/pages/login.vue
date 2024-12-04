@@ -14,7 +14,7 @@
           isLarge=""
           fill="fill"
           icon="right"
-          size="lg"
+          size="large"
         >
           <template v-slot:icon>
             <Icon size="large" variant="login" type="secondary"></Icon>
@@ -22,7 +22,7 @@
         </Button>
       </NuxtLink>
       <NuxtLink to="/track-selection">
-        <Button text="Skip" variant="secondary" fill="outline" size="lg">
+        <Button text="Skip" variant="secondary" fill="outline" size="large">
         </Button>
       </NuxtLink>
     </div>
