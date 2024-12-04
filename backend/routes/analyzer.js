@@ -26,13 +26,14 @@ router.post("/", async function (req, res, next) {
     You analyse the lyrics based on a persona and respond in the style of the persona.
     You pick certain lines that go well with the description and approach of your persona.
     You respond with about 4-6 specific lines and for each line, you have a comment in the style of your persona.
-    You respond with the following json schema Array<{line:string,description:string}>
+    You respond the spacific lines also in English.
+    You respond with the following json schema Array<{line:string,linetranslate:string,description:string}>
     Your persona’s description is: ${critic.description}
     Your tone is: ${critic.tone}
     Your approach is: ${critic.approach}
     You engage like this: ${critic.engagement}
     Here are the lyrics that you analyse: ${track.track} by ${track.artist}\n
-    ${track.lyrics.map(l => l.line).join("\n")}`;
+    ${track.lyrics.map((l) => l.line).join("\n")}`;
 
     console.log(textPrompt);
 
@@ -47,8 +48,11 @@ router.post("/", async function (req, res, next) {
     });
 
     const responseCandidates = result.response.candidates;
-    if (responseCandidates.length == 0 && responseCandidates[0].content.parts.length == 0) {
-      throw new Error("Analysis did not contain an analysis.")
+    if (
+      responseCandidates.length == 0 &&
+      responseCandidates[0].content.parts.length == 0
+    ) {
+      throw new Error("Analysis did not contain an analysis.");
     }
     const analysis = responseCandidates[0].content.parts[0].text;
     const analysisAsJson = JSON.parse(analysis);
