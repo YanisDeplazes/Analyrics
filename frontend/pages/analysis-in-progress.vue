@@ -1,14 +1,28 @@
 <template>
+  <HomeButton />
   <div class="progress-container">
     <div class="loaders">
-      <Loader :is-loading="!areLyricsFetched" loading-in-progress-message="Fetching lyrics..."
-        loading-finished-message="Lyrics fetched" :has-error="hasLyricsFetchingError"
-        :error-message="lyricsFetchingError"></Loader>
-      <Loader v-if="areLyricsFetched && !hasLyricsFetchingError" :is-loading="!areLyricsAnalysed"
-        loading-in-progress-message="Analysing lyrics..." loading-finished-message="Lyrics analysed"
-        :has-error="hasLyricsAnalysisError" :error-message="lyricsAnalysisError"></Loader>
+      <Loader
+        :is-loading="!areLyricsFetched"
+        loading-in-progress-message="Fetching lyrics..."
+        loading-finished-message="Lyrics fetched"
+        :has-error="hasLyricsFetchingError"
+        :error-message="lyricsFetchingError"
+      ></Loader>
+      <Loader
+        v-if="areLyricsFetched && !hasLyricsFetchingError"
+        :is-loading="!areLyricsAnalysed"
+        loading-in-progress-message="Analysing lyrics..."
+        loading-finished-message="Lyrics analysed"
+        :has-error="hasLyricsAnalysisError"
+        :error-message="lyricsAnalysisError"
+      ></Loader>
     </div>
-    <CriticConversation :critic="store.selectedCritic" :chat="chat" v-if="store.selectedCritic">
+    <CriticConversation
+      :critic="store.selectedCritic"
+      :chat="chat"
+      v-if="store.selectedCritic"
+    >
     </CriticConversation>
   </div>
 </template>
@@ -33,24 +47,26 @@ onMounted(async () => {
       trackLyrics.value = await backend.lyrics(store.selectedTrack);
       areLyricsFetched.value = true;
       // TODO: wait until text has been typed
-    }
-    catch (error) {
+    } catch (error) {
       hasLyricsFetchingError.value = true;
-      lyricsFetchingError.value = "This is embarrassing, but we could not get the lyrics for this track.";
+      lyricsFetchingError.value =
+        "This is embarrassing, but we could not get the lyrics for this track.";
       return;
     }
     try {
       chat.value = store.selectedCritic.messages.analysingLyrics;
-      store.setLineAnalysis(await backend.analyseLyrics(trackLyrics.value, store.selectedCritic));
+      store.setLineAnalysis(
+        await backend.analyseLyrics(trackLyrics.value, store.selectedCritic)
+      );
       areLyricsAnalysed.value = true;
       // TODO: wait until text has been typed
       setTimeout(() => {
         navigateTo("analysis-result");
-      }, 2000)
-    }
-    catch (error) {
+      }, 2000);
+    } catch (error) {
       hasLyricsAnalysisError.value = true;
-      lyricsAnalysisError.value = "Well... our AI seems to be too dumb to analyze these lyrics. We sincerely apologize."
+      lyricsAnalysisError.value =
+        "Well... our AI seems to be too dumb to analyze these lyrics. We sincerely apologize.";
     }
   }
 });

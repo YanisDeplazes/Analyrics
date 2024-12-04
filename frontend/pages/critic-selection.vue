@@ -61,6 +61,9 @@ const setCritic = (critic: Critic) => {
   store.setCritic(critic);
   navigateTo("analysis-in-progress");
 };
+onMounted(() => {
+  redirectIfNoSelectionMade();
+});
 </script>
 <style lang="scss" scoped>
 .swiper {

@@ -115,7 +115,7 @@ onMounted(() => {
     max-height: inherit;
     border-radius: $border-md;
     background-color: $bg-secondary;
-    border: 4px bg-secondary solid;
+    border: 4px $bg-secondary solid;
     position: relative;
     aspect-ratio: 9 / 16;
 

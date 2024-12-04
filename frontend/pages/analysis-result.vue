@@ -80,7 +80,9 @@ const changeLine = (direction: 1 | -1) => {
   }
 };
 
-onMounted(() => {});
+onMounted(() => {
+  redirectIfNoSelectionMade();
+});
 </script>
 <style lang="scss">
 .song-analysis-container {
