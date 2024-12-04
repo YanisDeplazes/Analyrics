@@ -1,13 +1,14 @@
+@use "./variables";
 // Medium devices
 @mixin md {
-    @media (min-width: #{$screen-md-min}) {
+    @media (min-width: #{variables.$screen-md-min}) {
         @content;
     }
 }
 
 // Large devices
 @mixin lg {
-    @media (min-width: #{$screen-lg-min}) {
+    @media (min-width: #{variables.$screen-lg-min}) {
         @content;
     }
 }

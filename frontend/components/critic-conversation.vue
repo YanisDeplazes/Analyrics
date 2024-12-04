@@ -55,6 +55,7 @@ const personaImageUrl = computed(() => `/stuwe1/frontend/${props.critic.imageUrl
     display: flex;
     flex-direction: column;
     gap: $spacing-lg;
+    align-items: flex-end;
 
     .chat-bubble {
         background-color: $bg-secondary;
@@ -65,8 +66,17 @@ const personaImageUrl = computed(() => `/stuwe1/frontend/${props.critic.imageUrl
         flex-direction: column;
         gap: $spacing-lg;
         align-items: flex-end;
-        .chat{
+
+        .chat {
             width: 100%;
+        }
+
+        @include lg {
+            max-width: 50%;
+        }
+
+        @include md {
+            max-width: 75%;
         }
     }
 
