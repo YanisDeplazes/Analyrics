@@ -13,82 +13,78 @@
   </NuxtLink>
 
   <div class="end-screen">
-    <h1>That's it!</h1>
-    <p>
-      If you want to see how another critic comments "{{
-        store.selectedTrack?.name
-      }}" you can:
-    </p>
-    <NuxtLink to="/critic-selection">
-      <Button
-        icon="left"
-        variant="secondary"
-        fill="fill"
-        size="sm"
-        text="Choose another critic"
+    <div class="end-navigation">
+      <h1>That's it!</h1>
+      <p>
+        If you want to see how another critic comments "{{
+          store.selectedTrack?.name
+        }}" you can:
+      </p>
+      <NuxtLink to="/critic-selection">
+        <Button
+          icon="left"
+          variant="secondary"
+          fill="fill"
+          size="sm"
+          text="Choose another critic"
+        >
+          <template v-slot:icon>
+            <Icon size="xl" type="secondary" variant="user"></Icon>
+          </template>
+        </Button>
+      </NuxtLink>
+      <p>
+        If you want to continue with {{ store.selectedCritic?.name }} you can:
+      </p>
+      <NuxtLink to="/track-selection">
+        <Button
+          icon="left"
+          variant="secondary"
+          fill="fill"
+          size="sm"
+          text="Choose another song"
+        >
+          <template v-slot:icon>
+            <Icon size="xl" type="secondary" variant="lyrics"></Icon>
+          </template>
+        </Button>
+      </NuxtLink>
+    </div>
+    <div class="end-critic">
+      <CriticConversation
+        v-if="store.selectedCritic"
+        :critic="store.selectedCritic"
+        :chat="store.currentAnalysis"
       >
-        <template v-slot:icon>
-          <Icon size="xl" type="secondary" variant="user"></Icon>
+        <template v-slot:navigation>
+          <div class="result-navigation">
+            <NuxtLink to="/analysis-result">
+              <Button
+                variant="primary"
+                icon="left"
+                text="Back"
+                fill="outline"
+                size="sm"
+              >
+                <template v-slot:icon>
+                  <Icon
+                    type="secondary"
+                    size="large"
+                    variant="arrow-backward"
+                  ></Icon>
+                </template>
+              </Button>
+            </NuxtLink>
+          </div>
         </template>
-      </Button>
-    </NuxtLink>
-    <p>
-      If you want to continue with {{ store.selectedCritic?.name }} you can:
-    </p>
-    <NuxtLink to="/track-selection">
-      <Button
-        icon="left"
-        variant="secondary"
-        fill="fill"
-        size="sm"
-        text="Choose another song"
-      >
-        <template v-slot:icon>
-          <Icon size="xl" type="secondary" variant="lyrics"></Icon>
-        </template>
-      </Button>
-    </NuxtLink>
-    <CriticConversation
-      v-if="store.selectedCritic"
-      :critic="store.selectedCritic"
-      :chat="store.currentAnalysis"
-    >
-      <template v-slot:navigation>
-        <div class="result-navigation">
-          <Button
-            variant="primary"
-            icon="left"
-            text="Back"
-            fill="outline"
-            size="sm"
-          >
-            <template v-slot:icon>
-              <Icon
-                type="secondary"
-                size="large"
-                variant="arrow-backward"
-              ></Icon>
-            </template>
-          </Button>
-          <Button
-            variant="primary"
-            icon="right"
-            text="Next"
-            fill="fill"
-            size="sm"
-          >
-            <template v-slot:icon>
-              <Icon type="primary" size="large" variant="arrow-forward"></Icon>
-            </template>
-          </Button>
-        </div>
-      </template>
-    </CriticConversation>
+      </CriticConversation>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { store } from "~/stores/store";
+console.log("Last Line Index: ", store.lineIndex);
 </script>
 
 <style lang="scss" scoped>
@@ -98,6 +94,26 @@ import { store } from "~/stores/store";
   right: 1rem;
 }
 
-.end-titel {
+.end-navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 2rem;
+  margin-top: 10rem;
+}
+
+.end-critic {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 2rem;
+}
+
+.end-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  gap: rem;
 }
 </style>
