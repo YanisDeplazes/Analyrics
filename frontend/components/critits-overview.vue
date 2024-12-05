@@ -14,7 +14,7 @@
       </Button>
     </div>
   </div>
-  <SwiperWrapper :modules="[Scrollbar, FreeMode, Autoplay]" :autoplay="{ delay: 3000 }" oop="true" :breakpoints="{
+  <SwiperWrapper :modules="[Scrollbar, FreeMode, Autoplay]" :autoplay="{ delay: 3000 }" :loop="true" :breakpoints="{
     480: {
       slidesPerView: 2.1,
       spaceBetween: 8
