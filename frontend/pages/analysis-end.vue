@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink to="/" @click="store.reset()" class="home-button">
+  <NuxtLink to="/" @click="store.resetAll()" class="home-button">
     <Button icon-only variant="secondary" fill="fill" size="small">
       <template v-slot:icon>
         <Icon size="xl" icon="home" variant="secondary"></Icon> </template
@@ -14,7 +14,7 @@
           store.selectedTrack?.name
         }}" you can:
       </p>
-      <NuxtLink to="/critic-selection">
+      <NuxtLink to="/critic-selection" @click="store.resetSelectedCritic()">
         <Button
           icon="left"
           variant="secondary"
@@ -30,7 +30,7 @@
       <p>
         If you want to continue with {{ store.selectedCritic?.name }} you can:
       </p>
-      <NuxtLink to="/track-selection">
+      <NuxtLink to="/track-selection" @click="store.resetSelectedTrack()">
         <Button
           icon="left"
           variant="secondary"
