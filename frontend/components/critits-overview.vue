@@ -24,7 +24,7 @@
       spaceBetween: 16
     },
   }" :slides-per-view="1.1" :space-between="8" :scrollbar="{ draggable: true }" @swiper="onSwiper"
-    class="swiper-container" :free-mode="true">
+    class="swiper-container" :freeMode="true">
     <swiper-slide v-for="(persona, index) in criticsData.critics" :key="index">
       <Critic :name="persona.name" :category="persona.category" :description="persona.description"
         :image-url="persona.imageUrl"></Critic>

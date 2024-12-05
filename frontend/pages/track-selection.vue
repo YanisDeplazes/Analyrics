@@ -49,6 +49,7 @@
           :loop="true"
           :scrollbar="{ draggable: true }"
           aria-label="Track recommendations carousel"
+          :freeMode="true"
           @swiper="onSwiper"
           :breakpoints="{
             480: {
