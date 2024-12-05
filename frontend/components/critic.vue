@@ -4,7 +4,7 @@
       <img :src="imageUrlWithBaseUrl" />
       <h3 class="title">{{ name }}</h3>
     </div>
-    <CriticCategory :variant="category"></CriticCategory>
+    <CriticCategory :category="category"></CriticCategory>
     <p>{{ description }}</p>
     <slot name="call-to-action" />
   </div>

@@ -1,18 +1,18 @@
 <template>
     <div class="category">
         <p class="icon">
-            <Icon :icon="variant" size="large" variant="primary"></Icon> {{ categoryTitle }}
+            <Icon :icon="category" size="large" variant="primary"></Icon> {{ categoryTitle }}
         </p>
         <p>{{ categoryDescription }}</p>
     </div>
 </template>
 <script setup lang="ts">
 const props = defineProps<{
-    variant: "culture" | "genre" | "humor" | "philosophy" | "intellect" | "niche"
+    category: "culture" | "genre" | "humor" | "philosophy" | "intellect" | "niche"
 }>();
 
 const categoryTitle = computed(() => {
-    switch (props.variant) {
+    switch (props.category) {
         case "culture":
             return "Cultural commentator";
         case "genre":
@@ -29,7 +29,7 @@ const categoryTitle = computed(() => {
 });
 
 const categoryDescription = computed(() => {
-    switch (props.variant) {
+    switch (props.category) {
         case "culture":
             return "Tying music to culture and society";
         case "genre":
