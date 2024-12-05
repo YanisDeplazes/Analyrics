@@ -14,7 +14,7 @@
       </Button>
     </div>
   </div>
-  <SwiperWrapper :modules="[Scrollbar, FreeMode, Autoplay]" :autoplay="{ delay: 3000 }" :loop="true" :breakpoints="{
+  <SwiperWrapper :modules="[Scrollbar, FreeMode, Autoplay]" :autoplay="{ delay: 5000 }" :loop="true" :breakpoints="{
     480: {
       slidesPerView: 2.1,
       spaceBetween: 8
@@ -25,9 +25,18 @@
     },
   }" :slides-per-view="1.1" :space-between="8" :scrollbar="{ draggable: true }" @swiper="onSwiper"
     class="swiper-container" :freeMode="true">
-    <swiper-slide v-for="(persona, index) in criticsData.critics" :key="index">
-      <Critic :name="persona.name" :category="persona.category" :description="persona.description"
-        :image-url="persona.imageUrl"></Critic>
+    <swiper-slide v-for="(critic, index) in criticsData.critics" :key="index">
+      <Critic :name="critic.name" :category="critic.category" :description="critic.description"
+        :image-url="critic.imageUrl">
+        <template v-slot:call-to-action>
+          <Button variant="primary" :text="`Analyze track with ${critic.name}`" size="large" fill="fill" icon="right"
+            @click="selectCritic(critic)">
+            <template v-slot:icon>
+              <Icon size="large" variant="primary" icon="arrow-forward" />
+            </template>
+          </Button>
+        </template>
+      </Critic>
     </swiper-slide>
   </SwiperWrapper>
 </template>
@@ -62,8 +71,15 @@ import "swiper/css";
 import "swiper/css/scrollbar";
 import criticsData from "assets/data/critics.json";
 import Swiper from "swiper";
+import type Critic from "~/model/critic";
+import { store } from "~/stores/store";
 const swiper = ref<Swiper | null>(null);
 const onSwiper = (swiperInstance: Swiper) => {
   swiper.value = swiperInstance;
+}
+
+const selectCritic = (critic: Critic) => {
+  store.setCritic(critic);
+  navigateTo("/login");
 }
 </script>

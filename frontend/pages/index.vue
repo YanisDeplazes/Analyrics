@@ -11,7 +11,7 @@
       Collective offers a fresh perspective on every song.
     </p>
     <NuxtLink to="/login">
-      <Button text="Explore now" variant="secondary" fill="fill" size="large" icon="right">
+      <Button text="Explore now" variant="secondary" fill="fill" size="large" icon="right" class="pulsate">
         <template v-slot:icon>
           <Icon size="large" icon="arrow-forward" variant="secondary"></Icon>
         </template>
@@ -50,5 +50,27 @@
 
 .introduction-section {
   max-height: 50vh;
+}
+
+.pulsate {
+  animation: pulsate 2s linear infinite;
+}
+
+.pulsate:hover {
+  animation-play-state: paused;
+}
+
+@keyframes pulsate {
+  0% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.1;
+  }
+
+  100% {
+    scale: 1;
+  }
 }
 </style>

@@ -4,11 +4,11 @@
       icon-only
       variant="secondary"
       fill="fill"
-      size="small"
+      size="large"
       @click="toggleMenu"
     >
       <template v-slot:icon>
-        <Icon size="xl" icon="three-dots" variant="secondary"></Icon>
+        <Icon size="large" icon="three-dots" variant="secondary"></Icon>
       </template>
     </Button>
 
@@ -18,11 +18,11 @@
           icon="left"
           variant="secondary"
           fill="fill"
-          size="small"
+          size="large"
           text="Home"
         >
           <template v-slot:icon>
-            <Icon size="xl" icon="home" variant="secondary"></Icon>
+            <Icon size="large" icon="home" variant="secondary"></Icon>
           </template>
         </Button>
       </NuxtLink>
@@ -31,11 +31,11 @@
           icon="left"
           variant="secondary"
           fill="fill"
-          size="small"
+          size="large"
           text="Change critic"
         >
           <template v-slot:icon>
-            <Icon size="xl" icon="user" variant="secondary"></Icon>
+            <Icon size="large" icon="user" variant="secondary"></Icon>
           </template>
         </Button>
       </NuxtLink>
@@ -44,11 +44,11 @@
           icon="left"
           variant="secondary"
           fill="fill"
-          size="small"
+          size="large"
           text="Change song"
         >
           <template v-slot:icon>
-            <Icon size="xl" icon="lyrics" variant="secondary"></Icon>
+            <Icon size="large" icon="lyrics" variant="secondary"></Icon>
           </template>
         </Button>
       </NuxtLink>

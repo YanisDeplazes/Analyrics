@@ -95,7 +95,6 @@ const currentChat = computed(() => {
 });
 
 const changeLine = (direction: 1 | -1) => {
-  console.log(store.lineIndex, store.currentAnalysis);
   if (!store.currentAnalysis) return;
   const nextIndex = store.lineIndex + direction;
   if (nextIndex >= 0 && nextIndex < store.currentAnalysis.length) {
