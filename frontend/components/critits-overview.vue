@@ -4,12 +4,12 @@
     <div class="swiper-buttons">
       <Button icon-only variant="secondary" fill="fill" size="small" @click="swiper!.slidePrev()">
         <template v-slot:icon>
-          <Icon size="small" variant="keyboard-arrow-left" type="secondary"></Icon>
+          <Icon size="small" icon="keyboard-arrow-left" variant="secondary"></Icon>
         </template>
       </Button>
       <Button icon-only variant="secondary" fill="fill" size="small" @click="swiper!.slideNext()">
         <template v-slot:icon>
-          <Icon size="small" variant="keyboard-arrow-right" type="secondary"></Icon>
+          <Icon size="small" icon="keyboard-arrow-right" variant="secondary"></Icon>
         </template>
       </Button>
     </div>

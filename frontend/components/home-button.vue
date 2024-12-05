@@ -8,7 +8,7 @@
       @click="toggleMenu"
     >
       <template v-slot:icon>
-        <Icon size="xl" variant="three-dots" type="secondary"></Icon>
+        <Icon size="xl" icon="three-dots" variant="secondary"></Icon>
       </template>
     </Button>
 
@@ -22,7 +22,7 @@
           text="Home"
         >
           <template v-slot:icon>
-            <Icon size="xl" variant="home" type="secondary"></Icon>
+            <Icon size="xl" icon="home" variant="secondary"></Icon>
           </template>
         </Button>
       </NuxtLink>
@@ -35,7 +35,7 @@
           text="Change critic"
         >
           <template v-slot:icon>
-            <Icon size="xl" variant="user" type="secondary"></Icon>
+            <Icon size="xl" icon="user" variant="secondary"></Icon>
           </template>
         </Button>
       </NuxtLink>
@@ -48,7 +48,7 @@
           text="Change song"
         >
           <template v-slot:icon>
-            <Icon size="xl" variant="lyrics" type="secondary"></Icon>
+            <Icon size="xl" icon="lyrics" variant="secondary"></Icon>
           </template>
         </Button>
       </NuxtLink>

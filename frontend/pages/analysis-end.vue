@@ -2,7 +2,7 @@
   <NuxtLink to="/" @click="store.reset()" class="home-button">
     <Button icon-only variant="secondary" fill="fill" size="small">
       <template v-slot:icon>
-        <Icon size="xl" variant="home" type="secondary"></Icon> </template
+        <Icon size="xl" icon="home" variant="secondary"></Icon> </template
     ></Button>
   </NuxtLink>
 
@@ -23,7 +23,7 @@
           text="Choose another critic"
         >
           <template v-slot:icon>
-            <Icon size="xl" type="secondary" variant="user"></Icon>
+            <Icon size="xl" variant="secondary" icon="user"></Icon>
           </template>
         </Button>
       </NuxtLink>
@@ -39,7 +39,7 @@
           text="Choose another song"
         >
           <template v-slot:icon>
-            <Icon size="xl" type="secondary" variant="lyrics"></Icon>
+            <Icon size="xl" variant="secondary" icon="lyrics"></Icon>
           </template>
         </Button>
       </NuxtLink>
@@ -62,9 +62,9 @@
               >
                 <template v-slot:icon>
                   <Icon
-                    type="secondary"
+                    variant="secondary"
                     size="small"
-                    variant="arrow-backward"
+                    icon="arrow-backward"
                   ></Icon>
                 </template>
               </Button>

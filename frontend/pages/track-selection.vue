@@ -19,8 +19,8 @@
             <template v-slot:icon>
               <Icon
                 size="small"
-                variant="keyboard-arrow-left"
-                type="secondary"
+                icon="keyboard-arrow-left"
+                variant="secondary"
               ></Icon>
             </template>
           </Button>
@@ -34,8 +34,8 @@
             <template v-slot:icon>
               <Icon
                 size="small"
-                variant="keyboard-arrow-right"
-                type="secondary"
+                icon="keyboard-arrow-right"
+                variant="secondary"
               ></Icon>
             </template>
           </Button>

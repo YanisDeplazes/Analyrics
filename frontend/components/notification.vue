@@ -3,7 +3,7 @@
   <div :class="['notification', type]" v-if="visible">
     <div class="notification-header">
       <h1 class="notification-title">{{ title }}</h1>
-      <Icon variant="cross" type="error" size="xl" @click="close"></Icon>
+      <Icon icon="cross" variant="error" size="xl" @click="close"></Icon>
     </div>
     <p>
       {{ description }}

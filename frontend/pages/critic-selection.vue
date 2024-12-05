@@ -37,8 +37,8 @@
               <template v-slot:icon>
                 <Icon
                   size="large"
-                  type="primary"
-                  variant="arrow-forward"
+                  variant="primary"
+                  icon="arrow-forward"
                 ></Icon>
               </template>
             </Button>

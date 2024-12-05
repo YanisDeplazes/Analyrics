@@ -15,7 +15,7 @@
         @click="toggleTranslation"
       >
         <template v-slot:icon>
-          <Icon variant="translate" size="small" type="bg-secondary" />
+          <Icon icon="translate" size="small" variant="bg-secondary" />
         </template>
       </Button>
     </div>
@@ -37,9 +37,9 @@
           >
             <template v-slot:icon>
               <Icon
-                type="secondary"
+                variant="secondary"
                 size="small"
-                variant="arrow-backward"
+                icon="arrow-backward"
               ></Icon>
             </template>
           </Button>
@@ -52,7 +52,7 @@
             size="small"
           >
             <template v-slot:icon>
-              <Icon type="primary" size="small" variant="arrow-forward"></Icon>
+              <Icon variant="primary" size="small" icon="arrow-forward"></Icon>
             </template>
           </Button>
         </div>

@@ -19,7 +19,7 @@
         icon="right"
       >
         <template v-slot:icon>
-          <Icon size="large" variant="arrow-forward" type="secondary"></Icon>
+          <Icon size="large" icon="arrow-forward" variant="secondary"></Icon>
         </template>
       </Button>
     </NuxtLink>

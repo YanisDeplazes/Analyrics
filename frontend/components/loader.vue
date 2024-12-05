@@ -2,17 +2,17 @@
     <div class="loader-container">
         <div class="loader">
             <div class="loader-icon">
-                <Icon size="large" type="secondary" variant="loading" class="rotating" v-if="isLoading && !hasError">
+                <Icon size="large" variant="secondary" icon="loading" class="rotating" v-if="isLoading && !hasError">
                 </Icon>
-                <Icon size="large" type="secondary" variant="check" class="animate-path-forward"
+                <Icon size="large" variant="secondary" icon="check" class="animate-path-forward"
                     v-if="!isLoading && !hasError"></Icon>
-                <Icon size="large" type="secondary" variant="cross" class="animate-path-forward" v-if="hasError"></Icon>
+                <Icon size="large" variant="secondary" icon="cross" class="animate-path-forward" v-if="hasError"></Icon>
             </div>
             <p v-if="isLoading">{{ loadingInProgressMessage }}</p>
             <p v-else>{{ loadingFinishedMessage }}</p>
         </div>
         <p class="error-message" v-if="hasError">
-            <Icon size="large" type="error" variant="error"></Icon>
+            <Icon size="large" variant="error" icon="error"></Icon>
             {{ errorMessage }}
         </p>
     </div>

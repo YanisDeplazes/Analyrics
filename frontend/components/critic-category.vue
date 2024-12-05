@@ -1,7 +1,7 @@
 <template>
     <div class="category">
         <p class="icon">
-            <Icon :variant="variant" size="large" type="primary"></Icon> {{ categoryTitle }}
+            <Icon :icon="variant" size="large" variant="primary"></Icon> {{ categoryTitle }}
         </p>
         <p>{{ categoryDescription }}</p>
     </div>

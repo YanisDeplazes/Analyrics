@@ -1,7 +1,7 @@
 <template>
   <div class="searchbar-wrapper">
     <div class="searchbar">
-      <Icon size="large" variant="search" type="secondary"></Icon>
+      <Icon size="large" icon="search" variant="secondary"></Icon>
       <input
         id="mySearch"
         class="input"
