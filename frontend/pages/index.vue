@@ -4,7 +4,7 @@
   </Section>
   <Section class="branding-section">
     <h1 class="font-branding text-center">THE UNDERTONE COLLECTIVE</h1>
-    <p>
+    <p class="branding-text">
       The Undertone Collective is where music’s hidden stories come to life. Our
       team of fictional critics, delves into the meaning behind the lyrics you
       love. From insightful analysis to playful commentary, The Undertone
@@ -43,8 +43,14 @@
   margin: $spacing-2xl $spacing-lg;
 }
 
-.branding-section{
+.branding-section {
   align-items: center;
+
+  .branding-text {
+    @include lg {
+      max-width: 75%;
+    }
+  }
 }
 
 .text-center {
