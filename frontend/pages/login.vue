@@ -1,21 +1,14 @@
 <template>
   <Section class="login-section">
     <h1 class="display-2">Get a personalised experience</h1>
-    <p>
+    <p class="login-text">
       Log in with your Spotify account to get song recommendations tailored just
       for you! Prefer not to log in? No worries—you can still search and analyze
       any song lyrics you like.
     </p>
     <div class="buttons">
       <NuxtLink to="http://localhost:3000/login">
-        <Button
-          text="Log in"
-          variant="secondary"
-          isLarge=""
-          fill="fill"
-          icon="right"
-          size="large"
-        >
+        <Button text="Log in" variant="secondary" isLarge="" fill="fill" icon="right" size="large">
           <template v-slot:icon>
             <Icon size="large" variant="login" type="secondary"></Icon>
           </template>
@@ -58,6 +51,12 @@ onMounted(() => {
   display: flex;
   flex: 1;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
+
+  .login-text {
+    @include lg {
+      max-width: 75%;
+    }
+  }
 }
 </style>
