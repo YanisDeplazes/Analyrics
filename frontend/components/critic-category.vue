@@ -1,9 +1,9 @@
 <template>
     <div class="category">
         <p class="icon">
-            <Icon :icon="category" size="large" variant="primary"></Icon> {{ categoryTitle }}
+            <Icon :icon="category" size="large" variant="primary"></Icon> <strong>{{ categoryTitle }}</strong>
         </p>
-        <p>{{ categoryDescription }}</p>
+        <p><small>{{ categoryDescription }}</small></p>
     </div>
 </template>
 <script setup lang="ts">
@@ -31,17 +31,17 @@ const categoryTitle = computed(() => {
 const categoryDescription = computed(() => {
     switch (props.category) {
         case "culture":
-            return "Tying music to culture and society";
+            return "Connecting music, culture";
         case "genre":
-            return "Genre or artist-specific deep dives";
+            return "Exploring genres deeply";
         case "humor":
-            return "Lighthearted and comedic interpretations";
+            return "Sharing musical humor";
         case "intellect":
-            return "Exploring deep meanings";
+            return "Exploring musical meaning";
         case "niche":
-            return "Sophisticated, scholarly commentary";
+            return "Sharing unique views";
         case "philosophy":
-            return "Unique and unconventional viewpoints";
+            return "Offering scholarly insights";
     }
 })
 </script>
@@ -58,6 +58,7 @@ const categoryDescription = computed(() => {
 
     .icon {
         display: flex;
+        align-items: center;
         gap: $spacing-md;
     }
 }
