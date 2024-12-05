@@ -13,7 +13,7 @@
     </Button>
 
     <template v-if="isOpen" class="home-menu">
-      <NuxtLink to="/">
+      <NuxtLink to="/" @click="store.reset()">
         <Button
           icon="left"
           variant="secondary"
@@ -58,6 +58,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { store } from "~/stores/store";
 
 const isOpen = ref(false);
 

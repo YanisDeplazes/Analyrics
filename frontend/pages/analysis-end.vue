@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink to="/" class="home-button">
+  <NuxtLink to="/" @click="store.reset()" class="home-button">
     <Button icon-only variant="secondary" fill="fill" size="small">
       <template v-slot:icon>
         <Icon size="xl" variant="home" type="secondary"></Icon> </template
