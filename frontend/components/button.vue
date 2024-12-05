@@ -1,14 +1,18 @@
 <template>
-  <button @click="handleClick" class="button" :class="[
-    {
-      'primary-fill': fill == 'fill' && variant == 'primary',
-      'secondary-fill': fill == 'fill' && variant == 'secondary',
-      'primary-outline': fill == 'outline' && variant == 'primary',
-      'secondary-outline': fill == 'outline' && variant == 'secondary',
-    },
-    `size-${size}`,
-    { 'icon-only': iconOnly },
-  ]">
+  <button
+    @click="handleClick"
+    class="button"
+    :class="[
+      {
+        'primary-fill': fill == 'fill' && variant == 'primary',
+        'secondary-fill': fill == 'fill' && variant == 'secondary',
+        'primary-outline': fill == 'outline' && variant == 'primary',
+        'secondary-outline': fill == 'outline' && variant == 'secondary',
+      },
+      `size-${size}`,
+      { 'icon-only': iconOnly },
+    ]"
+  >
     <template v-if="!iconOnly">
       <slot name="icon" v-if="icon == 'left'" />
       {{ text }}
