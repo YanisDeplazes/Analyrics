@@ -31,7 +31,7 @@
               variant="primary"
               :text="`Analyse with ${critic.name}`"
               icon="right"
-              size="lg"
+              size="large"
               @click="setCritic(critic)"
             >
               <template v-slot:icon>

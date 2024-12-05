@@ -29,7 +29,7 @@ const props = defineProps<{
   variant: "primary" | "secondary";
   fill: "fill" | "outline";
   icon?: "left" | "right";
-  size: "sm" | "lg";
+  size: "small" | "large";
   iconOnly?: boolean;
 }>();
 const emit = defineEmits<{
@@ -58,20 +58,16 @@ const handleClick = (e: MouseEvent) => {
 }
 
 /*sizes*/
-.size-sm {
+.size-small {
   padding: $spacing-md;
   border-radius: $border-md;
-  position: relative;
-  right: 0;
-  display: inline-flex;
+  gap: $spacing-md;
 }
 
-.size-lg {
+.size-large {
   padding: $spacing-lg;
   border-radius: $border-lg;
-  position: relative;
-  right: 0;
-  display: inline-flex;
+  gap: $spacing-lg;
 }
 
 /*colors*/

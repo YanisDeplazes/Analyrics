@@ -4,14 +4,14 @@
   </Section>
   <Section class="branding-section">
     <h1 class="font-branding text-center">THE UNDERTONE COLLECTIVE</h1>
-    <p>
+    <p class="branding-text">
       The Undertone Collective is where music’s hidden stories come to life. Our
       team of fictional critics, delves into the meaning behind the lyrics you
       love. From insightful analysis to playful commentary, The Undertone
       Collective offers a fresh perspective on every song.
     </p>
     <NuxtLink to="/login">
-      <Button text="Explore now" variant="secondary" fill="fill" size="lg" icon="right">
+      <Button text="Explore now" variant="secondary" fill="fill" size="large" icon="right">
         <template v-slot:icon>
           <Icon size="large" variant="arrow-forward" type="secondary"></Icon>
         </template>
@@ -43,8 +43,14 @@
   margin: $spacing-2xl $spacing-lg;
 }
 
-.branding-section{
+.branding-section {
   align-items: center;
+
+  .branding-text {
+    @include lg {
+      max-width: 75%;
+    }
+  }
 }
 
 .text-center {

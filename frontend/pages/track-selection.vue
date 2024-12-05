@@ -13,7 +13,7 @@
             icon-only
             variant="secondary"
             fill="fill"
-            size="sm"
+            size="small"
             @click="swiper!.slidePrev()"
           >
             <template v-slot:icon>
@@ -28,7 +28,7 @@
             icon-only
             variant="secondary"
             fill="fill"
-            size="sm"
+            size="small"
             @click="swiper!.slideNext()"
           >
             <template v-slot:icon>

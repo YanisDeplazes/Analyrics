@@ -1,5 +1,5 @@
 export default interface LineAnalysis {
     line: string,
-    linetranslate: string,
+    lineTranslation: string,
     description: string
 }

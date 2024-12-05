@@ -1,12 +1,6 @@
 <template>
-  <NuxtLink to="/">
-    <Button
-      class="home-button"
-      icon-only
-      variant="secondary"
-      fill="fill"
-      size="sm"
-    >
+  <NuxtLink to="/" class="home-button">
+    <Button icon-only variant="secondary" fill="fill" size="small">
       <template v-slot:icon>
         <Icon size="xl" variant="home" type="secondary"></Icon> </template
     ></Button>
@@ -25,7 +19,7 @@
           icon="left"
           variant="secondary"
           fill="fill"
-          size="sm"
+          size="small"
           text="Choose another critic"
         >
           <template v-slot:icon>
@@ -41,7 +35,7 @@
           icon="left"
           variant="secondary"
           fill="fill"
-          size="sm"
+          size="small"
           text="Choose another song"
         >
           <template v-slot:icon>
@@ -54,7 +48,7 @@
       <CriticConversation
         v-if="store.selectedCritic"
         :critic="store.selectedCritic"
-        :chat="store.currentAnalysis"
+        chat="Lalilalu"
       >
         <template v-slot:navigation>
           <div class="result-navigation">
@@ -64,12 +58,12 @@
                 icon="left"
                 text="Back"
                 fill="outline"
-                size="sm"
+                size="small"
               >
                 <template v-slot:icon>
                   <Icon
                     type="secondary"
-                    size="large"
+                    size="small"
                     variant="arrow-backward"
                   ></Icon>
                 </template>
@@ -89,31 +83,31 @@ console.log("Last Line Index: ", store.lineIndex);
 
 <style lang="scss" scoped>
 .home-button {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-}
-
-.end-navigation {
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  gap: 2rem;
-  margin-top: 10rem;
-}
-
-.end-critic {
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  gap: 2rem;
+  flex: 0;
+  align-self: flex-end;
 }
 
 .end-screen {
   display: flex;
   flex-direction: column;
   align-items: left;
-  justify-content: center;
+  justify-content: space-between;
   gap: rem;
+  flex: 1;
+
+  .end-navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 2rem;
+    margin-top: 10rem;
+  }
+
+  .end-critic {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 2rem;
+  }
 }
 </style>

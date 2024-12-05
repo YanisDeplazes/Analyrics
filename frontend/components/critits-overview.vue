@@ -2,12 +2,12 @@
   <div class="critics-title">
     <h2>Meet the critics</h2>
     <div class="swiper-buttons">
-      <Button icon-only variant="secondary" fill="fill" size="sm" @click="swiper!.slidePrev()">
+      <Button icon-only variant="secondary" fill="fill" size="small" @click="swiper!.slidePrev()">
         <template v-slot:icon>
           <Icon size="small" variant="keyboard-arrow-left" type="secondary"></Icon>
         </template>
       </Button>
-      <Button icon-only variant="secondary" fill="fill" size="sm" @click="swiper!.slideNext()">
+      <Button icon-only variant="secondary" fill="fill" size="small" @click="swiper!.slideNext()">
         <template v-slot:icon>
           <Icon size="small" variant="keyboard-arrow-right" type="secondary"></Icon>
         </template>
