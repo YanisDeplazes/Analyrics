@@ -3,7 +3,13 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-04-03',
   app: {
-    baseURL: "/stuwe1/frontend"
+    baseURL: "/stuwe1/frontend",
+    head: {
+      link:
+        [
+          { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        ]
+    }
   },
   devServer: {
     port: 8888
