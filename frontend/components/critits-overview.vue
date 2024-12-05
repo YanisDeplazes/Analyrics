@@ -14,7 +14,7 @@
       </Button>
     </div>
   </div>
-  <SwiperWrapper :modules="[Scrollbar, FreeMode]" :loop="true" :breakpoints="{
+  <SwiperWrapper :modules="[Scrollbar, FreeMode, Autoplay]" :autoplay="{ delay: 3000 }" oop="true" :breakpoints="{
     480: {
       slidesPerView: 2.1,
       spaceBetween: 8
@@ -32,10 +32,15 @@
   </SwiperWrapper>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .swiper-container {
   width: 100%;
   position: relative;
+
+  .swiper-slide {
+    display: flex;
+    height: unset;
+  }
 }
 
 .critics-title {
@@ -52,7 +57,7 @@
 </style>
 <script setup lang="ts">
 import { Swiper as SwiperWrapper, SwiperSlide } from "swiper/vue";
-import { Scrollbar, FreeMode } from "swiper/modules"; // Updated import
+import { Scrollbar, FreeMode, Autoplay } from "swiper/modules"; // Updated import
 import "swiper/css";
 import "swiper/css/scrollbar";
 import criticsData from "assets/data/critics.json";

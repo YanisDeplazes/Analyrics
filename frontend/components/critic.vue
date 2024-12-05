@@ -5,7 +5,7 @@
       <h3 class="title">{{ name }}</h3>
     </div>
     <CriticCategory :category="category"></CriticCategory>
-    <p>{{ description }}</p>
+    <p class="critic-description">{{ description }}</p>
     <slot name="call-to-action" />
   </div>
 </template>
@@ -33,6 +33,10 @@ const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
   flex-direction: column;
   background-color: $bg-secondary;
   border-radius: $border-lg;
+
+  .critic-description{
+    flex: 1;
+  }
 
   .image {
     position: relative;
