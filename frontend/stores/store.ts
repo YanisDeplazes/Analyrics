@@ -16,7 +16,9 @@ export const store = reactive<{
     setProfile: (profile: SpotifyProfile) => void,
     setAccessToken: (accesToken: string) => void,
     setLineIndex: (currentLineIndex: number) => void
-    reset: () => void
+    resetAll: () => void
+    resetSelectedTrack: () => void
+    resetSelectedCritic: () => void
 }>({
     selectedTrack: null,
     selectedCritic: null,
@@ -42,12 +44,22 @@ export const store = reactive<{
     setLineIndex: function (currentLineIndex) {
         this.lineIndex = currentLineIndex;
     },
-    reset: function () {
+    resetAll: function () {
         this.selectedTrack = null;
         this.selectedCritic = null;
         this.currentAnalysis = null;
         this.lineIndex = 0;
         this.spotifyProfile = null;
         this.spotifyUserAccessToken = null;
-    }
+    },
+    resetSelectedTrack: function () {
+        this.selectedTrack = null;
+        this.currentAnalysis = null;
+        this.lineIndex = 0;
+    },
+    resetSelectedCritic: function () {
+        this.selectedCritic = null;
+        this.currentAnalysis = null;
+        this.lineIndex = 0;
+    },
 });

@@ -13,7 +13,7 @@
     </Button>
 
     <template v-if="isOpen" class="home-menu">
-      <NuxtLink to="/" @click="store.reset()">
+      <NuxtLink to="/" @click="store.resetAll()">
         <Button
           icon="left"
           variant="secondary"
@@ -26,7 +26,7 @@
           </template>
         </Button>
       </NuxtLink>
-      <NuxtLink to="/critic-selection">
+      <NuxtLink to="/critic-selection" @click="store.resetSelectedCritic()">
         <Button
           icon="left"
           variant="secondary"
@@ -39,7 +39,7 @@
           </template>
         </Button>
       </NuxtLink>
-      <NuxtLink to="/track-selection">
+      <NuxtLink to="/track-selection" @click="store.resetSelectedTrack()">
         <Button
           icon="left"
           variant="secondary"
