@@ -69,11 +69,8 @@ function toggleMenu() {
 
 <style lang="scss" scoped>
 .home-button {
-  position: fixed;
   flex-direction: column;
   display: flex;
-  top: 1rem;
-  right: 1rem;
   align-items: flex-end;
   justify-content: flex-start;
   gap: 1rem;
