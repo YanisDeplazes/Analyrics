@@ -1,6 +1,6 @@
 <template>
 
-  <div :class="['notification', type]" v-if="visible">
+  <div :class="['notification', variant]" v-if="visible">
     <div class="notification-header">
       <h1 class="notification-title">{{ title }}</h1>
       <Icon icon="cross" variant="error" size="xl" @click="close"></Icon>
@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  type: "sucess" | "error" | "info" | "warning",
+  variant: "success" | "error" | "info" | "warning",
   title: string,
   description: string,
 }>();
