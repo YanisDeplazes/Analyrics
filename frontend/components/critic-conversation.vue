@@ -58,7 +58,7 @@ watch(
   { immediate: true } // Start the effect on the first render
 );
 
-const validMoods = ["happy", "smirk", "weird"];
+const validMoods = ["happy", "smirk", "weird", "calm", "sad"];
 
 const personaImageUrl = computed(() => {
   const mood = props.mood;

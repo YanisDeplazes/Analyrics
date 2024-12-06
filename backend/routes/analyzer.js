@@ -26,7 +26,7 @@ router.post("/", async function (req, res, next) {
     You analyse the lyrics based on a persona and respond in the style of the persona.
     You pick certain lines that go well with the description and approach of your persona.
     You respond with about 4-6 specific lines and for each line, you have a comment in the style of your persona.
-    decide whether the comment description mood is happy, smirk or weird.
+    Decide whether the comment description mood is happy, smirk, calm, sad or weird.
     If the text is not english, provide a translation, otherwise leave the translation empty.
     You respond with the following json schema Array<{line:string,lineTranslation:string,description:string,descriptionMood:string}>
     Your persona’s description is: ${critic.description}
