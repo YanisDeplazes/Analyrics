@@ -23,6 +23,7 @@ export const store = reactive<{
   resetAll: () => void; // Resets all store state to its initial values
   resetSelectedTrack: () => void; // Resets the selected track and related analysis
   resetSelectedCritic: () => void; // Resets the selected critic
+  isEndscreen: boolean; // Indicates if the endscren is active
 }>({
   // Properties
 
@@ -32,6 +33,7 @@ export const store = reactive<{
   lineIndex: 0, // Default to the first line
   spotifyProfile: null, // No Spotify profile information initially
   spotifyUserAccessToken: null, // No access token initially
+  isEndscreen: false, // Endscren is not active initially
 
   // Methods
 
@@ -114,5 +116,6 @@ export const store = reactive<{
     this.selectedCritic = null;
     this.currentAnalysis = null;
     this.lineIndex = 0;
+    this.isEndscreen = false;
   },
 });
