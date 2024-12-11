@@ -23,6 +23,7 @@
       v-if="store.selectedCritic"
       :critic="store.selectedCritic"
       :chat="currentChat"
+      :mood="store.currentAnalysis[store.lineIndex].descriptionMood"
     >
       <template v-slot:navigation>
         <div class="result-navigation">
