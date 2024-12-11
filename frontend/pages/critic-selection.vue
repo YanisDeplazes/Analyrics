@@ -1,4 +1,5 @@
 <template>
+  <HomeButton />
   <Section class="critic-selection-section">
     <h1>Select a critic</h1>
     <SwiperWrapper

@@ -1,5 +1,7 @@
 <template>
-  <HomeButton />
+  <div class="menuButton">
+    <HomeButton />
+  </div>
   <div class="song-analysis-container">
     <div class="line-container">
       <p class="font-branding line">
@@ -102,6 +104,7 @@ const changeLine = (direction: 1 | -1) => {
     store.setLineIndex(nextIndex);
   } else {
     navigateTo("analysis-end");
+    store.isEndscreen = true;
   }
 };
 

@@ -37,7 +37,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import type { SpotifyTrack } from "~/model/spotify";
 import { player } from "~/stores/player";
 import { store } from "~/stores/store";

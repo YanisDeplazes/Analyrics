@@ -1,11 +1,5 @@
 <template>
-  <NuxtLink to="/" @click="store.resetAll()" class="home-button">
-    <Button icon-only variant="secondary" fill="fill" size="small">
-      <template v-slot:icon>
-        <Icon size="xl" icon="home" variant="secondary"></Icon> </template
-    ></Button>
-  </NuxtLink>
-
+  <HomeButton />
   <div class="end-screen">
     <div class="end-navigation">
       <h1>That's it!</h1>
@@ -53,7 +47,7 @@
       >
         <template v-slot:navigation>
           <div class="result-navigation">
-            <NuxtLink to="/analysis-result">
+            <NuxtLink to="/analysis-result" @click="store.isEndscreen = false">
               <Button
                 variant="primary"
                 icon="left"
@@ -80,10 +74,6 @@
 import { store } from "~/stores/store";
 </script>
 <style lang="scss" scoped>
-.home-button {
-  flex: 0;
-  align-self: flex-end;
-}
 .end {
   &-screen {
     display: flex;

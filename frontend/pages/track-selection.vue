@@ -1,4 +1,5 @@
 <template>
+  <HomeButton />
   <Section class="recommendation-section">
     <h1>Hi {{ store.spotifyProfile?.display_name || "there" }}!</h1>
     <template v-if="recommendations && recommendations.items.length">
@@ -120,14 +121,6 @@ const recommendations = ref<SpotifyTopTracks>();
 const error = ref<null | string>(null);
 const backend = new Backend();
 const swiper = ref<Swiper | null>(null);
-const selectTrack = (track: SpotifyTrack) => {
-  store.setSelectedTrack(track);
-  if (store.selectedCritic) {
-    navigateTo("analysis-in-progress");
-  } else {
-    navigateTo("critic-selection");
-  }
-};
 
 const onSwiper = (swiperInstance: Swiper) => {
   swiper.value = swiperInstance;
