@@ -79,7 +79,7 @@ onMounted(async () => {
   flex: 1;
   justify-content: space-between;
 
-  .loaders {
+  & .loaders {
     display: flex;
     flex-direction: column;
     flex: 1;

@@ -110,7 +110,7 @@ onMounted(() => {
   max-width: 580px;
   margin: auto;
 
-  .card {
+  & .card {
     width: calc(100% / 3);
     max-height: inherit;
     border-radius: $border-md;
@@ -133,7 +133,7 @@ onMounted(() => {
       opacity: 0; // Initially hidden
     }
 
-    img {
+    & img {
       position: absolute;
       top: 0;
       left: 0;

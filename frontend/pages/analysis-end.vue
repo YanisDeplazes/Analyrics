@@ -84,16 +84,16 @@ import { store } from "~/stores/store";
   flex: 0;
   align-self: flex-end;
 }
-
-.end-screen {
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: space-between;
-  gap: rem;
-  flex: 1;
-
-  .end-navigation {
+.end {
+  &-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+    gap: rem;
+    flex: 1;
+  }
+  &-navigation {
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -101,7 +101,7 @@ import { store } from "~/stores/store";
     margin-top: 10rem;
   }
 
-  .end-critic {
+  &-critic {
     display: flex;
     flex-direction: column;
     align-items: left;

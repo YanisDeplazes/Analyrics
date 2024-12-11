@@ -47,7 +47,6 @@
         </Critic>
       </swiper-slide>
     </SwiperWrapper>
-    <TrackCard v-if="store.selectedTrack"></TrackCard>
   </Section>
 </template>
 <script setup lang="ts">
@@ -70,7 +69,7 @@ onMounted(() => {
 .swiper {
   width: 100%;
 
-  .swiper-slide {
+  &-slide {
     display: flex;
     height: unset;
   }
@@ -80,6 +79,5 @@ onMounted(() => {
   display: flex;
   flex: 1;
   align-items: center;
-  justify-content: space-around;
 }
 </style>
