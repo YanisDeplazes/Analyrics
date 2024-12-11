@@ -47,15 +47,6 @@ onMounted(() => {
 });
 </script>
 <style lang="scss" scoped>
-.buttons {
-  display: flex;
-  gap: $spacing-lg;
-
-  button {
-    height: 100%;
-  }
-}
-
 .login-section {
   height: 100%;
   display: flex;
@@ -63,7 +54,7 @@ onMounted(() => {
   flex-direction: column;
   justify-content: space-between;
 
-  .login-content {
+  & .login-content {
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -71,9 +62,17 @@ onMounted(() => {
     gap: $spacing-lg;
   }
 
-  .login-text {
+  & .login-text {
     @include lg {
       max-width: 75%;
+    }
+  }
+  .buttons {
+    display: flex;
+    gap: $spacing-lg;
+
+    & button {
+      height: 100%;
     }
   }
 }

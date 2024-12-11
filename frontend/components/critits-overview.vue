@@ -86,7 +86,7 @@
   width: 100%;
   position: relative;
 
-  .swiper-slide {
+  & .swiper-slide {
     display: flex;
     height: unset;
   }

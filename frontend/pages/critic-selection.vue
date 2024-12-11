@@ -69,7 +69,7 @@ onMounted(() => {
 .swiper {
   width: 100%;
 
-  .swiper-slide {
+  &-slide {
     display: flex;
     height: unset;
   }

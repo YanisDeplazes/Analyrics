@@ -37,7 +37,6 @@
 .player-container {
   margin: auto;
   display: flex;
-
   width: 361px;
   padding: var(--spacing-md);
   border-radius: var(--border-md);
@@ -50,7 +49,7 @@
   justify-content: center;
   align-items: center;
 
-  .track {
+  & .track {
     padding: var(--spacing-sm);
     display: flex;
     gap: var(--spacing-lg);
@@ -60,26 +59,26 @@
       box-shadow: unset;
     }
 
-    .image {
+    & .image {
       position: relative;
-      .cover {
+      & .cover {
         width: 50px;
         height: 50px;
       }
     }
-    .track-info {
+    & .track-info {
       display: flex;
       flex-direction: column;
       gap: var(--spacing-sm);
       color: var(--on-secondary, #392467);
     }
   }
-  .controls {
-    .button {
+  & .controls {
+    & .button {
       &:hover {
         cursor: pointer;
       }
-      .icon-xl {
+      & .icon-xl {
         margin: 0;
       }
     }

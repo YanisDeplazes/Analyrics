@@ -109,12 +109,12 @@ const selectTrack = (track: SpotifyTrack) => {
         rgba(0, 0, 0, 0)
       );
     }
-    .cover {
+    & .cover {
       width: 100%;
       height: 100%;
     }
 
-    .icon {
+    & .icon {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -140,8 +140,8 @@ const selectTrack = (track: SpotifyTrack) => {
   }
 
   &.playing {
-    .track-image {
-      .icon {
+    & .track-image {
+      & .icon {
         background-image: url("../public/icons/pause_white.svg");
       }
 

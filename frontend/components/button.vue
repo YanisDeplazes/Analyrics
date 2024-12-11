@@ -45,51 +45,49 @@ const handleClick = (e: MouseEvent) => {
   align-items: center;
   justify-content: center;
   border: unset;
-}
 
-.button:hover {
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  scale: 1.01;
-  cursor: pointer;
-}
+  &.primary-fill {
+    background-color: $bg-primary;
+    color: $on-primary;
+  }
 
-.button:active {
-  scale: 1.05;
-}
+  &.secondary-fill {
+    background-color: $bg-secondary;
+    color: $on-secondary;
+  }
 
-/*sizes*/
-.size-small {
-  padding: $spacing-md;
-  border-radius: $border-md;
-  gap: $spacing-md;
-}
+  &.primary-outline {
+    background-color: transparent;
+    color: $bg-primary;
+    border: 1px solid $bg-primary;
+  }
 
-.size-large {
-  padding: $spacing-lg;
-  border-radius: $border-lg;
-  gap: $spacing-lg;
-}
+  &.secondary-outline {
+    background-color: transparent;
+    color: $bg-secondary;
+    border: 1px solid $bg-secondary;
+  }
 
-/*colors*/
-.primary-fill {
-  background-color: $bg-primary;
-  color: $on-primary;
-}
+  &.size-small {
+    padding: $spacing-md;
+    border-radius: $border-md;
+    gap: $spacing-md;
+  }
 
-.secondary-fill {
-  background-color: $bg-secondary;
-  color: $on-secondary;
-}
+  &.size-large {
+    padding: $spacing-lg;
+    border-radius: $border-lg;
+    gap: $spacing-lg;
+  }
 
-.primary-outline {
-  background-color: transparent;
-  color: $bg-primary;
-  border: 1px solid $bg-primary;
-}
+  &:hover {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    scale: 1.01;
+    cursor: pointer;
+  }
 
-.secondary-outline {
-  background-color: transparent;
-  color: $bg-secondary;
-  border: 1px solid $bg-secondary;
+  &:active {
+    scale: 1.05;
+  }
 }
 </style>

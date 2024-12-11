@@ -50,14 +50,14 @@ const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
   background-color: $bg-secondary;
   border-radius: $border-lg;
 
-  .critic-description {
+  & .critic-description {
     flex: 1;
   }
 
-  .image {
+  & .image {
     position: relative;
 
-    img {
+    & img {
       width: 100%;
       height: auto;
       object-fit: cover;
@@ -65,7 +65,7 @@ const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
       border-radius: $border-lg;
     }
 
-    .title {
+    & .title {
       position: absolute;
       bottom: $spacing-lg;
       background-color: $bg-secondary;

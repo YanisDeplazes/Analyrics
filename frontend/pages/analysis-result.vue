@@ -116,23 +116,23 @@ onMounted(() => {
   flex: 1;
   gap: 1rem;
 
-  .line-container {
+  & .line-container {
     display: flex;
     flex-direction: column;
     flex: 1;
     align-items: center;
     justify-content: center;
 
-    .line {
+    & .line {
       color: $bg-secondary;
       font-size: calc(2.027rem + 2vw);
     }
   }
-}
 
-.result-navigation {
-  display: flex;
-  flex-direction: row;
-  gap: $spacing-lg;
+  & .result-navigation {
+    display: flex;
+    flex-direction: row;
+    gap: $spacing-lg;
+  }
 }
 </style>

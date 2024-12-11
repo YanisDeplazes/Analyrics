@@ -65,7 +65,7 @@ const categoryDescription = computed(() => {
   border-radius: $border-md;
   padding: $spacing-md;
 
-  .icon {
+  & .icon {
     display: flex;
     align-items: center;
     gap: $spacing-md;
