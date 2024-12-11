@@ -1,9 +1,9 @@
 <template>
   <div
     class="player-container"
-    :class="{ collapsed: isCollapsed }"
+    :class="{ isPlaying: player.isPlaying }"
     v-if="player.playingTrack"
-    @click="toggleCollapsed"
+    @mousedown="startDrag"
   >
     <div class="track">
       <div class="image">
@@ -43,22 +43,25 @@
 
 <style lang="scss" scoped>
 .player-container {
+  cursor: grab;
   border: 1px solid var(--bg-secondary);
   margin: 0 auto;
   display: flex;
-  width: 361px;
   padding: var(--spacing-md);
-  border-radius: var(--border-md);
   background: var(--bg-secondary);
-  gap: var(--spacing-md);
   justify-content: center;
   align-items: center;
-  transition: all 0.2s ease-in-out;
-
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
+  -moz-user-select: none;
+  user-select: none;
+  position: absolute;
+  z-index: 10;
+  gap: 0;
+  border-radius: 104px;
+  overflow: hidden;
+  width: calc(50px + 2 * var(--spacing-md));
+  height: 50px;
+  padding-left: 0;
+  padding-right: 0;
 
   & .track {
     padding: 0;
@@ -68,11 +71,10 @@
       background: unset;
       box-shadow: unset;
     }
-
     & .image {
       position: relative;
-      height: 50px;
-      width: 50px;
+      width: calc(50px + 2 * var(--spacing-md));
+      height: calc(50px + 2 * var(--spacing-md));
 
       & .cover {
         position: absolute;
@@ -81,6 +83,8 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        user-select: none; /* Prevent image selection */
+        pointer-events: none; /* Ignore pointer events on the image */
       }
       & #progressBar {
         background: var(--bg-primary);
@@ -103,6 +107,8 @@
     flex: 1;
     width: 100%;
     transition: all 0.2s ease-in-out;
+    width: 0px;
+    height: 0px;
     strong {
       display: -webkit-box;
       -webkit-box-orient: vertical;
@@ -119,7 +125,8 @@
   & .controls {
     overflow: hidden;
     transition: all 0.2s ease-in-out;
-
+    width: 0px;
+    height: 0px;
     & .button {
       cursor: pointer;
 
@@ -128,27 +135,42 @@
       }
     }
   }
-  &.collapsed {
-    gap: 0;
-    width: unset;
-    border-radius: 104px;
+  &:hover {
+    gap: var(--spacing-md);
+    width: 361px;
+    border-radius: var(--border-md);
     overflow: hidden;
-    width: calc(50px + 2 * var(--spacing-md));
     height: 50px;
-    padding-left: 0;
-    padding-right: 0;
-
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
     & .image {
-      width: calc(50px + 2 * var(--spacing-md));
-      height: calc(50px + 2 * var(--spacing-md));
+      width: 50px;
+      height: 50px;
+
+      .cover {
+        animation: unset;
+      }
     }
     .track-info {
-      width: 0px;
-      height: 0px;
+      width: unset;
+      height: unset;
     }
     .controls {
-      width: 0px;
-      height: 0px;
+      width: unset;
+      height: unset;
+    }
+  }
+  &.isPlaying {
+    .cover {
+      animation: spin 30s linear infinite;
+    }
+  }
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
     }
   }
 }
@@ -228,4 +250,67 @@ onMounted(async () => {
     console.error("Failed to initialize Spotify player:", error);
   }
 });
+
+const isDragging = ref(false);
+const dragOffset = ref({ x: 0, y: 0 }); // Track offset from mouse position
+const playerContainer = ref<HTMLDivElement | null>(null);
+
+const startDrag = (event: MouseEvent) => {
+  if (event.button !== 0) return; // Only allow left-click dragging
+  if (!playerContainer.value) {
+    playerContainer.value = event.currentTarget as HTMLDivElement;
+  }
+
+  isDragging.value = true;
+
+  const rect = playerContainer.value.getBoundingClientRect();
+  dragOffset.value = {
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top,
+  };
+
+  playerContainer.value.style.cursor = "grabbing"; // Visual feedback for dragging
+
+  document.addEventListener("mousemove", handleDrag);
+  document.addEventListener("mouseup", stopDrag);
+
+  // Stop click event propagation
+  event.stopPropagation();
+};
+
+let animationFrame: number | null = null;
+
+const handleDrag = (event: MouseEvent) => {
+  if (!isDragging.value || !playerContainer.value) return;
+
+  // Calculate the new position
+  const newLeft = event.clientX - dragOffset.value.x;
+  const newTop = event.clientY - dragOffset.value.y;
+
+  // Constrain movement within the viewport
+  const parent = document.documentElement; // Constrain to the viewport
+  const maxLeft = parent.clientWidth - playerContainer.value.offsetWidth;
+  const maxTop = parent.clientHeight - playerContainer.value.offsetHeight;
+
+  const constrainedLeft = Math.max(0, Math.min(newLeft, maxLeft));
+  const constrainedTop = Math.max(0, Math.min(newTop, maxTop));
+
+  // Use requestAnimationFrame for smoother updates
+  if (animationFrame === null) {
+    animationFrame = requestAnimationFrame(() => {
+      if (playerContainer.value) {
+        playerContainer.value.style.left = `${constrainedLeft}px`;
+        playerContainer.value.style.top = `${constrainedTop}px`;
+      }
+      animationFrame = null; // Reset animation frame
+    });
+  }
+};
+
+const stopDrag = () => {
+  isDragging.value = false;
+
+  document.removeEventListener("mousemove", handleDrag);
+  document.removeEventListener("mouseup", stopDrag);
+};
 </script>
