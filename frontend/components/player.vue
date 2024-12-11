@@ -41,10 +41,6 @@
   padding: var(--spacing-md);
   border-radius: var(--border-md);
   background: var(--bg-secondary);
-  position: fixed;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
   gap: var(--spacing-md);
   justify-content: center;
   align-items: center;
@@ -97,16 +93,13 @@
 </style>
 
 <script setup lang="ts">
+import { player } from "~/stores/player";
+
 declare global {
   interface Window {
     onSpotifyIframeApiReady?: (IFrameAPI: any) => void;
   }
 }
-
-import { store } from "~/stores/store";
-import { player } from "~/stores/player";
-
-import type { SpotifyTrack } from "~/model/spotify";
 
 const loadSpotifyScript = () => {
   return new Promise<void>((resolve, reject) => {
