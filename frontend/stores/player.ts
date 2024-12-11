@@ -65,7 +65,6 @@ export const player = reactive<{
         const percentage = (state.data.position / state.data.duration) * 100;
         // Update the width of the progress bar
         progressBar.style.width = `${Math.min(percentage, 100)}%`; // Ensure the width does not exceed 100%
-        console.log(percentage)
       }
 
 
