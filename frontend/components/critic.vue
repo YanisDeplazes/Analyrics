@@ -83,7 +83,12 @@ function handleClick() {
     opacity: 0.8;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     cursor: pointer;
+    &.selected{
+      opacity: 1;
+
+    }
   }
+
 
   .image {
     position: relative;
