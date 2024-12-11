@@ -54,34 +54,46 @@
         },
       }"
     >
-      <swiper-slide v-for="critic in criticsData.critics">
+      <swiper-slide
+        v-for="(critic, index) in criticsData.critics"
+        :key="index"
+        :class="{
+          dimmed: selectedCardIndex !== null && selectedCardIndex !== index,
+        }"
+      >
         <Critic
           :name="critic.name"
           :category="critic.category"
           :description="critic.description"
           :image-url="critic.imageUrl"
+          :isSelected="selectedCardIndex === index"
+          @select="selectCard(index)"
         >
           <template v-slot:call-to-action>
-            <Button
-              fill="fill"
-              variant="primary"
-              :text="`Analyse with ${critic.name}`"
-              icon="right"
-              size="large"
-              @click="setCritic(critic)"
-            >
-              <template v-slot:icon>
-                <Icon
-                  size="large"
-                  variant="primary"
-                  icon="arrow-forward"
-                ></Icon>
-              </template>
-            </Button>
+            <!-- Call to action slot if needed -->
           </template>
         </Critic>
       </swiper-slide>
     </SwiperWrapper>
+    <div class="buttons">
+      <NuxtLink to="/track-selection">
+        <Button text="Go Back" variant="secondary" fill="outline" size="large">
+        </Button>
+      </NuxtLink>
+
+      <Button
+        text="Analyze Song"
+        variant="secondary"
+        isLarge=""
+        fill="fill"
+        size="large"
+        @click="setCritic()"
+      >
+        <template v-slot:icon>
+          <Icon size="large" icon="login" variant="secondary"></Icon>
+        </template>
+      </Button>
+    </div>
   </Section>
 </template>
 <script setup lang="ts">
@@ -93,19 +105,28 @@ import Swiper from "swiper";
 import criticsData from "assets/data/critics.json";
 import { store } from "~/stores/store";
 import type Critic from "~/model/critic";
-import "swiper/css/scrollbar";
 
 const swiper = ref<Swiper | null>(null);
 const onSwiper = (swiperInstance: Swiper) => {
   swiper.value = swiperInstance;
 };
-const setCritic = (critic: Critic) => {
-  store.setCritic(critic);
-  navigateTo("analysis-in-progress");
+const setCritic = () => {
+  if (selectedCardIndex.value !== null) {
+    const selectedCritic = criticsData.critics[selectedCardIndex.value];
+    store.setCritic(selectedCritic);
+    navigateTo("analysis-in-progress");
+  } else {
+    alert("Please select a critic before proceeding!");
+  }
 };
+
 onMounted(() => {
   redirectIfNoSelectionMade();
 });
+const selectedCardIndex = ref<number | null>(null);
+const selectCard = (index: number) => {
+  selectedCardIndex.value = selectedCardIndex.value === index ? null : index; // Toggle selection
+};
 </script>
 <style lang="scss" scoped>
 .swiper {
@@ -136,5 +157,18 @@ onMounted(() => {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.dimmed {
+  opacity: 0.7;
+}
+
+.buttons {
+  display: flex;
+  gap: $spacing-lg;
+
+  & button {
+    height: 100%;
+  }
 }
 </style>

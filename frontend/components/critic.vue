@@ -1,5 +1,9 @@
 <template>
-  <div class="critic">
+  <div
+    class="critic"
+    :class="{ selected: isSelected, dimmed: !isSelected && isAnotherSelected }"
+    @click="handleClick"
+  >
     <div class="image">
       <img :src="imageUrlWithBaseUrl" />
       <h3 class="title">{{ name }}</h3>
@@ -9,10 +13,26 @@
     <slot name="call-to-action" />
   </div>
 </template>
+
 <script setup lang="ts">
 import { computed } from "vue";
 
-// Allowed categories
+// Define props
+const props = defineProps<{
+  name: string;
+  category: string;
+  description: string;
+  imageUrl: string;
+  isSelected?: boolean; // Optional prop for selected state
+  isAnotherSelected?: boolean; // Optional prop for dimming logic
+}>();
+
+// Emit events
+const emit = defineEmits<{
+  (event: "select"): void; // Emit when this critic is selected
+}>();
+
+// Validate category
 const validCategories = [
   "culture",
   "genre",
@@ -22,22 +42,19 @@ const validCategories = [
   "niche",
 ] as const;
 
-const props = defineProps<{
-  name: string;
-  category: string;
-  description: string;
-  imageUrl: string;
-}>();
-
-const safeCategory = computed<
-  "culture" | "genre" | "humor" | "philosophy" | "intellect" | "niche"
->(() =>
+const safeCategory = computed(() =>
   validCategories.includes(props.category as (typeof validCategories)[number])
     ? (props.category as (typeof validCategories)[number])
     : "niche"
 );
 
+// Compute image URL with base path
 const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
+
+// Handle click and emit "select"
+function handleClick() {
+  emit("select");
+}
 </script>
 
 <style lang="scss" scoped>
@@ -49,15 +66,29 @@ const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
   flex-direction: column;
   background-color: $bg-secondary;
   border-radius: $border-lg;
+  transition: all 0.3s ease;
+  box-sizing: border-box; // Ensure the border is included in dimensions
+  border: 3px solid transparent;
 
-  & .critic-description {
-    flex: 1;
+  &.selected {
+    border: 3px solid var(--on-primary);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
   }
 
-  & .image {
+  &.dimmed {
+    opacity: 0.7;
+  }
+
+  &:hover {
+    opacity: 0.8;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+
+  .image {
     position: relative;
 
-    & img {
+    img {
       width: 100%;
       height: auto;
       object-fit: cover;
@@ -65,7 +96,7 @@ const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
       border-radius: $border-lg;
     }
 
-    & .title {
+    .title {
       position: absolute;
       bottom: $spacing-lg;
       background-color: $bg-secondary;
