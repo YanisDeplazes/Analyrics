@@ -21,6 +21,7 @@
     <CriticConversation
       :critic="store.selectedCritic"
       :chat="chat"
+      mood="0"
       v-if="store.selectedCritic"
     >
     </CriticConversation>
