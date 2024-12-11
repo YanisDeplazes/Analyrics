@@ -1,5 +1,10 @@
 <template>
-  <div class="player-container" v-if="player.playingTrack">
+  <div
+    class="player-container"
+    :class="{ collapsed: isCollapsed }"
+    v-if="player.playingTrack"
+    @click="toggleCollapsed"
+  >
     <div class="track">
       <div class="image">
         <img
@@ -11,10 +16,10 @@
           class="cover"
         />
       </div>
-      <div class="track-info">
-        <strong>{{ player.playingTrack?.name }}</strong>
-        <small>{{ player.playingTrack?.artists[0].name }}</small>
-      </div>
+    </div>
+    <div class="track-info">
+      <strong>{{ player.playingTrack?.name }}</strong>
+      <small>{{ player.playingTrack?.artists[0].name }}</small>
     </div>
     <div class="controls">
       <div class="button">
@@ -22,8 +27,10 @@
           size="xl"
           variant="empty"
           :icon="player.isPlaying ? 'pause' : 'play'"
-          @click="player.toggleSong(player.playingTrack)"
-        ></Icon>
+          @click.stop="player.toggleSong(player.playingTrack)"
+        >
+          ></Icon
+        >
       </div>
     </div>
   </div>
@@ -35,7 +42,8 @@
 
 <style lang="scss" scoped>
 .player-container {
-  margin: auto;
+  border: 1px solid var(--bg-secondary);
+  margin: 0 auto;
   display: flex;
   width: 361px;
   padding: var(--spacing-md);
@@ -44,12 +52,12 @@
   gap: var(--spacing-md);
   justify-content: center;
   align-items: center;
+  transition: all 0.2s ease-in-out;
 
   & .track {
-    padding: var(--spacing-sm);
+    padding: 0;
     display: flex;
-    gap: var(--spacing-lg);
-    flex: 1;
+    gap: 0;
     &:hover {
       background: unset;
       box-shadow: unset;
@@ -57,26 +65,61 @@
 
     & .image {
       position: relative;
+      height: 50px;
+      width: 50px;
+
       & .cover {
-        width: 50px;
-        height: 50px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
-    }
-    & .track-info {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-sm);
-      color: var(--on-secondary, #392467);
     }
   }
+  & .track-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    color: var(--on-secondary, #392467);
+    overflow: hidden;
+    flex: 1;
+    width: 100%;
+    transition: all 0.2s ease-in-out;
+  }
   & .controls {
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+
     & .button {
-      &:hover {
-        cursor: pointer;
-      }
+      cursor: pointer;
+
       & .icon-xl {
         margin: 0;
       }
+    }
+  }
+  &.collapsed {
+    gap: 0;
+    width: unset;
+    padding: 0;
+    border-radius: 104px;
+    overflow: hidden;
+    width: calc(50px + 2 * var(--spacing-md));
+    height: calc(50px + 2 * var(--spacing-md));
+
+    & .image {
+      width: calc(50px + 2 * var(--spacing-md));
+      height: calc(50px + 2 * var(--spacing-md));
+    }
+    .track-info {
+      width: 0px;
+      height: 0px;
+    }
+    .controls {
+      width: 0px;
+      height: 0px;
     }
   }
 }
@@ -100,6 +143,12 @@ declare global {
     onSpotifyIframeApiReady?: (IFrameAPI: any) => void;
   }
 }
+
+const isCollapsed = ref(true); // State to control the collapsed state
+
+const toggleCollapsed = () => {
+  isCollapsed.value = !isCollapsed.value; // Toggle the collapsed state
+};
 
 const loadSpotifyScript = () => {
   return new Promise<void>((resolve, reject) => {

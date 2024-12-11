@@ -1,0 +1,8 @@
+@use "./../abstracts/variables";
+.page-track-selection {
+  .content {
+    .player-container {
+      display: none !important;
+    }
+  }
+}

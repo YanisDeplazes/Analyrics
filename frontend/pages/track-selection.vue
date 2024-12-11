@@ -101,7 +101,6 @@
           stroke-linecap="round"
         />
       </svg>
-      <p>Alternatively, you can search for any song you'd like:</p>
     </template>
   </Section>
 </template>
@@ -156,7 +155,6 @@ const loadProfileAndRecommendations = async () => {
 <style lang="scss" scoped>
 .recommendation-section {
   display: flex;
-  flex: 1;
 
   & .swiper {
     &-container {

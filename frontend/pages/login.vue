@@ -53,7 +53,6 @@ onMounted(async () => {
 .login-section {
   height: 100%;
   display: flex;
-  flex: 1;
   flex-direction: column;
   justify-content: space-between;
 
@@ -66,7 +65,7 @@ onMounted(async () => {
 
   & .login-text {
     @include lg {
-      max-width: 75%;
+      max-width: 65%;
     }
   }
   .buttons {
