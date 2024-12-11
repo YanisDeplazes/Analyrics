@@ -54,7 +54,7 @@ onMounted(async () => {
 
   & .branding-text {
     @include lg {
-      max-width: 75%;
+      max-width: 50%;
     }
   }
 }
