@@ -7,55 +7,77 @@
         fill="fill"
         size="large"
         @click="toggleMenu"
+        class="toggleButton"
       >
         <template v-slot:icon>
           <Icon size="large" icon="three-dots" variant="secondary"></Icon>
         </template>
       </Button>
-
-      <template v-if="isOpen" class="home-menu">
-        <NuxtLink to="/" @click="store.resetAll()">
-          <Button
-            icon="left"
-            variant="secondary"
-            fill="fill"
-            size="large"
-            text="Home"
-          >
-            <template v-slot:icon>
-              <Icon size="large" icon="home" variant="secondary"></Icon>
-            </template>
-          </Button>
-        </NuxtLink>
-        <NuxtLink to="/critic-selection" @click="store.resetSelectedCritic()">
-          <Button
-            icon="left"
-            variant="secondary"
-            fill="fill"
-            size="large"
-            text="Change critic"
-          >
-            <template v-slot:icon>
-              <Icon size="large" icon="user" variant="secondary"></Icon>
-            </template>
-          </Button>
-        </NuxtLink>
-        <NuxtLink to="/track-selection" @click="store.resetSelectedTrack()">
-          <Button
-            icon="left"
-            variant="secondary"
-            fill="fill"
-            size="large"
-            text="Change song"
-          >
-            <template v-slot:icon>
-              <Icon size="large" icon="lyrics" variant="secondary"></Icon>
-            </template>
-          </Button>
-        </NuxtLink>
-      </template>
     </div>
+    <template v-if="isOpen" class="home-menu">
+      <NuxtLink to="/" @click="store.resetAll()">
+        <Button
+          icon="left"
+          variant="secondary"
+          fill="fill"
+          size="large"
+          text="Home"
+        >
+          <template v-slot:icon>
+            <Icon size="large" icon="home" variant="secondary"></Icon>
+          </template>
+        </Button>
+      </NuxtLink>
+      <NuxtLink
+        v-if="store.selectedCritic && !store.isEndscreen"
+        to="/critic-selection"
+        @click="store.resetSelectedCritic()"
+      >
+        <Button
+          icon="left"
+          variant="secondary"
+          fill="fill"
+          size="large"
+          text="Change critic"
+        >
+          <template v-slot:icon>
+            <Icon size="large" icon="user" variant="secondary"></Icon>
+          </template>
+        </Button>
+      </NuxtLink>
+      <NuxtLink
+        v-if="store.selectedTrack && !store.isEndscreen"
+        to="/track-selection"
+        @click="store.resetSelectedTrack()"
+      >
+        <Button
+          icon="left"
+          variant="secondary"
+          fill="fill"
+          size="large"
+          text="Change song"
+        >
+          <template v-slot:icon>
+            <Icon size="large" icon="lyrics" variant="secondary"></Icon>
+          </template>
+        </Button>
+      </NuxtLink>
+      <div to="/track-selection" @click="logout">
+        <Button
+          icon="left"
+          variant="secondary"
+          fill="fill"
+          size="large"
+          text="Logout"
+        >
+          <template v-slot:icon>
+            <Icon size="large" icon="logout" variant="secondary"></Icon>
+          </template>
+        </Button>
+      </div>
+    </template>
   </div>
+  <div v-if="isOpen" class="overlay" @click="toggleMenu"></div>
 </template>
 
 <script setup lang="ts">
@@ -85,11 +107,16 @@ onMounted(() => {
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
+
+const logout = (): void => {
+  const spotifyLogoutUrl: string = "https://accounts.spotify.com/en/logout";
+  const redirectUri: string = "http://localhost:8888/stuwe1/frontend";
+  window.location.href = `${spotifyLogoutUrl}?redirect_uri=${redirectUri}`;
+};
 </script>
 
 <style lang="scss" scoped>
 .home-button {
-  flex-direction: column;
   display: flex;
   align-items: flex-end;
   gap: 1rem;
@@ -97,14 +124,45 @@ onBeforeUnmount(() => {
   &-wrapper {
     display: flex;
     justify-content: flex-end;
-    align-items: center;
-    position: relative;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
+    gap: 1rem;
+    top: 1rem;
+    right: 1rem;
+    z-index: 100;
   }
 }
+.logout {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .home-menu {
-  flex-direction: column;
   align-items: flex-end;
-  justify-content: flex-start;
-  gap: 8rem;
+  flex-direction: column;
+  gap: 1rem;
+  display: flex;
+  gap: 1rem;
+  position: absolute;
+}
+
+.toggleButton {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2); /* Dunkler Overlay */
+  backdrop-filter: blur(3px); /* Blur-Effekt */
+  z-index: 5; /* Sollte unter dem Menü, aber über anderen Inhalten liegen */
 }
 </style>

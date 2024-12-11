@@ -67,7 +67,6 @@ export default class Backend {
         const data = await response.json();
         return data.tracks.items as Array<SpotifyTrack>;
     }
-
     track = async (id: string): Promise<SpotifyTrack> => {
         const response = await fetch(
             `${this.baseUrl}/tracks?id=${id}`,
@@ -78,4 +77,5 @@ export default class Backend {
         const track = await response.json();
         return track as SpotifyTrack;
     }
+
 }

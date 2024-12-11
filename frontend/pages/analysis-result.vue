@@ -1,5 +1,7 @@
 <template>
-  <HomeButton />
+  <div class="menuButton">
+    <HomeButton />
+  </div>
   <div class="song-analysis-container">
     <div class="line-container">
       <p class="font-branding line font-sad" :class="lineAnimation">
@@ -85,6 +87,7 @@ const changeLine = (direction: 1 | -1) => {
     }, 50);
   } else {
     navigateTo("analysis-end");
+    store.isEndscreen = true;
   }
 };
 
