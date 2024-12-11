@@ -110,6 +110,7 @@
 import { Swiper as SwiperWrapper, SwiperSlide, useSwiper } from "swiper/vue";
 import { Scrollbar, FreeMode } from "swiper/modules";
 import { store } from "~/stores/store";
+import { player } from "~/stores/player";
 import "swiper/css";
 import "swiper/css/scrollbar";
 import Backend from "~/api/backend";
@@ -133,6 +134,8 @@ const onSwiper = (swiperInstance: Swiper) => {
 };
 
 onMounted(async () => {
+  await player.stopSong();
+
   if (!store.spotifyUserAccessToken) {
     const route = useRoute();
     const accessToken = route.query["access_token"] as string;
@@ -144,7 +147,6 @@ onMounted(async () => {
 
     store.setAccessToken(accessToken);
   }
-  store.clearSong();
 
   await loadProfileAndRecommendations();
 });

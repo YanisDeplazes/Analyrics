@@ -58,7 +58,6 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     flex: 1;
-    justify-content: center;
     gap: $spacing-lg;
   }
 

@@ -1,10 +1,10 @@
 <template>
-  <div class="player-container" v-if="store.playingTrack">
+  <div class="player-container" v-if="player.playingTrack">
     <div class="track">
       <div class="image">
         <img
           :src="
-            store.playingTrack?.album.images[0].url ||
+            player.playingTrack?.album.images[0].url ||
             '/images/personas/default-cover-image.png'
           "
           alt="Album cover"
@@ -12,8 +12,8 @@
         />
       </div>
       <div class="track-info">
-        <strong>{{ store.playingTrack?.name }}</strong>
-        <small>{{ store.playingTrack?.artists[0].name }}</small>
+        <strong>{{ player.playingTrack?.name }}</strong>
+        <small>{{ player.playingTrack?.artists[0].name }}</small>
       </div>
     </div>
     <div class="controls">
@@ -21,8 +21,8 @@
         <Icon
           size="xl"
           variant="empty"
-          :icon="store.isPlaying ? 'pause' : 'play'"
-          @click="store.toggleSong(store.playingTrack)"
+          :icon="player.isPlaying ? 'pause' : 'play'"
+          @click="player.toggleSong(player.playingTrack)"
         ></Icon>
       </div>
     </div>
@@ -104,6 +104,8 @@ declare global {
 }
 
 import { store } from "~/stores/store";
+import { player } from "~/stores/player";
+
 import type { SpotifyTrack } from "~/model/spotify";
 
 const loadSpotifyScript = () => {
@@ -137,7 +139,7 @@ const initializeSpotifyPlayer = () => {
     };
 
     const callback = (controller: any) => {
-      store.setEmbedController(controller); // Save controller to store
+      player.setEmbedController(controller); // Save controller to store
       console.log("Spotify player initialized.");
     };
 
@@ -147,11 +149,12 @@ const initializeSpotifyPlayer = () => {
 
 onMounted(async () => {
   try {
+    player.initializePlayer(); // Ensure initialization promise is created
     await loadSpotifyScript();
-    console.log("Spotify Embed API loaded.");
-    initializeSpotifyPlayer(); // Initialize the player once
+    initializeSpotifyPlayer();
+    console.log("Spotify Embed API loaded and player initialized.");
   } catch (error) {
-    console.error("Failed to load Spotify Embed API:", error);
+    console.error("Failed to initialize Spotify player:", error);
   }
 });
 </script>

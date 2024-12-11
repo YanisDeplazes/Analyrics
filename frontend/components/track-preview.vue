@@ -3,14 +3,14 @@
     :class="[
       'track',
       {
-        playing: store.playingTrack === track && store.isPlaying,
+        playing: player.playingTrack === track && player.isPlaying,
       },
     ]"
   >
-    <div class="track-image" @click="store.toggleSong(track)">
+    <div class="track-image" @click="player.toggleSong(track)">
       <div
         class="icon"
-        :class="{ pause: store.playingTrack === track && store.isPlaying }"
+        :class="{ pause: player.playingTrack === track && player.isPlaying }"
       ></div>
       <img
         :src="
@@ -39,6 +39,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import type { SpotifyTrack } from "~/model/spotify";
+import { player } from "~/stores/player";
 import { store } from "~/stores/store";
 
 defineProps({
@@ -53,8 +54,8 @@ defineProps({
 });
 
 const selectTrack = (track: SpotifyTrack) => {
-  store.setSong(track);
-  store.playSong();
+  player.setSong(track);
+  player.playSong();
   store.setSelectedTrack(track);
   navigateTo("critic-selection");
 };

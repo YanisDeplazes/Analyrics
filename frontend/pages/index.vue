@@ -33,6 +33,14 @@
   </Section>
 </template>
 
+<script setup lang="ts">
+import { player } from "~/stores/player";
+
+onMounted(async () => {
+  await player.stopSong();
+});
+</script>
+
 <style lang="scss" scoped>
 .introduction-section,
 .critics-section,
