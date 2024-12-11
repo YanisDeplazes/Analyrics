@@ -3,8 +3,8 @@
     <div class="critics-title">
       <h1>Select a critic</h1>
       <h2 class="display-5">to analyze {{ store.selectedTrack?.name }}</h2>
-    </div>
-    <div class="swiper-buttons">
+
+      <div class="swiper-buttons">
       <Button
         icon-only
         variant="secondary"
@@ -36,6 +36,9 @@
         </template>
       </Button>
     </div>
+
+    </div>
+   
     <SwiperWrapper
       :slides-per-view="1.1"
       :space-between="8"
@@ -169,11 +172,12 @@ const selectCard = (index: number) => {
   gap: 1rem;
   position: absolute;
   right: 0;
-  top: 0;
+  bottom: 0;
 }
 
 .critics-title {
   width: 100%;
+  position: relative;
 }
 
 .dimmed {

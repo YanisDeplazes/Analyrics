@@ -96,12 +96,16 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
 }
 
 .swiper-buttons {
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 </style>
 <script setup lang="ts">
