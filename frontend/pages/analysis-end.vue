@@ -49,6 +49,7 @@
         v-if="store.selectedCritic"
         :critic="store.selectedCritic"
         chat="Lalilalu"
+        mood="null"
       >
         <template v-slot:navigation>
           <div class="result-navigation">

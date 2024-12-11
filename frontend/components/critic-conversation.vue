@@ -18,12 +18,14 @@
 </template>
 <script setup lang="ts">
 import type Critic from "~/model/critic";
+import { store } from "~/stores/store";
 const animatedChat = ref("");
 let timeoutId: NodeJS.Timeout | null;
 
 const props = defineProps<{
   critic: Critic;
   chat: string;
+  mood: string;
 }>();
 
 const typeWriterEffect = (text: string) => {
@@ -56,9 +58,15 @@ watch(
   { immediate: true } // Start the effect on the first render
 );
 
-const personaImageUrl = computed(
-  () => `/stuwe1/frontend/${props.critic.imageUrl}`
-);
+const validMoods = ["happy", "smirk", "weird", "calm", "sad"];
+
+const personaImageUrl = computed(() => {
+  const mood = props.mood;
+  if (!mood || !validMoods.includes(mood)) {
+    return `/stuwe1/frontend/${props.critic.imageUrl}`;
+  }
+  return `/stuwe1/frontend/images/personas/${props.critic.name.toLowerCase()}_${mood}.png`;
+});
 </script>
 <style lang="scss" scoped>
 .persona-conversation-container {
