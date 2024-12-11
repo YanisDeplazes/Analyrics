@@ -13,6 +13,7 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-md;
+
   // min-height: calc(100vh - 2 * $spacing-lg);
 }
 </style>
