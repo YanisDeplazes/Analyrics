@@ -1,8 +1,8 @@
 <template>
   <div class="content">
     <slot />
+    <Player />
   </div>
-  <Player />
 </template>
 <style lang="scss" scoped>
 .content {
