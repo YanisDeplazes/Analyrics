@@ -103,6 +103,18 @@
     flex: 1;
     width: 100%;
     transition: all 0.2s ease-in-out;
+    strong {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+    small {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
+    }
   }
   & .controls {
     overflow: hidden;
