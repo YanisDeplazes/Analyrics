@@ -31,6 +31,7 @@
 </template>
 <script setup lang="ts">
 import { store } from "~/stores/store";
+import { player } from "~/stores/player";
 
 const login = () => {
   if (store.spotifyUserAccessToken) {
@@ -40,7 +41,9 @@ const login = () => {
   }
 };
 
-onMounted(() => {
+onMounted(async () => {
+  await player.stopSong();
+
   if (store.spotifyUserAccessToken) {
     navigateTo("track-selection");
   }
