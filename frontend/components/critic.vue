@@ -10,20 +10,34 @@
   </div>
 </template>
 <script setup lang="ts">
+import { computed } from "vue";
+
+// Allowed categories
+const validCategories = [
+  "culture",
+  "genre",
+  "humor",
+  "philosophy",
+  "intellect",
+  "niche",
+] as const;
+
 const props = defineProps<{
   name: string;
-  category:
-  | "culture"
-  | "genre"
-  | "humor"
-  | "philosophy"
-  | "intellect"
-  | "niche";
+  category: string;
   description: string;
   imageUrl: string;
 }>();
-const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
-</script>
+
+// Validate category or fallback to a default
+const safeCategory = computed(() =>
+  validCategories.includes(props.category as typeof validCategories[number])
+    ? props.category
+    : "niche"
+);
+
+const imageUrlWithBaseUrl = computed(() => `/st
+
 <style lang="scss" scoped>
 .critic {
   padding: $spacing-lg;
@@ -34,7 +48,7 @@ const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
   background-color: $bg-secondary;
   border-radius: $border-lg;
 
-  .critic-description{
+  .critic-description {
     flex: 1;
   }
 

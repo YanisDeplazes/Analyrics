@@ -11,7 +11,14 @@
       Collective offers a fresh perspective on every song.
     </p>
     <NuxtLink to="/login">
-      <Button text="Explore now" variant="secondary" fill="fill" size="large" icon="right" class="pulsate">
+      <Button
+        text="Explore now"
+        variant="secondary"
+        fill="fill"
+        size="large"
+        icon="right"
+        class="pulsate"
+      >
         <template v-slot:icon>
           <Icon size="large" icon="arrow-forward" variant="secondary"></Icon>
         </template>
