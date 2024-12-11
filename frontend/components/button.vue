@@ -25,7 +25,7 @@
 </template>
 <script setup lang="ts">
 const props = defineProps<{
-  text?: string;
+  text?: string | "";
   variant: "primary" | "secondary";
   fill: "fill" | "outline";
   icon?: "left" | "right";
