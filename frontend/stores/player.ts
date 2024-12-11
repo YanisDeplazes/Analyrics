@@ -57,8 +57,24 @@ export const player = reactive<{
 
     // Add listener for playback updates
     this.EmbedController.addListener("playback_update", (state: PlaybackState) => {
+      
+      const progressBar = document.getElementById('progressBar') as HTMLElement;  // Assuming your progress bar has id 'progressBar'
+      if (progressBar && state.data.duration > 0) {
+  
+        // Calculate the percentage of playback position relative to duration
+        const percentage = (state.data.position / state.data.duration) * 100;
+        // Update the width of the progress bar
+        progressBar.style.width = `${Math.min(percentage, 100)}%`; // Ensure the width does not exceed 100%
+        console.log(percentage)
+      }
+
+
       if (state.data.position >= state.data.duration) {
-        this.clearSong(); // Clear song when playback is complete
+        if(this.playingTrack){
+          this.toggleSong(this.playingTrack);
+        } else {
+          console.warn('Track is not loaded or playingTrack is not set.');
+        }
       }
     });
   },

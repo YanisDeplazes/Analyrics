@@ -7,6 +7,7 @@
   >
     <div class="track">
       <div class="image">
+        <div id="progressBar"></div>
         <img
           :src="
             player.playingTrack?.album.images[0].url ||
@@ -54,6 +55,11 @@
   align-items: center;
   transition: all 0.2s ease-in-out;
 
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+
   & .track {
     padding: 0;
     display: flex;
@@ -75,6 +81,16 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+      }
+      & #progressBar {
+        background: var(--bg-primary);
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        z-index: 1;
+        opacity: 0.7;
       }
     }
   }
@@ -103,11 +119,12 @@
   &.collapsed {
     gap: 0;
     width: unset;
-    padding: 0;
     border-radius: 104px;
     overflow: hidden;
     width: calc(50px + 2 * var(--spacing-md));
-    height: calc(50px + 2 * var(--spacing-md));
+    height: 50px;
+    padding-left: 0;
+    padding-right: 0;
 
     & .image {
       width: calc(50px + 2 * var(--spacing-md));
