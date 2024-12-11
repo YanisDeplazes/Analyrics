@@ -19,42 +19,10 @@
   font-style: normal;
 }
 
-@font-face {
-  font-family: "Barriecito";
-  src: url("/assets/fonts/Barriecito/Barriecito-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Chicle";
-  src: url("/assets/fonts/Chicle/Chicle-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Salsa";
-  src: url("/assets/fonts/Salsa/Salsa-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Gabarito";
-  src: url("/assets/fonts/Gabarito/Gabarito-VariableFont_wght.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
 $font-family-branding: "Playfair Display", serif;
 $font-family-heading: "Gothic A1", sans-serif;
 $font-family-body: "Gothic A1", sans-serif;
 $font-family-sad: "Special Elite", serif;
-$font-family-weird: "Barriecito", sans-serif;
-$font-family-happy: "Chicle", serif;
-$font-family-smirk: "Salsa", serif;
-$font-family-calm: "Gabarito", serif;
 
 .font-branding {
   font-family: $font-family-branding;
@@ -62,23 +30,6 @@ $font-family-calm: "Gabarito", serif;
 
 .font-sad {
   font-family: $font-family-sad;
-}
-
-.font-weird {
-  font-family: $font-family-weird;
-}
-
-.font-happy {
-  font-family: $font-family-happy;
-  letter-spacing: .1rem;
-}
-
-.font-smirk {
-  font-family: $font-family-smirk;
-}
-
-.font-calm {
-  font-family: $font-family-calm;
 }
 
 html {
