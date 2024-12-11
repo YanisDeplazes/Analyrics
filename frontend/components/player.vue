@@ -143,6 +143,7 @@
     height: 50px;
     padding-left: var(--spacing-md);
     padding-right: var(--spacing-md);
+
     & .image {
       width: 50px;
       height: 50px;
