@@ -3,6 +3,7 @@
   <Section class="critic-selection-section">
     <div class="critics-title">
       <h1>Select a critic</h1>
+      <h2 class="display-5">to analyze {{ store.selectedTrack?.name }}</h2>
     </div>
     <div class="swiper-buttons">
       <Button
@@ -39,6 +40,7 @@
     <SwiperWrapper
       :slides-per-view="1.1"
       :space-between="8"
+      :class="{ 'pulse-animation': showPulse }"
       :modules="[Scrollbar, FreeMode]"
       :loop="true"
       :scrollbar="{ draggable: true }"
@@ -94,6 +96,9 @@
           <Icon size="large" icon="login" variant="secondary"></Icon>
         </template>
       </Button>
+      <div class="error-message" v-if="displayError">
+        Please select a critic before proceeding!
+      </div>
     </div>
   </Section>
 </template>
@@ -111,13 +116,24 @@ const swiper = ref<Swiper | null>(null);
 const onSwiper = (swiperInstance: Swiper) => {
   swiper.value = swiperInstance;
 };
+const showPulse = ref(false);
+const displayError = ref(false);
+
 const setCritic = () => {
   if (selectedCardIndex.value !== null) {
     const selectedCritic = criticsData.critics[selectedCardIndex.value];
     store.setCritic(selectedCritic);
     navigateTo("analysis-in-progress");
   } else {
-    alert("Please select a critic before proceeding!");
+    showPulse.value = true;
+    displayError.value = true;
+    setTimeout(() => {
+      showPulse.value = false; // Remove pulse animation
+    }, 300); // Duration of the pulse animation
+
+    setTimeout(() => {
+      displayError.value = false; // Hide the error message after a delay
+    }, 6000); // Duration to show the error message
   }
 };
 
@@ -132,10 +148,13 @@ const selectCard = (index: number) => {
 <style lang="scss" scoped>
 .swiper {
   width: 100%;
-
+  transition: transform 0.3s ease-in-out;
   &-slide {
     display: flex;
     height: unset;
+  }
+  &.pulse-animation {
+    transform: scale(1.01);
   }
 }
 
@@ -155,9 +174,7 @@ const selectCard = (index: number) => {
 }
 
 .critics-title {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  width: 100%;
 }
 
 .dimmed {
@@ -165,11 +182,24 @@ const selectCard = (index: number) => {
 }
 
 .buttons {
+  position: relative;
   display: flex;
   gap: $spacing-lg;
 
   & button {
     height: 100%;
   }
+}
+
+.error-message {
+  margin-top: 1rem;
+  color: $bg-error;
+  font-size: 0.875rem; // Adjust size as needed
+  text-align: center;
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  width: 260px;
+  transform: translateX(-50%);
 }
 </style>
