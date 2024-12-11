@@ -88,19 +88,18 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" scoped>
-.home-button-wrapper {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  position: relative;
-}
-
 .home-button {
   flex-direction: column;
   display: flex;
   align-items: flex-end;
-
   gap: 1rem;
+
+  &-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+  }
 }
 .home-menu {
   flex-direction: column;

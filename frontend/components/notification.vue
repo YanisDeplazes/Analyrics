@@ -29,30 +29,30 @@ const close = () => {
   display: flex;
   flex-direction: column;
 
-  .notification-header {
+  & .notification-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-}
 
-.success {
-  color: $on-success;
-  background-color: $bg-success;
-}
+  & .success {
+    color: $on-success;
+    background-color: $bg-success;
+  }
 
-.error {
-  color: $on-error;
-  background-color: $bg-error;
-}
+  & .error {
+    color: $on-error;
+    background-color: $bg-error;
+  }
 
-.info {
-  color: $on-info;
-  background-color: $bg-info;
-}
+  & .info {
+    color: $on-info;
+    background-color: $bg-info;
+  }
 
-.warning {
-  color: $on-warning;
-  background-color: $bg-warning;
+  & .warning {
+    color: $on-warning;
+    background-color: $bg-warning;
+  }
 }
 </style>

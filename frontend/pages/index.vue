@@ -44,7 +44,7 @@
 .branding-section {
   align-items: center;
 
-  .branding-text {
+  & .branding-text {
     @include lg {
       max-width: 75%;
     }

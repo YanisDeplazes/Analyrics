@@ -68,7 +68,7 @@ const personaImageUrl = computed(
   align-items: flex-end;
   width: 100%;
 
-  .chat-bubble-indicator {
+  & .chat-bubble-indicator {
     fill: $bg-secondary;
     width: 1.5rem;
     height: 1.5rem;
@@ -77,7 +77,7 @@ const personaImageUrl = computed(
     right: 30%;
   }
 
-  .chat-bubble {
+  & .chat-bubble {
     background-color: $bg-secondary;
     color: $on-secondary;
     padding: $spacing-lg;
@@ -88,7 +88,7 @@ const personaImageUrl = computed(
     align-items: flex-end;
     position: relative;
 
-    .chat {
+    & .chat {
       width: 100%;
     }
 
@@ -97,7 +97,7 @@ const personaImageUrl = computed(
     }
   }
 
-  img {
+  & img {
     max-height: calc(8rem + 10vw);
     max-width: calc(8rem + 10vw);
     align-self: flex-end;

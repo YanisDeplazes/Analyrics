@@ -347,51 +347,47 @@ const props = defineProps<{
 <style lang="scss" scoped>
 i {
   display: inline-block;
-}
 
-img,
-svg {
-  object-fit: contain;
-  width: 100%;
-  height: 100%;
-}
+  & img,
+  & svg {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
 
-svg {
-  object-fit: contain;
-  width: 100%;
-  height: 100%;
-}
+  // Size modifiers
+  &.icon-small {
+    width: 0.889rem;
+    height: 0.889rem;
+  }
 
-.icon-primary svg {
-  fill: $on-primary;
-}
+  &.icon-large {
+    margin: $spacing-sm;
+    width: 1rem;
+    height: 1rem;
+  }
 
-.icon-secondary svg {
-  fill: $on-secondary;
-}
+  &.icon-xl {
+    margin: $spacing-md;
+    width: 2rem;
+    height: 2rem;
+  }
 
-.icon-bg-secondary svg {
-  fill: $bg-secondary;
-}
+  // Color variants
+  &.icon-primary svg {
+    fill: $on-primary;
+  }
 
-.icon-error svg {
-  fill: $on-error;
-}
+  &.icon-secondary svg {
+    fill: $on-secondary;
+  }
 
-.icon-small {
-  width: 0.889rem;
-  height: 0.889rem;
-}
+  &.icon-bg-secondary svg {
+    fill: $bg-secondary;
+  }
 
-.icon-large {
-  margin: $spacing-sm;
-  width: 1rem;
-  height: 1rem;
-}
-
-.icon-xl {
-  margin: $spacing-md;
-  width: 2rem;
-  height: 2rem;
+  &.icon-error svg {
+    fill: $on-error;
+  }
 }
 </style>

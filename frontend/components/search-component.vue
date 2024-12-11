@@ -60,35 +60,32 @@ const searchSong = () => {
 </script>
 
 <style lang="scss" scoped>
-.searchbar-wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 345px;
-}
-
 .searchbar {
   border-radius: $border-md;
   background: $bg-secondary;
   padding: $spacing-md;
   display: flex;
   align-items: center;
-}
-
-.input {
-  color: $on-secondary;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-family: "Gothic A1";
-  font-size: 16px;
-  width: 100%;
-}
-
-.icon {
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 345px;
+  }
+  & .input {
+    color: $on-secondary;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: "Gothic A1";
+    font-size: 16px;
+    width: 100%;
+  }
+  & .icon {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
 }
 
 .results-list {

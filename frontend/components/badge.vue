@@ -18,15 +18,15 @@ const props = defineProps<{
   gap: $spacing-md;
   border-radius: $border-md;
   width: max-content;
-}
 
-.primary {
-  color: $on-primary;
-  background-color: $bg-primary;
-}
+  &.primary {
+    color: $on-primary;
+    background-color: $bg-primary;
+  }
 
-.secondary {
-  color: $on-secondary;
-  background-color: $bg-secondary;
+  &.secondary {
+    color: $on-secondary;
+    background-color: $bg-secondary;
+  }
 }
 </style>

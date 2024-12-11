@@ -4,7 +4,7 @@
       <img :src="imageUrlWithBaseUrl" />
       <h3 class="title">{{ name }}</h3>
     </div>
-    <CriticCategory :category="category"></CriticCategory>
+    <CriticCategory :category="safeCategory"></CriticCategory>
     <p class="critic-description">{{ description }}</p>
     <slot name="call-to-action" />
   </div>
@@ -29,14 +29,16 @@ const props = defineProps<{
   imageUrl: string;
 }>();
 
-// Validate category or fallback to a default
-const safeCategory = computed(() =>
-  validCategories.includes(props.category as typeof validCategories[number])
-    ? props.category
+const safeCategory = computed<
+  "culture" | "genre" | "humor" | "philosophy" | "intellect" | "niche"
+>(() =>
+  validCategories.includes(props.category as (typeof validCategories)[number])
+    ? (props.category as (typeof validCategories)[number])
     : "niche"
 );
 
-const imageUrlWithBaseUrl = computed(() => `/st
+const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
+</script>
 
 <style lang="scss" scoped>
 .critic {
@@ -48,14 +50,14 @@ const imageUrlWithBaseUrl = computed(() => `/st
   background-color: $bg-secondary;
   border-radius: $border-lg;
 
-  .critic-description {
+  & .critic-description {
     flex: 1;
   }
 
-  .image {
+  & .image {
     position: relative;
 
-    img {
+    & img {
       width: 100%;
       height: auto;
       object-fit: cover;
@@ -63,7 +65,7 @@ const imageUrlWithBaseUrl = computed(() => `/st
       border-radius: $border-lg;
     }
 
-    .title {
+    & .title {
       position: absolute;
       bottom: $spacing-lg;
       background-color: $bg-secondary;

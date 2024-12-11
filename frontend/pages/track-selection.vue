@@ -163,27 +163,28 @@ const loadProfileAndRecommendations = async () => {
 .recommendation-section {
   display: flex;
   flex: 1;
-}
 
-.swiper-container {
-  width: 100%;
-  position: relative;
-}
+  & .swiper {
+    &-container {
+      width: 100%;
+      position: relative;
+    }
+    &-buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+    }
 
-.top-tracks-title {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
+    &-button-prev::after,
+    &-button-next::after {
+      all: unset;
+    }
+  }
 
-.swiper-buttons {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-}
-
-.swiper-button-prev::after,
-.swiper-button-next::after {
-  all: unset;
+  .top-tracks-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 </style>

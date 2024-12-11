@@ -55,17 +55,20 @@ const props = defineProps<{
   border-radius: $border-lg;
   padding: $spacing-lg;
 
-  .loader {
+  & .loader {
     display: inline-flex;
     justify-content: center;
     flex-direction: row;
     gap: $spacing-lg;
 
-    .loader-icon {
+    & .loader-icon {
       max-height: 24px;
       max-width: 24px;
+      & .rotating {
+        animation: rotate-360deg 1s infinite;
+      }
 
-      .animate-path-forward {
+      & .animate-path-forward {
         animation-name: scale-up-down;
         animation-duration: 0.3s;
         animation-timing-function: linear;
@@ -74,7 +77,7 @@ const props = defineProps<{
     }
   }
 
-  .error-message {
+  & .error-message {
     background-color: $bg-error;
     color: $on-error;
     padding: $spacing-md;
@@ -107,9 +110,5 @@ const props = defineProps<{
   to {
     rotate: 360deg;
   }
-}
-
-.rotating {
-  animation: rotate-360deg 1s infinite;
 }
 </style>
