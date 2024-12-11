@@ -4,26 +4,42 @@
       <img :src="imageUrlWithBaseUrl" />
       <h3 class="title">{{ name }}</h3>
     </div>
-    <CriticCategory :category="category"></CriticCategory>
+    <CriticCategory :category="safeCategory"></CriticCategory>
     <p class="critic-description">{{ description }}</p>
     <slot name="call-to-action" />
   </div>
 </template>
 <script setup lang="ts">
+import { computed } from "vue";
+
+// Allowed categories
+const validCategories = [
+  "culture",
+  "genre",
+  "humor",
+  "philosophy",
+  "intellect",
+  "niche",
+] as const;
+
 const props = defineProps<{
   name: string;
-  category:
-  | "culture"
-  | "genre"
-  | "humor"
-  | "philosophy"
-  | "intellect"
-  | "niche";
+  category: string;
   description: string;
   imageUrl: string;
 }>();
+
+const safeCategory = computed<
+  "culture" | "genre" | "humor" | "philosophy" | "intellect" | "niche"
+>(() =>
+  validCategories.includes(props.category as (typeof validCategories)[number])
+    ? (props.category as (typeof validCategories)[number])
+    : "niche"
+);
+
 const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
 </script>
+
 <style lang="scss" scoped>
 .critic {
   padding: $spacing-lg;
@@ -34,7 +50,7 @@ const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
   background-color: $bg-secondary;
   border-radius: $border-lg;
 
-  .critic-description{
+  .critic-description {
     flex: 1;
   }
 

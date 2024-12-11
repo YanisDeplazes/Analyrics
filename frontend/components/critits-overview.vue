@@ -2,35 +2,75 @@
   <div class="critics-title">
     <h2>Meet the critics</h2>
     <div class="swiper-buttons">
-      <Button icon-only variant="secondary" fill="fill" size="small" @click="swiper!.slidePrev()">
+      <Button
+        icon-only
+        variant="secondary"
+        fill="fill"
+        size="small"
+        @click="swiper!.slidePrev()"
+      >
         <template v-slot:icon>
-          <Icon size="small" icon="keyboard-arrow-left" variant="secondary"></Icon>
+          <Icon
+            size="small"
+            icon="keyboard-arrow-left"
+            variant="secondary"
+          ></Icon>
         </template>
       </Button>
-      <Button icon-only variant="secondary" fill="fill" size="small" @click="swiper!.slideNext()">
+      <Button
+        icon-only
+        variant="secondary"
+        fill="fill"
+        size="small"
+        @click="swiper!.slideNext()"
+      >
         <template v-slot:icon>
-          <Icon size="small" icon="keyboard-arrow-right" variant="secondary"></Icon>
+          <Icon
+            size="small"
+            icon="keyboard-arrow-right"
+            variant="secondary"
+          ></Icon>
         </template>
       </Button>
     </div>
   </div>
-  <SwiperWrapper :modules="[Scrollbar, FreeMode, Autoplay]" :autoplay="{ delay: 5000 }" :loop="true" :breakpoints="{
-    480: {
-      slidesPerView: 2.1,
-      spaceBetween: 8
-    },
-    768: {
-      slidesPerView: 4.1,
-      spaceBetween: 16
-    },
-  }" :slides-per-view="1.1" :space-between="8" :scrollbar="{ draggable: true }" @swiper="onSwiper"
-    class="swiper-container" :freeMode="true">
+  <SwiperWrapper
+    :modules="[Scrollbar, FreeMode, Autoplay]"
+    :autoplay="{ delay: 5000 }"
+    :loop="true"
+    :breakpoints="{
+      480: {
+        slidesPerView: 2.1,
+        spaceBetween: 8,
+      },
+      768: {
+        slidesPerView: 4.1,
+        spaceBetween: 16,
+      },
+    }"
+    :slides-per-view="1.1"
+    :space-between="8"
+    :scrollbar="{ draggable: true }"
+    @swiper="onSwiper"
+    class="swiper-container"
+    :freeMode="true"
+  >
     <swiper-slide v-for="(critic, index) in criticsData.critics" :key="index">
-      <Critic :name="critic.name" :category="critic.category" :description="critic.description"
-        :image-url="critic.imageUrl">
+      <Critic
+        :name="critic.name"
+        :category="critic.category"
+        :description="critic.description"
+        :image-url="critic.imageUrl"
+      >
         <template v-slot:call-to-action>
-          <Button variant="primary" :text="`Analyze track with ${critic.name}`" size="large" fill="fill" icon="right"
-            @click="selectCritic(critic)">
+          <Button
+            variant="primary"
+            :text="`Analyze track with ${critic.name}`"
+            size="large"
+            fill="fill"
+            icon="right"
+            @click="selectCritic(critic)"
+          >
             <template v-slot:icon>
               <Icon size="large" variant="primary" icon="arrow-forward" />
             </template>
@@ -76,10 +116,10 @@ import { store } from "~/stores/store";
 const swiper = ref<Swiper | null>(null);
 const onSwiper = (swiperInstance: Swiper) => {
   swiper.value = swiperInstance;
-}
+};
 
 const selectCritic = (critic: Critic) => {
   store.setCritic(critic);
   navigateTo("/login");
-}
+};
 </script>

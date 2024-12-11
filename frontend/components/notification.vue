@@ -1,5 +1,4 @@
 <template>
-
   <div :class="['notification', variant]" v-if="visible">
     <div class="notification-header">
       <h1 class="notification-title">{{ title }}</h1>
@@ -13,14 +12,14 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  variant: "success" | "error" | "info" | "warning",
-  title: string,
-  description: string,
+  variant: "success" | "error" | "info" | "warning";
+  title: string;
+  description: string;
 }>();
 const visible = ref(true);
 const close = () => {
   visible.value = false;
-}
+};
 </script>
 
 <style lang="scss" scoped>
