@@ -41,7 +41,7 @@
       <CriticConversation
         v-if="store.selectedCritic"
         :critic="store.selectedCritic"
-        chat="Lalilalu"
+        chat="Wow, these lyrics were deeper than my thoughts while trying to survive a weekend without music. Thanks for joining – you rock just like the chorus of this catchy tune! 🎵"
         mood="null"
       >
         <template v-slot:navigation>
