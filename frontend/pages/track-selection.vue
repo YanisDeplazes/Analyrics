@@ -66,33 +66,12 @@
             },
           }"
         >
-          <swiper-slide
+          <SwiperSlide
             v-for="(track, index) in recommendations.items"
             :key="track.id"
           >
-            <div class="track" :id="'track_' + index">
-              <div class="track-image">
-                <div class="icon"></div>
-                <div class="track_preview_controls" @click="togglePlay(index)">
-                  <audio :src="track.preview_url"></audio>
-                </div>
-                <img
-                  :src="track.album.images[1].url || '/default-cover.jpg'"
-                  alt="Album cover"
-                  class="cover"
-                  aria-label="Album cover"
-                />
-              </div>
-              <div class="track-info" @click="selectTrack(track)">
-                <p class="track-title">
-                  <strong>{{ track.name }}</strong>
-                </p>
-                <p class="track-artists">
-                  <small>{{ commaSeparatedArtists(track.artists) }}</small>
-                </p>
-              </div>
-            </div>
-          </swiper-slide>
+            <TrackPreview :track="track" :index="index" />
+          </SwiperSlide>
         </SwiperWrapper>
       </div>
     </template>
@@ -165,6 +144,8 @@ onMounted(async () => {
 
     store.setAccessToken(accessToken);
   }
+  store.clearSong();
+
   await loadProfileAndRecommendations();
 });
 
@@ -176,147 +157,12 @@ const loadProfileAndRecommendations = async () => {
     );
   }
 };
-
-// Toggle playback
-const togglePlay = (index: number) => {
-  const track = document.querySelector<HTMLDivElement>(`#track_${index}`);
-  const audio = track?.querySelector<HTMLAudioElement>("audio");
-  // Get all tracks and audio elements
-  const allTracks = document.querySelectorAll<HTMLDivElement>(`.track`);
-  const allAudioElements = document.querySelectorAll<HTMLAudioElement>("audio");
-  // Pause all other audio elements and reset their state
-  allAudioElements.forEach((audioElement, i) => {
-    if (!audioElement.paused && i !== index) {
-      audioElement.pause();
-      audioElement.currentTime = 0; // Reset to the beginning
-    }
-  });
-  // Remove "playing" class from all tracks
-  allTracks.forEach((track) => track.classList.remove("playing"));
-  // Play or pause the current track
-  if (audio && track) {
-    if (audio.paused) {
-      track.classList.add("playing");
-      audio.play();
-    } else {
-      track.classList.remove("playing");
-      audio.pause();
-    }
-  }
-};
 </script>
 
 <style lang="scss" scoped>
 .recommendation-section {
   display: flex;
   flex: 1;
-  justify-content: center;
-}
-
-.swiper-slide {
-  background-color: $bg-secondary;
-  /* Optional styling */
-  color: $on-secondary;
-  /* Optional styling */
-  border-radius: $border-lg;
-  height: auto;
-  max-width: 100%;
-
-  .track {
-    padding: $spacing-lg;
-    /* Optional padding */
-    display: flex;
-    /* To center content */
-    padding: $spacing-lg;
-    /* Optional padding */
-    gap: $spacing-lg;
-
-    .track-info {
-      cursor: pointer;
-    }
-
-    &.playing {
-      .track-image {
-        .icon {
-          background-image: url("../public/icons/pause_white.svg");
-        }
-
-        .track_preview_controls {
-          background-color: rgba(0, 0, 0, 0.3);
-          opacity: 1;
-        }
-      }
-    }
-
-    &-info {
-      flex: 1;
-    }
-
-    &-title {
-      -webkit-box-orient: vertical;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      overflow: hidden;
-    }
-    &-artists {
-      -webkit-box-orient: vertical;
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
-      overflow: hidden;
-    }
-
-    .track-image {
-      position: relative;
-      width: 70px;
-      height: 70px;
-      .cover {
-        width: 100%;
-        height: 100%;
-      }
-
-      .icon {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 50%;
-        height: 50%;
-        max-width: 40px;
-        -o-object-fit: cover;
-        object-fit: cover;
-        transform: translate(-50%, -50%);
-        background-image: url("../public/icons/play_white.svg");
-        background-size: contain;
-        z-index: 1;
-        pointer-events: none;
-      }
-
-      .track_preview_controls {
-        position: absolute;
-        background: linear-gradient(
-          rgba(0, 0, 0, 0.502),
-          rgba(0, 0, 0, 0),
-          rgba(0, 0, 0, 0)
-        );
-        opacity: 0;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        transition: all 0.2s ease-in-out;
-      }
-
-      &:hover {
-        .track_preview_controls {
-          opacity: 1;
-          cursor: pointer;
-        }
-      }
-
-      .track_preview {
-        display: none;
-      }
-    }
-  }
 }
 
 .swiper-container {

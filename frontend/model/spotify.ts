@@ -110,3 +110,11 @@ export interface SpotifyAudioFeatures {
   duration_ms: number
   time_signature: number
 }
+
+export interface PlaybackState {
+  data: {
+    position: number; // Current playback position in milliseconds
+    duration: number; // Total track duration in milliseconds
+  };
+}
+

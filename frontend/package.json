@@ -17,6 +17,7 @@
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.13",
     "cypress-mochawesome-reporter": "^3.8.2",
     "mocha-junit-reporter": "^2.2.1",
     "sass": "^1.80.5",

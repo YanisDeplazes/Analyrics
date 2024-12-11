@@ -1,8 +1,14 @@
 <template>
   <Section class="critic-selection-section">
     <h1>Select a critic</h1>
-    <SwiperWrapper :slides-per-view="1.1" :space-between="8" :modules="[Scrollbar, FreeMode]" :loop="true"
-      :scrollbar="{ draggable: true }" :freeMode="true" :breakpoints="{
+    <SwiperWrapper
+      :slides-per-view="1.1"
+      :space-between="8"
+      :modules="[Scrollbar, FreeMode]"
+      :loop="true"
+      :scrollbar="{ draggable: true }"
+      :freeMode="true"
+      :breakpoints="{
         480: {
           slidesPerView: 2.1,
           spaceBetween: 8,
@@ -11,22 +17,36 @@
           slidesPerView: 4.1,
           spaceBetween: 16,
         },
-      }">
+      }"
+    >
       <swiper-slide v-for="critic in criticsData.critics">
-        <Critic :name="critic.name" :category="critic.category" :description="critic.description"
-          :image-url="critic.imageUrl">
+        <Critic
+          :name="critic.name"
+          :category="critic.category"
+          :description="critic.description"
+          :image-url="critic.imageUrl"
+        >
           <template v-slot:call-to-action>
-            <Button fill="fill" variant="primary" :text="`Analyse with ${critic.name}`" icon="right" size="large"
-              @click="setCritic(critic)">
+            <Button
+              fill="fill"
+              variant="primary"
+              :text="`Analyse with ${critic.name}`"
+              icon="right"
+              size="large"
+              @click="setCritic(critic)"
+            >
               <template v-slot:icon>
-                <Icon size="large" variant="primary" icon="arrow-forward"></Icon>
+                <Icon
+                  size="large"
+                  variant="primary"
+                  icon="arrow-forward"
+                ></Icon>
               </template>
             </Button>
           </template>
         </Critic>
       </swiper-slide>
     </SwiperWrapper>
-    <TrackCard v-if="store.selectedTrack"></TrackCard>
   </Section>
 </template>
 <script setup lang="ts">
@@ -59,6 +79,5 @@ onMounted(() => {
   display: flex;
   flex: 1;
   align-items: center;
-  justify-content: space-around;
 }
 </style>

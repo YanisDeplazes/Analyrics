@@ -17,27 +17,13 @@
         :key="index"
         class="result-item"
       >
-        <img
-          :src="
-            track.album?.images?.[0]?.url ||
-            '/images/personas/default-cover-image.png'
-          "
-          alt="Album Art"
-          class="track-image"
-        />
-        <div class="track-info" @click="selectTrack(track)">
-          <span class="track-name">{{ track.name || "Unknown Track" }}</span>
-          <span class="track-artist">
-            {{ commaSeparatedArtists(track.artists) || "Unknown Artist" }}
-          </span>
-        </div>
+        <TrackPreview :track="track" :index="index" />
       </li>
     </ul>
   </div>
 </template>
 <script setup lang="ts">
 import debounce from "lodash/debounce";
-import { store } from "~/stores/store";
 import type { SpotifyTrack } from "~/model/spotify";
 import Backend from "~/api/backend";
 const backend = new Backend();
@@ -70,11 +56,6 @@ const searchSong = () => {
   } else {
     searchResults.value = [];
   }
-};
-
-const selectTrack = (track: SpotifyTrack) => {
-  store.setSelectedTrack(track);
-  navigateTo("critic-selection");
 };
 </script>
 
@@ -118,54 +99,12 @@ const selectTrack = (track: SpotifyTrack) => {
   background: $bg-secondary;
   overflow-y: auto;
   max-height: 300px;
-}
-
-.result-item {
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.result-item:hover {
-  border-radius: $border-md;
-  background: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.2) 0%,
-      rgba(0, 0, 0, 0.2) 100%
-    ),
-    $bg-secondary;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.track-image {
-  width: 50px;
-  height: 50px;
-  border-radius: 4px;
-  margin-right: 12px;
-}
-
-.track-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.track-name {
-  color: $on-secondary;
-  font-family: "Gothic A1";
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 160%;
-}
-
-.track-artist {
-  color: $on-secondary;
-  font-family: "Gothic A1";
-  font-size: 14.22px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 160%;
+  & .track {
+    border-radius: unset;
+    & .track-image {
+      width: 50px !important;
+      height: 50px !important;
+    }
+  }
 }
 </style>
