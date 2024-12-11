@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <HomeButton />
     <slot />
     <Player />
   </div>

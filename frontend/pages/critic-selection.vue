@@ -1,5 +1,4 @@
 <template>
-  <HomeButton />
   <Section class="critic-selection-section">
     <div class="critics-title">
       <h1>Select a critic</h1>

@@ -126,7 +126,7 @@ const logout = (): void => {
     justify-content: flex-end;
     flex-direction: column;
     align-items: flex-end;
-    position: absolute;
+    position: fixed;
     gap: 1rem;
     top: 1rem;
     right: 1rem;

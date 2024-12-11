@@ -1,5 +1,4 @@
 <template>
-  <HomeButton />
   <div class="end-screen">
     <div class="end-navigation">
       <h1>That's it!</h1>

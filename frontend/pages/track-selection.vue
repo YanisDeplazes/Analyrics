@@ -1,5 +1,4 @@
 <template>
-  <HomeButton />
   <Section class="recommendation-section">
     <h1>Hi {{ store.spotifyProfile?.display_name || "there" }}!</h1>
     <template v-if="recommendations && recommendations.items.length">

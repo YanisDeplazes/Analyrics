@@ -1,7 +1,4 @@
 <template>
-  <div class="menuButton">
-    <HomeButton />
-  </div>
   <div class="progress-container">
     <div class="loaders">
       <Loader
