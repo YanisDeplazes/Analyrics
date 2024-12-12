@@ -25,7 +25,7 @@
     },
   }" :slides-per-view="1.1" :space-between="8" :scrollbar="{ draggable: true }" @swiper="onSwiper"
     class="swiper-container" :freeMode="true">
-    <swiper-slide v-for="(critic, index) in criticsData.critics" :key="index">
+    <swiper-slide v-for="(critic, index) in critics" :key="index">
       <Critic :name="critic.name" :category="critic.category" :description="critic.description"
         :image-url="critic.imageUrl">
       </Critic>
@@ -65,10 +65,10 @@ import { Swiper as SwiperWrapper, SwiperSlide } from "swiper/vue";
 import { Scrollbar, FreeMode, Autoplay } from "swiper/modules"; // Updated import
 import "swiper/css";
 import "swiper/css/scrollbar";
-import criticsData from "assets/data/critics.json";
 import Swiper from "swiper";
 import type Critic from "~/model/critic";
 import { store } from "~/stores/store";
+const critics = getRandomizedCritics();
 const swiper = ref<Swiper | null>(null);
 const onSwiper = (swiperInstance: Swiper) => {
   swiper.value = swiperInstance;

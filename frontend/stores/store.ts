@@ -106,6 +106,7 @@ export const store = reactive<{
    */
   resetSelectedCritic: function () {
     this.selectedCritic = null;
+    this.lineIndex = 0;
   },
 
   /**
