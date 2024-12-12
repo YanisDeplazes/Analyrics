@@ -2,7 +2,7 @@
   <Section class="critic-selection-section">
     <div class="critics-title">
       <h1>Select a critic</h1>
-      <h2 class="display-5">to analyze {{ store.selectedTrack?.name }}</h2>
+      <h2 class="display-5">to analyze "{{ store.selectedTrack?.name }}"</h2>
 
       <div class="swiper-buttons">
       <Button
@@ -82,7 +82,10 @@
     </SwiperWrapper>
     <div class="buttons">
       <NuxtLink to="/track-selection">
-        <Button text="Go Back" variant="secondary" fill="outline" size="large">
+        <Button text="Back" variant="secondary" fill="outline" size="large" icon="left">
+          <template v-slot:icon>
+          <Icon variant="bg-secondary" size="small" icon="arrow-backward"/>
+          </template>
         </Button>
       </NuxtLink>
 
