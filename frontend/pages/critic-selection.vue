@@ -2,7 +2,7 @@
   <Section class="critic-selection-section">
     <div class="critics-title">
       <h1>Select a critic</h1>
-      <h2 class="display-5">to analyze {{ store.selectedTrack?.name }}</h2>
+      <h2 class="display-5">to analyze "{{ store.selectedTrack?.name }}"</h2>
 
       <div class="swiper-buttons">
       <Button
