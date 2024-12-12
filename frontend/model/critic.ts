@@ -4,7 +4,8 @@ export default interface Critic {
     imageUrl: string,
     messages: {
         fetchingLyrics: string,
-        analysingLyrics: string
+        analysingLyrics: string,
+        analysisDone: string
     }
     description: string,
     tone: string,
