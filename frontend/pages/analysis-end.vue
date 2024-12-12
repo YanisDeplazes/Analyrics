@@ -8,9 +8,9 @@
         }}" you can:
       </p>
       <NuxtLink to="/critic-selection" @click="store.resetSelectedCritic()">
-        <Button icon="left" variant="secondary" fill="fill" size="small" text="Choose another critic">
+        <Button icon="left" variant="secondary" fill="fill" size="large" text="Choose another critic">
           <template v-slot:icon>
-            <Icon size="xl" variant="secondary" icon="user"></Icon>
+            <Icon size="large" variant="secondary" icon="user"></Icon>
           </template>
         </Button>
       </NuxtLink>
@@ -18,9 +18,9 @@
         If you want to continue with {{ store.selectedCritic?.name }} you can:
       </p>
       <NuxtLink to="/track-selection" @click="store.resetSelectedTrack()">
-        <Button icon="left" variant="secondary" fill="fill" size="small" text="Choose another song">
+        <Button icon="left" variant="secondary" fill="fill" size="large" text="Choose another song">
           <template v-slot:icon>
-            <Icon size="xl" variant="secondary" icon="lyrics"></Icon>
+            <Icon size="large" variant="secondary" icon="lyrics"></Icon>
           </template>
         </Button>
       </NuxtLink>
