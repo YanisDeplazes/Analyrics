@@ -1,6 +1,7 @@
 @use "swiper/css";
 @use "swiper/css/pagination";
 .swiper-wrapper {
+  margin-block-start: 15px;
   margin-bottom: 16px !important;
 }
 

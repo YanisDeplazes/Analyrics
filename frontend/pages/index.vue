@@ -12,6 +12,7 @@
     </p>
     <NuxtLink to="/login">
       <Button
+        style="margin-block-start: 12px"
         text="Explore now"
         variant="secondary"
         fill="fill"

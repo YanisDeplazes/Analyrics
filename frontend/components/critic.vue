@@ -70,25 +70,39 @@ function handleClick() {
   box-sizing: border-box; // Ensure the border is included in dimensions
   border: 3px solid transparent;
 
+  &::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: var(--on-primary);
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
   &.selected {
     border: 3px solid var(--on-primary);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+    &::after {
+      content: "";
+      position: absolute;
+
+      background-color: var(--on-primary);
+      border-radius: 100%;
+
+      background-image: url("../public/icons/check.svg");
+      background-repeat: no-repeat;
+      background-size: 70%;
+      background-position: center;
+    }
   }
 
   &.dimmed {
     opacity: 0.7;
   }
-
-  &:hover {
-    opacity: 0.8;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    &.selected{
-      opacity: 1;
-
-    }
-  }
-
 
   .image {
     position: relative;
@@ -108,6 +122,19 @@ function handleClick() {
       border-top-right-radius: $border-md;
       border-bottom-right-radius: $border-md;
       padding: $spacing-md;
+    }
+  }
+
+  &:hover {
+    background-color: rgba(255, 246, 137, 0.8);
+    & .title {
+      background-color: rgba(255, 246, 137, 0.8) !important;
+    }
+
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    &.selected {
+      opacity: 1;
     }
   }
 }

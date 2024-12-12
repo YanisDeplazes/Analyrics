@@ -71,6 +71,11 @@ const selectTrack = (track: SpotifyTrack) => {
   padding: $spacing-lg;
   gap: $spacing-lg;
 
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+
   &-info {
     flex: 1;
   }
@@ -80,6 +85,7 @@ const selectTrack = (track: SpotifyTrack) => {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
+    cursor: pointer;
   }
 
   &-artists {
@@ -108,6 +114,9 @@ const selectTrack = (track: SpotifyTrack) => {
         rgba(0, 0, 0, 0),
         rgba(0, 0, 0, 0)
       );
+      opacity: 0.3;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
     }
     & .cover {
       width: 100%;
@@ -124,6 +133,11 @@ const selectTrack = (track: SpotifyTrack) => {
       background-image: url("../public/icons/play_white.svg");
       background-size: contain;
       z-index: 1;
+      cursor: pointer;
+    }
+
+    &:hover::after {
+      opacity: 1;
     }
   }
   &:hover {
@@ -134,9 +148,6 @@ const selectTrack = (track: SpotifyTrack) => {
       ),
       $bg-secondary;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  }
-  &:hover .track_preview_controls {
-    opacity: 1;
   }
 
   &.playing {
