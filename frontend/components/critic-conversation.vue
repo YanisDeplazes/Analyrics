@@ -1,5 +1,5 @@
 <template>
-  <div class="persona-conversation-container">
+  <div class="critic-conversation-container">
     <div class="chat-bubble">
       <p class="chat">
         <span v-for="(char, index) in animatedChat.split('')" :style="`--i:${index}`" aria-hidden="true"
@@ -11,7 +11,7 @@
           d="M0,.222222222220807c6.361624320275041,27.317563257651273,92.823563531912441,192.990215873111083,135.924025145925953,274.61904132546988,7.376648960463172,13.970782860971667,28.296583745785938,10.54164140823741,30.805964557676816-5.056458847089743C181.217046882427894,179.7344746712497,222.308946854458554.596517445000245,320,.222222222220807,159.5-.277777777779193,0,.222222222220807,0,.222222222220807Z" />
       </svg>
     </div>
-    <img :src="personaImageUrl" alt="Persona image" />
+    <img :src="criticImageUrl" alt="Critic image" />
   </div>
 </template>
 <script setup lang="ts">
@@ -36,7 +36,7 @@ watch(
 
 const validMoods = ["happy", "smirk", "weird", "calm", "sad"];
 
-const personaImageUrl = computed(() => {
+const criticImageUrl = computed(() => {
   const mood = props.mood;
   if (!mood || !validMoods.includes(mood)) {
     return `/stuwe1/frontend/${props.critic.imageUrl}`;
@@ -45,7 +45,7 @@ const personaImageUrl = computed(() => {
 });
 </script>
 <style lang="scss" scoped>
-.persona-conversation-container {
+.critic-conversation-container {
   display: flex;
   flex-direction: column;
   gap: $spacing-lg;
