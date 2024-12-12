@@ -1,8 +1,9 @@
 <template>
   <div class="song-analysis-container">
     <div class="line-container">
-      <p class="font-branding line font-sad" :class="lineAnimation">
-        <span v-for="(lyric, index) in currentLine" :style="`--i:${index};`">
+      <p class="font-branding line font-sad line-animated">
+        <span v-for="(lyric, index) in currentLine" :style="`--i:${index};`" aria-hidden="true"
+          :key="`${lyric}-${index}-${Math.random()}`">
           {{ `${lyric}&nbsp;` }}
         </span>
       </p>
@@ -36,14 +37,9 @@
 <script setup lang="ts">
 import { store } from "~/stores/store";
 const isTranslationShown = ref(false);
-const lineAnimation = ref("line-animated");
 
 const toggleTranslation = () => {
-  lineAnimation.value = "";
-  setTimeout(() => {
-    isTranslationShown.value = !isTranslationShown.value;
-    lineAnimation.value = "line-animated";
-  }, 50);
+  isTranslationShown.value = !isTranslationShown.value;
 };
 
 const translationAvailable = () => {
@@ -77,11 +73,7 @@ const changeLine = (direction: 1 | -1) => {
   if (!store.currentAnalysis) return;
   const nextIndex = store.lineIndex + direction;
   if (nextIndex >= 0 && nextIndex < store.currentAnalysis.length) {
-    lineAnimation.value = "";
-    setTimeout(() => {
-      store.setLineIndex(nextIndex);
-      lineAnimation.value = "line-animated";
-    }, 50);
+    store.setLineIndex(nextIndex);
   } else {
     navigateTo("analysis-end");
     store.isEndscreen = true;
