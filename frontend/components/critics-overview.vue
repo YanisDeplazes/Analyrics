@@ -66,8 +66,6 @@ import { Scrollbar, FreeMode, Autoplay } from "swiper/modules"; // Updated impor
 import "swiper/css";
 import "swiper/css/scrollbar";
 import Swiper from "swiper";
-import type Critic from "~/model/critic";
-import { store } from "~/stores/store";
 const critics = getRandomizedCritics();
 const swiper = ref<Swiper | null>(null);
 const onSwiper = (swiperInstance: Swiper) => {

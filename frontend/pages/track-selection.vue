@@ -131,6 +131,7 @@ const loadProfileAndRecommendations = async (timeRange: string) => {
 .recommendation-section {
   display: flex;
   flex: 1;
+  justify-content: center;
 
   & .swiper {
     &-container {
@@ -159,7 +160,6 @@ const loadProfileAndRecommendations = async (timeRange: string) => {
   & .track-selection-container {
     display: flex;
     flex-direction: column;
-    flex: 1;
     justify-content: center;
     gap: $spacing-3xl;
   }
