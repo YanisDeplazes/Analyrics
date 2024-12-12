@@ -43,7 +43,8 @@ export const store = reactive<{
    * @param {SpotifyTrack} track - The track to set as the selected track
    */
   setSelectedTrack: function (track) {
-    player.toggleSong(track); // Start or toggle playback for the selected track
+    player.setSong(track); 
+    player.isPlaying = false;
     this.selectedTrack = track; // Update the selected track in the store
   },
 

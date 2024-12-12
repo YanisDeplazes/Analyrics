@@ -5,21 +5,48 @@
       <h2 class="display-5">to analyze "{{ store.selectedTrack?.name }}"</h2>
 
       <div class="swiper-buttons">
-        <Button icon-only variant="secondary" fill="fill" size="small" @click="swiper!.slidePrev()">
+        <Button
+          icon-only
+          variant="secondary"
+          fill="fill"
+          size="small"
+          @click="swiper!.slidePrev()"
+        >
           <template v-slot:icon>
-            <Icon size="small" icon="keyboard-arrow-left" variant="secondary"></Icon>
+            <Icon
+              size="small"
+              icon="keyboard-arrow-left"
+              variant="secondary"
+            ></Icon>
           </template>
         </Button>
-        <Button icon-only variant="secondary" fill="fill" size="small" @click="swiper!.slideNext()">
+        <Button
+          icon-only
+          variant="secondary"
+          fill="fill"
+          size="small"
+          @click="swiper!.slideNext()"
+        >
           <template v-slot:icon>
-            <Icon size="small" icon="keyboard-arrow-right" variant="secondary"></Icon>
+            <Icon
+              size="small"
+              icon="keyboard-arrow-right"
+              variant="secondary"
+            ></Icon>
           </template>
         </Button>
       </div>
     </div>
 
-    <SwiperWrapper :slides-per-view="1.1" :space-between="8" :class="{ 'pulse-animation': showPulse }"
-      :modules="[Scrollbar, FreeMode]" :loop="true" :scrollbar="{ draggable: true }" :freeMode="true" @swiper="onSwiper"
+    <SwiperWrapper
+      :slides-per-view="1.1"
+      :space-between="8"
+      :class="{ 'pulse-animation': showPulse }"
+      :modules="[Scrollbar, FreeMode]"
+      :loop="true"
+      :scrollbar="{ draggable: true }"
+      :freeMode="true"
+      @swiper="onSwiper"
       :breakpoints="{
         480: {
           slidesPerView: 2.1,
@@ -29,12 +56,23 @@
           slidesPerView: 4.1,
           spaceBetween: 16,
         },
-      }">
-      <swiper-slide v-for="(critic, index) in critics" :key="index" :class="{
-        dimmed: selectedCardIndex !== null && selectedCardIndex !== index,
-      }">
-        <Critic :name="critic.name" :category="critic.category" :description="critic.description"
-          :image-url="critic.imageUrl" :isSelected="selectedCardIndex === index" @select="selectCard(index)">
+      }"
+    >
+      <swiper-slide
+        v-for="(critic, index) in critics"
+        :key="index"
+        :class="{
+          dimmed: selectedCardIndex !== null && selectedCardIndex !== index,
+        }"
+      >
+        <Critic
+          :name="critic.name"
+          :category="critic.category"
+          :description="critic.description"
+          :image-url="critic.imageUrl"
+          :isSelected="selectedCardIndex === index"
+          @select="selectCard(index)"
+        >
           <template v-slot:call-to-action>
             <!-- Call to action slot if needed -->
           </template>
@@ -43,14 +81,27 @@
     </SwiperWrapper>
     <div class="buttons">
       <NuxtLink to="/track-selection">
-        <Button text="Back" variant="secondary" fill="outline" size="large" icon="left">
+        <Button
+          text="Back"
+          variant="secondary"
+          fill="outline"
+          size="large"
+          icon="left"
+        >
           <template v-slot:icon>
             <Icon variant="bg-secondary" size="small" icon="arrow-backward" />
           </template>
         </Button>
       </NuxtLink>
 
-      <Button text="Analyze Song" variant="secondary" isLarge="" fill="fill" size="large" @click="setCritic()">
+      <Button
+        text="Analyze Song"
+        variant="secondary"
+        isLarge=""
+        fill="fill"
+        size="large"
+        @click="setCritic()"
+      >
         <template v-slot:icon>
           <Icon size="large" icon="login" variant="secondary"></Icon>
         </template>
@@ -68,6 +119,8 @@ import "swiper/css";
 import "swiper/css/scrollbar";
 import Swiper from "swiper";
 import { store } from "~/stores/store";
+import { player } from "~/stores/player";
+
 import type Critic from "~/model/critic";
 const critics = getRandomizedCritics();
 const swiper = ref<Swiper | null>(null);
@@ -95,7 +148,7 @@ const setCritic = () => {
   }
 };
 
-onMounted(() => {
+onMounted(async () => {
   redirectIfNoSelectionMade();
 });
 const selectedCardIndex = ref<number | null>(null);

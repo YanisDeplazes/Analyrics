@@ -43,6 +43,7 @@
 
 <style lang="scss" scoped>
 .player-container {
+  transition: width 0.2s ease-in-out;
   cursor: grab;
   border: 1px solid var(--bg-secondary);
   margin: 0 auto;
@@ -53,7 +54,7 @@
   align-items: center;
   -moz-user-select: none;
   user-select: none;
-  position: absolute;
+  position: fixed;
   z-index: 10;
   gap: 0;
   border-radius: 104px;
@@ -63,7 +64,7 @@
   padding-left: 0;
   padding-right: 0;
   bottom: 15px;
-  left: 15px;
+  left: clamp(15px, calc((100vw - 1200px) / 2), calc(100vw - 100px));
 
   & .track {
     padding: 0;
@@ -77,6 +78,7 @@
       position: relative;
       width: calc(50px + 2 * var(--spacing-md));
       height: calc(50px + 2 * var(--spacing-md));
+      transition: all 0.2s ease-in-out;
 
       & .cover {
         position: absolute;
@@ -198,12 +200,6 @@ declare global {
   }
 }
 
-const isCollapsed = ref(true); // State to control the collapsed state
-
-const toggleCollapsed = () => {
-  isCollapsed.value = !isCollapsed.value; // Toggle the collapsed state
-};
-
 const loadSpotifyScript = () => {
   return new Promise<void>((resolve, reject) => {
     if (document.getElementById("spotify-iframe-api")) {
@@ -253,16 +249,15 @@ onMounted(async () => {
     console.error("Failed to initialize Spotify player:", error);
   }
 });
-
 const isDragging = ref(false);
-const dragOffset = ref({ x: 0, y: 0 }); // Track offset from mouse position
+const dragOffset = ref({ x: 0, y: 0 });
 const playerContainer = ref<HTMLDivElement | null>(null);
 
 const startDrag = (event: MouseEvent) => {
-  if (event.button !== 0) return; // Only allow left-click dragging
-  if (!playerContainer.value) {
-    playerContainer.value = event.currentTarget as HTMLDivElement;
-  }
+  if (event.button !== 0) return; // Allow only left mouse button
+
+  playerContainer.value = event.currentTarget as HTMLDivElement;
+  if (!playerContainer.value) return;
 
   isDragging.value = true;
 
@@ -272,46 +267,38 @@ const startDrag = (event: MouseEvent) => {
     y: event.clientY - rect.top,
   };
 
-  playerContainer.value.style.cursor = "grabbing"; // Visual feedback for dragging
+  playerContainer.value.style.cursor = "grabbing";
 
   document.addEventListener("mousemove", handleDrag);
   document.addEventListener("mouseup", stopDrag);
 
-  // Stop click event propagation
-  event.stopPropagation();
+  event.preventDefault(); // Prevent default actions
 };
-
-let animationFrame: number | null = null;
 
 const handleDrag = (event: MouseEvent) => {
   if (!isDragging.value || !playerContainer.value) return;
 
-  // Calculate the new position
   const newLeft = event.clientX - dragOffset.value.x;
   const newTop = event.clientY - dragOffset.value.y;
 
-  // Constrain movement within the viewport
-  const parent = document.documentElement; // Constrain to the viewport
+  const parent = document.documentElement;
   const maxLeft = parent.clientWidth - playerContainer.value.offsetWidth;
   const maxTop = parent.clientHeight - playerContainer.value.offsetHeight;
 
   const constrainedLeft = Math.max(0, Math.min(newLeft, maxLeft));
   const constrainedTop = Math.max(0, Math.min(newTop, maxTop));
 
-  // Use requestAnimationFrame for smoother updates
-  if (animationFrame === null) {
-    animationFrame = requestAnimationFrame(() => {
-      if (playerContainer.value) {
-        playerContainer.value.style.left = `${constrainedLeft}px`;
-        playerContainer.value.style.top = `${constrainedTop}px`;
-      }
-      animationFrame = null; // Reset animation frame
-    });
-  }
+  playerContainer.value.style.left = `${constrainedLeft}px`;
+  playerContainer.value.style.top = `${constrainedTop}px`;
 };
 
 const stopDrag = () => {
+  if (!isDragging.value) return;
+
   isDragging.value = false;
+  if (playerContainer.value) {
+    playerContainer.value.style.cursor = "grab";
+  }
 
   document.removeEventListener("mousemove", handleDrag);
   document.removeEventListener("mouseup", stopDrag);
