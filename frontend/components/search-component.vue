@@ -69,15 +69,16 @@ const searchSong = () => {
   &-wrapper {
     display: flex;
     flex-direction: column;
-    width: 345px;
+    height: 320px;
+    @include lg{
+      max-width: 50%;
+    }
   }
   & .input {
     color: $on-secondary;
     background: transparent;
     border: none;
     outline: none;
-    font-family: "Gothic A1";
-    font-size: 16px;
     width: 100%;
   }
   & .icon {
@@ -95,7 +96,6 @@ const searchSong = () => {
   border-radius: $border-md;
   background: $bg-secondary;
   overflow-y: auto;
-  max-height: 300px;
   & .track {
     border-radius: unset;
     & .track-image {

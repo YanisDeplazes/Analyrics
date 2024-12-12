@@ -15,9 +15,9 @@ export default class Backend {
         return profile as SpotifyProfile;
     }
 
-    topTracks = async (accessToken: string): Promise<SpotifyTopTracks> => {
+    topTracks = async (accessToken: string, timeRange: string): Promise<SpotifyTopTracks> => {
         const topTracksFetch = await fetch(
-            `${this.baseUrl}/me/top/tracks?access_token=${accessToken}`
+            `${this.baseUrl}/me/top/tracks?access_token=${accessToken}&time_range=${timeRange}`
         );
 
         const topTracks = await topTracksFetch.json();

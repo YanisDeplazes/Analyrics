@@ -32,7 +32,8 @@ $font-family-sad: "Special Elite", serif;
   font-family: $font-family-sad;
 }
 
-html {
+html,
+input {
   font-family: $font-family-body;
   font-size: 1rem;
   font-weight: 400;

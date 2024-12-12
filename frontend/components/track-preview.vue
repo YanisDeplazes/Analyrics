@@ -83,7 +83,7 @@ const selectTrack = (track: SpotifyTrack) => {
   &-title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     overflow: hidden;
     cursor: pointer;
   }

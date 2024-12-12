@@ -1,107 +1,57 @@
 <template>
   <Section class="recommendation-section">
-    <h1>Hi {{ store.spotifyProfile?.display_name || "there" }}!</h1>
-    <template v-if="recommendations && recommendations.items.length">
-      <p>
-        Let's get to analysing your preferred song. We've pulled a few tracks
-        from your Spotify account to get you started:
-      </p>
-      <div class="top-tracks-title">
-        <h2>Your Top Tracks</h2>
-        <div class="swiper-buttons">
-          <Button
-            icon-only
-            variant="secondary"
-            fill="fill"
-            size="small"
-            @click="swiper!.slidePrev()"
-          >
-            <template v-slot:icon>
-              <Icon
-                size="small"
-                icon="keyboard-arrow-left"
-                variant="secondary"
-              ></Icon>
-            </template>
-          </Button>
-          <Button
-            icon-only
-            variant="secondary"
-            fill="fill"
-            size="small"
-            @click="swiper!.slideNext()"
-          >
-            <template v-slot:icon>
-              <Icon
-                size="small"
-                icon="keyboard-arrow-right"
-                variant="secondary"
-              ></Icon>
-            </template>
-          </Button>
+    <h1>Hi {{ store.spotifyProfile?.display_name || "there" }}, select your track:</h1>
+    <div class="track-selection-container">
+      <template v-if="recommendations && recommendations.items.length">
+        <div class="recommendation-container">
+          <h2>Your top tracks</h2>
+          <div class="top-tracks-title">
+            <FilterList :filters="recommendationFilters" variant="secondary" :initial-value="selectedRecommendationTerm"
+              @filter-changed="filterChanged" />
+            <div class="swiper-buttons">
+              <Button icon-only variant="secondary" fill="fill" size="small" @click="swiper!.slidePrev()">
+                <template v-slot:icon>
+                  <Icon size="small" icon="keyboard-arrow-left" variant="secondary"></Icon>
+                </template>
+              </Button>
+              <Button icon-only variant="secondary" fill="fill" size="small" @click="swiper!.slideNext()">
+                <template v-slot:icon>
+                  <Icon size="small" icon="keyboard-arrow-right" variant="secondary"></Icon>
+                </template>
+              </Button>
+            </div>
+          </div>
+          <div class="swiper-container">
+            <SwiperWrapper :modules="[Scrollbar, FreeMode]" :slides-per-view="1.1" :space-between="8" :loop="true"
+              :scrollbar="{ draggable: true }" aria-label="Track recommendations carousel" :freeMode="true"
+              @swiper="onSwiper" :breakpoints="{
+                480: {
+                  slidesPerView: 2.1,
+                  spaceBetween: 8,
+                },
+                768: {
+                  slidesPerView: 3.1,
+                  spaceBetween: 16,
+                },
+                1080: {
+                  slidesPerView: 4.1,
+                  spaceBetween: 16,
+                },
+              }">
+              <SwiperSlide v-for="(track, index) in recommendations.items" :key="track.id">
+                <TrackPreview :track="track" :index="index" />
+              </SwiperSlide>
+            </SwiperWrapper>
+          </div>
         </div>
+      </template>
+      <div class="search-container">
+        <h2>
+          Search a track
+        </h2>
+        <SearchComponent />
       </div>
-      <div class="swiper-container">
-        <SwiperWrapper
-          :modules="[Scrollbar, FreeMode]"
-          :slides-per-view="1.1"
-          :space-between="8"
-          :loop="true"
-          :scrollbar="{ draggable: true }"
-          aria-label="Track recommendations carousel"
-          :freeMode="true"
-          @swiper="onSwiper"
-          :breakpoints="{
-            480: {
-              slidesPerView: 2.1,
-              spaceBetween: 8,
-            },
-            768: {
-              slidesPerView: 3.1,
-              spaceBetween: 16,
-            },
-            1080: {
-              slidesPerView: 4.1,
-              spaceBetween: 16,
-            },
-          }"
-        >
-          <SwiperSlide
-            v-for="(track, index) in recommendations.items"
-            :key="track.id"
-          >
-            <TrackPreview :track="track" :index="index" />
-          </SwiperSlide>
-        </SwiperWrapper>
-      </div>
-    </template>
-    <p>
-      To get started with your song analysis, search for any song you’d like.
-    </p>
-    <SearchComponent />
-    <template v-if="!(recommendations && recommendations.items.length)">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="345"
-        height="4"
-        viewBox="0 0 357 4"
-        fill="none"
-      >
-        <path
-          d="M2 2H355"
-          stroke="#392467"
-          stroke-width="4"
-          stroke-linecap="round"
-        />
-        <path
-          d="M2 2H355"
-          stroke="white"
-          stroke-opacity="0.2"
-          stroke-width="4"
-          stroke-linecap="round"
-        />
-      </svg>
-    </template>
+    </div>
   </Section>
 </template>
 
@@ -119,10 +69,29 @@ const recommendations = ref<SpotifyTopTracks>();
 const error = ref<null | string>(null);
 const backend = new Backend();
 const swiper = ref<Swiper | null>(null);
+const selectedRecommendationTerm = ref("medium_term");
+const recommendationFilters = [
+  {
+    value: "short_term",
+    displayName: "Last 4 weeks"
+  },
+  {
+    value: "medium_term",
+    displayName: "Last 6 months"
+  },
+  {
+    value: "long_term",
+    displayName: "Last year"
+  },
+];
 
 const onSwiper = (swiperInstance: Swiper) => {
   swiper.value = swiperInstance;
 };
+
+const filterChanged = async (filter: { value: string, displayName: string }) => {
+  await loadProfileAndRecommendations(filter.value);
+}
 
 onMounted(async () => {
   await player.stopSong();
@@ -137,16 +106,22 @@ onMounted(async () => {
     }
 
     store.setAccessToken(accessToken);
+    await setUserProfile();
   }
 
-  await loadProfileAndRecommendations();
+  await loadProfileAndRecommendations(selectedRecommendationTerm.value);
 });
 
-const loadProfileAndRecommendations = async () => {
+const setUserProfile = async () => {
   if (store.spotifyUserAccessToken) {
     store.setProfile(await backend.me(store.spotifyUserAccessToken));
+  }
+}
+
+const loadProfileAndRecommendations = async (timeRange: string) => {
+  if (store.spotifyUserAccessToken) {
     recommendations.value = await backend.topTracks(
-      store.spotifyUserAccessToken
+      store.spotifyUserAccessToken, timeRange
     );
   }
 };
@@ -155,12 +130,14 @@ const loadProfileAndRecommendations = async () => {
 <style lang="scss" scoped>
 .recommendation-section {
   display: flex;
+  flex: 1;
 
   & .swiper {
     &-container {
       width: 100%;
       position: relative;
     }
+
     &-buttons {
       display: flex;
       flex-direction: row;
@@ -173,10 +150,25 @@ const loadProfileAndRecommendations = async () => {
     }
   }
 
-  .top-tracks-title {
+  & .top-tracks-title {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between
+  }
+
+  & .track-selection-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    gap: $spacing-3xl;
+  }
+
+  & .recommendation-container,
+  .search-container {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
   }
 }
 </style>
