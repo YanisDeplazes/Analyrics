@@ -87,7 +87,6 @@ import { store } from "~/stores/store";
     flex-direction: column;
     align-items: left;
     gap: 2rem;
-    margin-top: 10rem;
   }
 
   &-critic {

@@ -5,40 +5,39 @@
       <h2 class="display-5">to analyze "{{ store.selectedTrack?.name }}"</h2>
 
       <div class="swiper-buttons">
-      <Button
-        icon-only
-        variant="secondary"
-        fill="fill"
-        size="small"
-        @click="swiper!.slidePrev()"
-      >
-        <template v-slot:icon>
-          <Icon
-            size="small"
-            icon="keyboard-arrow-left"
-            variant="secondary"
-          ></Icon>
-        </template>
-      </Button>
-      <Button
-        icon-only
-        variant="secondary"
-        fill="fill"
-        size="small"
-        @click="swiper!.slideNext()"
-      >
-        <template v-slot:icon>
-          <Icon
-            size="small"
-            icon="keyboard-arrow-right"
-            variant="secondary"
-          ></Icon>
-        </template>
-      </Button>
+        <Button
+          icon-only
+          variant="secondary"
+          fill="fill"
+          size="small"
+          @click="swiper!.slidePrev()"
+        >
+          <template v-slot:icon>
+            <Icon
+              size="small"
+              icon="keyboard-arrow-left"
+              variant="secondary"
+            ></Icon>
+          </template>
+        </Button>
+        <Button
+          icon-only
+          variant="secondary"
+          fill="fill"
+          size="small"
+          @click="swiper!.slideNext()"
+        >
+          <template v-slot:icon>
+            <Icon
+              size="small"
+              icon="keyboard-arrow-right"
+              variant="secondary"
+            ></Icon>
+          </template>
+        </Button>
+      </div>
     </div>
 
-    </div>
-   
     <SwiperWrapper
       :slides-per-view="1.1"
       :space-between="8"
@@ -82,9 +81,15 @@
     </SwiperWrapper>
     <div class="buttons">
       <NuxtLink to="/track-selection">
-        <Button text="Back" variant="secondary" fill="outline" size="large" icon="left">
+        <Button
+          text="Back"
+          variant="secondary"
+          fill="outline"
+          size="large"
+          icon="left"
+        >
           <template v-slot:icon>
-          <Icon variant="bg-secondary" size="small" icon="arrow-backward"/>
+            <Icon variant="bg-secondary" size="small" icon="arrow-backward" />
           </template>
         </Button>
       </NuxtLink>
@@ -168,6 +173,7 @@ const selectCard = (index: number) => {
   flex: 1;
   align-items: center;
   position: relative;
+  margin-bottom: 70px;
 }
 .swiper-buttons {
   display: flex;

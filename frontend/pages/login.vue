@@ -54,12 +54,13 @@ onMounted(async () => {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  flex: 1;
+  margin-bottom: 70px;
 
   & .login-content {
     display: flex;
     flex-direction: column;
-    flex: 1;
     gap: $spacing-lg;
   }
 

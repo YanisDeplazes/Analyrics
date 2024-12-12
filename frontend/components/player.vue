@@ -62,6 +62,8 @@
   height: 50px;
   padding-left: 0;
   padding-right: 0;
+  bottom: 15px;
+  left: 15px;
 
   & .track {
     padding: 0;

@@ -50,6 +50,10 @@ onMounted(async () => {
   margin: $spacing-2xl $spacing-lg;
 }
 
+.disclaimer-section {
+  margin-bottom: 70px;
+}
+
 .branding-section {
   align-items: center;
 

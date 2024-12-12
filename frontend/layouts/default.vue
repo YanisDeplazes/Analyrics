@@ -7,15 +7,14 @@
 </template>
 <style lang="scss" scoped>
 .content {
-  padding: $spacing-3xl $spacing-lg;
-
+  padding: 0 $spacing-lg;
+  position: relative;
   max-width: 1200px;
   margin: auto;
   display: flex;
   flex-direction: column;
   gap: $spacing-md;
-
-  // min-height: calc(100vh - 2 * $spacing-lg);
+  min-height: 100vh;
 }
 </style>
 

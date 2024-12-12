@@ -14,68 +14,70 @@
         </template>
       </Button>
     </div>
-    <template v-if="isOpen" class="home-menu">
-      <NuxtLink to="/" @click="store.resetAll()">
-        <Button
-          icon="left"
-          variant="secondary"
-          fill="fill"
-          size="large"
-          text="Home"
+    <div class="home-open">
+      <template v-if="isOpen" class="home-menu">
+        <NuxtLink to="/" @click="store.resetAll()">
+          <Button
+            icon="left"
+            variant="secondary"
+            fill="fill"
+            size="large"
+            text="Home"
+          >
+            <template v-slot:icon>
+              <Icon size="large" icon="home" variant="secondary"></Icon>
+            </template>
+          </Button>
+        </NuxtLink>
+        <NuxtLink
+          v-if="store.selectedCritic && !store.isEndscreen"
+          to="/critic-selection"
+          @click="store.resetSelectedCritic()"
         >
-          <template v-slot:icon>
-            <Icon size="large" icon="home" variant="secondary"></Icon>
-          </template>
-        </Button>
-      </NuxtLink>
-      <NuxtLink
-        v-if="store.selectedCritic && !store.isEndscreen"
-        to="/critic-selection"
-        @click="store.resetSelectedCritic()"
-      >
-        <Button
-          icon="left"
-          variant="secondary"
-          fill="fill"
-          size="large"
-          text="Change critic"
+          <Button
+            icon="left"
+            variant="secondary"
+            fill="fill"
+            size="large"
+            text="Change critic"
+          >
+            <template v-slot:icon>
+              <Icon size="large" icon="user" variant="secondary"></Icon>
+            </template>
+          </Button>
+        </NuxtLink>
+        <NuxtLink
+          v-if="store.selectedTrack && !store.isEndscreen"
+          to="/track-selection"
+          @click="store.resetSelectedTrack()"
         >
-          <template v-slot:icon>
-            <Icon size="large" icon="user" variant="secondary"></Icon>
-          </template>
-        </Button>
-      </NuxtLink>
-      <NuxtLink
-        v-if="store.selectedTrack && !store.isEndscreen"
-        to="/track-selection"
-        @click="store.resetSelectedTrack()"
-      >
-        <Button
-          icon="left"
-          variant="secondary"
-          fill="fill"
-          size="large"
-          text="Change song"
-        >
-          <template v-slot:icon>
-            <Icon size="large" icon="lyrics" variant="secondary"></Icon>
-          </template>
-        </Button>
-      </NuxtLink>
-      <div to="/track-selection" @click="logout">
-        <Button
-          icon="left"
-          variant="secondary"
-          fill="fill"
-          size="large"
-          text="Logout"
-        >
-          <template v-slot:icon>
-            <Icon size="large" icon="logout" variant="secondary"></Icon>
-          </template>
-        </Button>
-      </div>
-    </template>
+          <Button
+            icon="left"
+            variant="secondary"
+            fill="fill"
+            size="large"
+            text="Change song"
+          >
+            <template v-slot:icon>
+              <Icon size="large" icon="lyrics" variant="secondary"></Icon>
+            </template>
+          </Button>
+        </NuxtLink>
+        <div to="/track-selection" @click="logout">
+          <Button
+            icon="left"
+            variant="secondary"
+            fill="fill"
+            size="large"
+            text="Logout"
+          >
+            <template v-slot:icon>
+              <Icon size="large" icon="logout" variant="secondary"></Icon>
+            </template>
+          </Button>
+        </div>
+      </template>
+    </div>
   </div>
   <div v-if="isOpen" class="overlay" @click="toggleMenu"></div>
 </template>
@@ -126,12 +128,21 @@ const logout = (): void => {
     justify-content: flex-end;
     flex-direction: column;
     align-items: flex-end;
-    position: fixed;
     gap: 1rem;
-    top: 1rem;
-    right: 1rem;
     z-index: 100;
+    position: relative;
+    margin-top: $spacing-xl;
   }
+}
+.home-open {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+  z-index: 100;
+  top: calc(100% + 1rem);
 }
 .logout {
   position: absolute;
