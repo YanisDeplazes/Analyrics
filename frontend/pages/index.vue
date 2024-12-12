@@ -27,7 +27,7 @@
     </NuxtLink>
   </Section>
   <Section class="critics-section">
-    <CrititsOverview />
+    <CriticsOverview />
   </Section>
   <Section class="disclaimer-section">
     <Disclaimer />
