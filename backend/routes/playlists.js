@@ -18,7 +18,7 @@ router.get("/", async function (req, res, next) {
     const results = await makeSpotifyRequest(endpoint);
     res.json(results);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(502).json({ error: error.message });
   }
 });
 

@@ -45,7 +45,7 @@ router.get("/", async function (req, res, next) {
     // Sende die Antwort als JSON
     res.json(lyricsData);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(502).json({ error: error.message });
   }
 });
 

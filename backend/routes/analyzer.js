@@ -57,7 +57,7 @@ router.post("/", async function (req, res, next) {
     const analysisAsJson = JSON.parse(analysis);
     res.json(analysisAsJson);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(502).json({ error: error.message });
   }
 });
 

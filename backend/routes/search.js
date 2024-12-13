@@ -21,7 +21,7 @@ router.get("/", async function (req, res, next) {
     res.json(searchResults);
   } catch (error) {
     console.error("Error in track search with speechiness filter:", error);
-    res.status(500).json({ error: error.message });
+    res.status(502).json({ error: error.message });
   }
 });
 

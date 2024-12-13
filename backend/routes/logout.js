@@ -8,7 +8,7 @@ router.get("/logout", async function (req, res) {
       res.redirect("https://accounts.spotify.com/en/logout"); // Leitet den Benutzer auf die Hauptseite weiter
     }, 2000);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(502).json({ error: error.message });
   }
 });
 
