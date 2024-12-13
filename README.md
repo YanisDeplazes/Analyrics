@@ -18,19 +18,13 @@
 
 `git clone <repository-url> cd <repository-name>`
 
-2. **Install and Start Backend**
+2. **Install**
+   `npm install`
 
-The backend will start on [http://localhost:3000](http://localhost:3000).
+3. **Start the application**
 
-`cd backend npm install npm run start`
-
-3. **Install and Start Frontend**
-   In a new terminal window: `git clone <repository-url> cd <repository-name>`
-
-The frontend will start on [http://localhost:8888](http://localhost:8888).
+`npm run start`
 
 4. **Access the Application**
-
-`cd frontend npm install npm run start`
 
 Open your browser and navigate to [http://localhost:8888](http://localhost:8888).
