@@ -1,0 +1,59 @@
+name: Node.js CI with Cypress
+
+on:
+  push:
+    branches:
+      - frontend
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # Install dependencies for the backend
+      - name: Install backend dependencies
+        run: npm install
+        working-directory: ./backend
+
+      # Install dependencies for the frontend
+      - name: Install frontend dependencies
+        run: npm install
+        working-directory: ./frontend
+
+      # Start the backend service in the background
+      - name: Start backend service
+        run: |
+          npm run start &
+        working-directory: ./backend
+        env:
+          GENIUS_CLIENT_ID: ${{ secrets.GENIUS_CLIENT_ID }}
+          GENIUS_CLIENT_SECRET: ${{ secrets.GENIUS_CLIENT_SECRET }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          SPOTIFY_REDIRECT_URI: ${{ secrets.SPOTIFY_REDIRECT_URI }}
+
+      # Start the frontend service in the background
+      - name: Start frontend service
+        run: |
+          npm run dev &
+        working-directory: ./frontend
+
+      # Wait for services to start
+      - name: Wait for services to start
+        run: sleep 20
+
+      # Run Cypress tests
+      - name: Run Cypress tests
+        run: npx cypress run
+        working-directory: ./frontend

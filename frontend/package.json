@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "test": "cypress run --reporter junit --reporter-options mochaFile=results/my-test-output-[hash].xml"
+    "test": "cypress run"
   },
   "dependencies": {
     "cypress": "^13.16.0",
