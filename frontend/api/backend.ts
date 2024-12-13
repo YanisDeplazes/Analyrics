@@ -1,4 +1,4 @@
-import type { SpotifyTopTracks, SpotifyProfile, SpotifyAudioFeatures, SpotifyTrack } from "~/model/spotify";
+import type { SpotifyTopTracks, SpotifyProfile, SpotifyTrack } from "~/model/spotify";
 import removeTextInBraces from "~/utils/removeTextInBraces";
 import type LineAnalysis from "~/model/line-analysis";
 import type { TrackLyrics } from "~/model/tracklyrics";
@@ -24,13 +24,6 @@ export default class Backend {
         return topTracks as SpotifyTopTracks;
     }
 
-    audioFeatures = async (trackId: string): Promise<SpotifyAudioFeatures> => {
-        const audioFeaturesFetch = await fetch(
-            `${this.baseUrl}/audio-features/?id=${trackId}`
-        );
-        const audioFeatures = await audioFeaturesFetch.json();
-        return audioFeatures as SpotifyAudioFeatures;
-    }
     lyrics = async (track: SpotifyTrack): Promise<TrackLyrics> => {
         const response = await fetch(
             `${this.baseUrl}/lyrics?q=${removeTextInBraces(track.name).trim()} ${track.artists[0].name}`,
