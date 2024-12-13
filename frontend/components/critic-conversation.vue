@@ -2,13 +2,23 @@
   <div class="critic-conversation-container">
     <div class="chat-bubble">
       <p class="chat">
-        <span v-for="(char, index) in animatedChat.split('')" :style="`--i:${index}`" aria-hidden="true"
-          :key="`${char}-${index}-${Math.random()}`">{{ char }}</span>
+        <span
+          v-for="(char, index) in animatedChat.split('')"
+          :style="`--i:${index}`"
+          aria-hidden="true"
+          :key="`${char}-${index}-${Math.random()}`"
+          >{{ char }}</span
+        >
       </p>
       <slot name="navigation"></slot>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 283.627767119631244" class="chat-bubble-indicator">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 320 283.627767119631244"
+        class="chat-bubble-indicator"
+      >
         <path
-          d="M0,.222222222220807c6.361624320275041,27.317563257651273,92.823563531912441,192.990215873111083,135.924025145925953,274.61904132546988,7.376648960463172,13.970782860971667,28.296583745785938,10.54164140823741,30.805964557676816-5.056458847089743C181.217046882427894,179.7344746712497,222.308946854458554.596517445000245,320,.222222222220807,159.5-.277777777779193,0,.222222222220807,0,.222222222220807Z" />
+          d="M0,.222222222220807c6.361624320275041,27.317563257651273,92.823563531912441,192.990215873111083,135.924025145925953,274.61904132546988,7.376648960463172,13.970782860971667,28.296583745785938,10.54164140823741,30.805964557676816-5.056458847089743C181.217046882427894,179.7344746712497,222.308946854458554.596517445000245,320,.222222222220807,159.5-.277777777779193,0,.222222222220807,0,.222222222220807Z"
+        />
       </svg>
     </div>
     <img :src="criticImageUrl" alt="Critic image" />
@@ -39,9 +49,9 @@ const validMoods = ["happy", "smirk", "weird", "calm", "sad"];
 const criticImageUrl = computed(() => {
   const mood = props.mood;
   if (!mood || !validMoods.includes(mood)) {
-    return `/stuwe1/frontend/${props.critic.imageUrl}`;
+    return `/${props.critic.imageUrl}`;
   }
-  return `/stuwe1/frontend/images/personas/${props.critic.name.toLowerCase()}_${mood}.png`;
+  return `/images/personas/${props.critic.name.toLowerCase()}_${mood}.png`;
 });
 </script>
 <style lang="scss" scoped>
@@ -79,7 +89,7 @@ const criticImageUrl = computed(() => {
 
       span {
         animation-name: appear;
-        animation-duration: .02s;
+        animation-duration: 0.02s;
         animation-fill-mode: forwards;
         visibility: hidden;
       }

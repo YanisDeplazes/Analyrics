@@ -112,7 +112,7 @@ onBeforeUnmount(() => {
 
 const logout = (): void => {
   const spotifyLogoutUrl: string = "https://accounts.spotify.com/en/logout";
-  const redirectUri: string = "http://localhost:8888/stuwe1/frontend";
+  const redirectUri: string = "http://localhost:8888/";
   window.location.href = `${spotifyLogoutUrl}?redirect_uri=${redirectUri}`;
 };
 </script>

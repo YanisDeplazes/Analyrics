@@ -49,7 +49,7 @@ const safeCategory = computed(() =>
 );
 
 // Compute image URL with base path
-const imageUrlWithBaseUrl = computed(() => `/stuwe1/frontend${props.imageUrl}`);
+const imageUrlWithBaseUrl = computed(() => `${props.imageUrl}`);
 
 // Handle click and emit "select"
 function handleClick() {
