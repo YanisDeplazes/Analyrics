@@ -48,7 +48,7 @@ $spacing-640: 640px;
 $spacing-720: 720px;
 
 // Spacing Tokens
-$spcaing-sm: $spacing-4;
+$spacing-sm: $spacing-4;
 $spacing-md: $spacing-8;
 $spacing-lg: $spacing-16;
 $spacing-xl: $spacing-24;
@@ -56,6 +56,10 @@ $spacing-2xl: $spacing-32;
 $spacing-3xl: $spacing-64;
 $spacing-4xl: $spacing-160;
 $spacing-5xl: $spacing-224;
+
+// Screen sizes
+$screen-md-min: 768px;
+$screen-lg-min: 1200px;
 
 :root {
   --bg-primary: #{$bg-primary};
@@ -78,7 +82,7 @@ $spacing-5xl: $spacing-224;
   --border-lg: #{$border-lg};
   --border-xl: #{$border-xl};
 
-  --spacing-sm:#{$spcaing-sm};
+  --spacing-sm:#{$spacing-sm};
   --spacing-md: #{$spacing-md};
   --spacing-lg: #{$spacing-lg};
   --spacing-xl: #{$spacing-xl};

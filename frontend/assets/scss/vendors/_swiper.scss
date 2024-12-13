@@ -1,3 +1,13 @@
 @use "swiper/css";
-@use "swiper/css/navigation"; // Additional styles if using navigation, pagination, etc.
 @use "swiper/css/pagination";
+.swiper-wrapper {
+  margin-block-start: 15px;
+  margin-bottom: 16px !important;
+}
+
+.swiper-scrollbar {
+  background: rgba(255, 246, 137, 0.3) !important;
+  .swiper-scrollbar-drag {
+    background: rgba(255, 246, 137, 0.7) !important;
+  }
+}

@@ -1,7 +1,6 @@
 @font-face {
   font-family: "Playfair Display";
-  src: url("/assets/fonts/Playfair_Display/PlayfairDisplay-Regular.ttf")
-    format("truetype");
+  src: url("/assets/fonts/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -13,23 +12,38 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Special Elite";
+  src: url("/assets/fonts/Special_Elite/SpecialElite-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 $font-family-branding: "Playfair Display", serif;
 $font-family-heading: "Gothic A1", sans-serif;
 $font-family-body: "Gothic A1", sans-serif;
+$font-family-sad: "Special Elite", serif;
 
 .font-branding {
   font-family: $font-family-branding;
 }
 
-html {
+.font-sad {
+  font-family: $font-family-sad;
+}
+
+html,
+input {
   font-family: $font-family-body;
   font-size: 1rem;
   font-weight: 400;
   color: var(--on-primary);
 }
+
 strong {
   font-weight: bold;
 }
+
 small {
   font-size: 0.889rem;
 }

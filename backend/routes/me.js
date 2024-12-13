@@ -24,14 +24,16 @@ router.get("/", async function (req, res) {
 
 router.get("/top/tracks", async function (req, res) {
   const accessToken = req.query.access_token;
-
+  let time_range = req.query.time_range;
   if (!accessToken) {
     return res.status(401).json({ error: "Access token missing" });
   }
-
+  if (!time_range) {
+    time_range = "medium_term"
+  }
   try {
     const response = await axios.get(
-      "https://api.spotify.com/v1/me/top/tracks",
+      `https://api.spotify.com/v1/me/top/tracks?time_range=${time_range}`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
