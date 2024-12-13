@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Apply CORS middleware here, before defining routes
-app.use(cors({ origin: "http://localhost:8888" }));
+app.use(cors({ origin: process.env.FRONTEND_URI }));
 
 // Define routes
 app.use("/", indexRouter);
