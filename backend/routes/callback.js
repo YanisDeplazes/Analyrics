@@ -41,7 +41,8 @@ router.get("/", async (req, res) => {
     const accessToken = response.data.access_token;
 
     res.redirect(
-      "http://localhost:8888/track-selection?" +
+      process.env.FRONTEND_URI +
+        "/track-selection?" +
         querystring.stringify({ access_token: accessToken })
     );
   } catch (error) {
