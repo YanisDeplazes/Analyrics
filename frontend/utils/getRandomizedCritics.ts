@@ -4,6 +4,7 @@ export default function getRandomizedCritics() {
     return randomizeOrder(criticsData.critics);
 }
 function randomizeOrder(array: Array<Critic>) {
+    return array;
     // Create a copy of the array to avoid mutating the original
     let shuffled = [...array];
 
@@ -15,6 +16,6 @@ function randomizeOrder(array: Array<Critic>) {
         // Swap the elements at i and randomIndex
         [shuffled[i], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[i]];
     }
-
+    console.log(shuffled)
     return shuffled;
 }
