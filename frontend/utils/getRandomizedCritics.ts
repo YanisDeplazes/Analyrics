@@ -4,7 +4,8 @@ export default function getRandomizedCritics() {
     return randomizeOrder(criticsData.critics);
 }
 function randomizeOrder(array: Array<Critic>) {
-    return array;
+    const disabledCritics = ["Kyla", "Emma", "Chad", "Gabby", "Riff", "Gordon"];
+    return array.filter(c => disabledCritics.findIndex(dc => dc == c.name) == -1);
     // Create a copy of the array to avoid mutating the original
     let shuffled = [...array];
 
