@@ -8,11 +8,8 @@ var { genAI } = require("../modules/googleClient");
 router.use(express.json());
 
 router.post("/", async function (req, res, next) {
-  const textPrompt = `Analyze the following line by rhyme, description, emotions:`;
-
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    let analysisResults = {};
 
     const { track, critic } = req.body;
     // Check if lyrics is provided and is an array
