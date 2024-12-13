@@ -51,3 +51,4 @@ temp/
 *.swp
 *.swo
 *.lock
+.vercel
