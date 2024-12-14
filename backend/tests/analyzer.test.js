@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("../app");
+const app = require("../index");
 
 describe("GET /albums", () => {
   it("should return 400 if lyrics is not provided", async () => {
