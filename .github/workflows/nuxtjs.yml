@@ -20,6 +20,8 @@ jobs:
         working-directory: ./frontend
       - run: npx nuxt build --preset github_pages
         working-directory: ./frontend
+        env:
+          BACKEND_URL: ${{ secrets.BACKEND_URL }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
