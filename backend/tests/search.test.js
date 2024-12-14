@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("../app");
+const app = require("../index");
 
 describe("GET /search", () => {
   it("should return 400 if Query is not provided", async () => {

@@ -51,7 +51,7 @@ const criticImageUrl = computed(() => {
   if (!mood || !validMoods.includes(mood)) {
     return `${props.critic.imageUrl}`;
   }
-  return `/images/personas/${props.critic.name.toLowerCase()}_${mood}.png`;
+  return `./images/personas/${props.critic.name.toLowerCase()}_${mood}.png`;
 });
 </script>
 <style lang="scss" scoped>

@@ -6,7 +6,7 @@ require("dotenv").config(); // Load environment variables
 
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const redirect_uri = "http://localhost:3000/callback"; // Ensure this matches the URI in Spotify Dashboard
+const redirect_uri = process.env.BACKEND_URI + "/callback"; // Ensure this matches the URI in Spotify Dashboard
 
 router.get("/", async (req, res) => {
   // Capture the authorization code and state
