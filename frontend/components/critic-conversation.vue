@@ -49,7 +49,7 @@ const validMoods = ["happy", "smirk", "weird", "calm", "sad"];
 const criticImageUrl = computed(() => {
   const mood = props.mood;
   if (!mood || !validMoods.includes(mood)) {
-    return `${props.critic.imageUrl}`;
+    return `./${props.critic.imageUrl}`;
   }
   return `./images/personas/${props.critic.name.toLowerCase()}_${mood}.png`;
 });
