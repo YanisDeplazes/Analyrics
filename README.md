@@ -24,5 +24,4 @@
    `npm run start`
 
 4. **Access the Application**
-
-Open your browser and navigate to [http://localhost:8888](http://localhost:8888).
+   [http://localhost:8888](http://localhost:8888).
