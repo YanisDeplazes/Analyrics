@@ -85,6 +85,9 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { store } from "~/stores/store";
+import { useRuntimeConfig } from "#app";
+
+const config = useRuntimeConfig();
 
 const isOpen = ref(false);
 
@@ -112,7 +115,7 @@ onBeforeUnmount(() => {
 
 const logout = (): void => {
   const spotifyLogoutUrl: string = "https://accounts.spotify.com/en/logout";
-  const redirectUri: string = "http://localhost:8888/";
+  const redirectUri = config.public.frontendUrl; // Use runtime config
   window.location.href = `${spotifyLogoutUrl}?redirect_uri=${redirectUri}`;
 };
 </script>

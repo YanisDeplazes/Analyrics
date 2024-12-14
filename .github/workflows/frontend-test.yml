@@ -42,6 +42,8 @@ jobs:
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
           SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
           SPOTIFY_REDIRECT_URI: ${{ secrets.SPOTIFY_REDIRECT_URI }}
+          BACKEND_URL: ${{ secrets.BACKEND_URL }}
+          FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
 
       # Start the frontend service in the background
       - name: Start frontend service
