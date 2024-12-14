@@ -23,7 +23,7 @@ router.get("/", function (req, res, next) {
         response_type: "code",
         client_id: process.env.SPOTIFY_CLIENT_ID,
         scope: scope,
-        redirect_uri: process.env.FRONTEND_URI + "/callback",
+        redirect_uri: process.env.BACKEND_URI + "/callback",
         state: state,
       })
   );

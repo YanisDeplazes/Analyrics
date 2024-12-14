@@ -22,6 +22,7 @@ jobs:
         working-directory: ./frontend
         env:
           BACKEND_URL: ${{ secrets.BACKEND_URL }}
+          FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
