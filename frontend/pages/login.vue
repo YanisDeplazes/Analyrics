@@ -32,12 +32,14 @@
 <script setup lang="ts">
 import { store } from "~/stores/store";
 import { player } from "~/stores/player";
+import { useRuntimeConfig } from "#app";
+const config = useRuntimeConfig();
 
 const login = () => {
   if (store.spotifyUserAccessToken) {
     navigateTo("track-selection");
   } else {
-    navigateTo("http://localhost:3000/login", { external: true });
+    navigateTo(config.public.backendUrl + "/login", { external: true });
   }
 };
 
